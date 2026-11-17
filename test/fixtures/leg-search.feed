@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:ukm="http://www.legislation.gov.uk/namespaces/metadata">
+  <entry><id>http://www.legislation.gov.uk/id/ukpga/2006/3</id><title>Equality Act 2006</title><ukm:Year Value="2006"/><ukm:Number Value="3"/></entry>
+  <entry><id>http://www.legislation.gov.uk/id/ukpga/2010/15</id><title>Equality Act 2010</title><ukm:Year Value="2010"/><ukm:Number Value="15"/></entry>
+</feed>

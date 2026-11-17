@@ -1,0 +1,22 @@
+<linkset xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml">
+  <html:link rel="localization" href="oscola-check.ftl"/>
+</linkset>
+<vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml" id="oscola-check-prefs">
+  <groupbox>
+    <html:h2 data-l10n-id="oc-prefs-sources"/>
+    <html:p data-l10n-id="oc-prefs-sources-help"/>
+    <checkbox preference="extensions.oscola-check.source.crossref" data-l10n-id="oc-prefs-source-crossref"/>
+    <checkbox preference="extensions.oscola-check.source.openalex" data-l10n-id="oc-prefs-source-openalex"/>
+    <checkbox preference="extensions.oscola-check.source.openlibrary" data-l10n-id="oc-prefs-source-openlibrary"/>
+    <checkbox preference="extensions.oscola-check.source.legislation-gov-uk" data-l10n-id="oc-prefs-source-legislation-gov-uk"/>
+    <checkbox preference="extensions.oscola-check.source.find-case-law" data-l10n-id="oc-prefs-source-find-case-law"/>
+    <checkbox preference="extensions.oscola-check.source.eur-lex" data-l10n-id="oc-prefs-source-eur-lex"/>
+    <checkbox preference="extensions.oscola-check.source.hudoc" data-l10n-id="oc-prefs-source-hudoc"/>
+    <checkbox preference="extensions.oscola-check.source.lovdata" data-l10n-id="oc-prefs-source-lovdata"/>
+  </groupbox>
+  <groupbox>
+    <label data-l10n-id="oc-prefs-email" control="oscola-check-email"/>
+    <html:input id="oscola-check-email" type="email" preference="extensions.oscola-check.contactEmail"/>
+    <html:p data-l10n-id="oc-prefs-email-help"/>
+  </groupbox>
+</vbox>

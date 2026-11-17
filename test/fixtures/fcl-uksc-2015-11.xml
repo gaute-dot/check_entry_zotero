@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<akomaNtoso xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0" xmlns:uk="https://caselaw.nationalarchives.gov.uk/akn">
+  <judgment name="judgment">
+    <meta>
+      <identification source="#tna">
+        <FRBRWork>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/id/uksc/2015/11"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/id/uksc/2015/11"/>
+          <FRBRdate date="2015-03-11" name="judgment"/>
+          <FRBRauthor href="#uksc"/>
+          <FRBRname value="Montgomery v Lanarkshire Health Board (Scotland)"/>
+        </FRBRWork>
+      </identification>
+      <proprietary source="#tna"><uk:court>UKSC</uk:court><uk:year>2015</uk:year><uk:number>11</uk:number><uk:cite>[2015] UKSC 11</uk:cite></proprietary>
+    </meta>
+  </judgment>
+</akomaNtoso>

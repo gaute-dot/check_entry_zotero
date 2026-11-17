@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/global.css"?>
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        id="oscola-check-review"
+        windowtype="oscola-check:review"
+        data-l10n-id="oc-dialog-window"
+        width="1000" height="720"
+        persist="screenX screenY width height">
+  <linkset>
+    <html:link rel="localization" href="oscola-check.ftl"/>
+    <html:link rel="stylesheet" href="chrome://oscola-check/content/review.css"/>
+  </linkset>
+  <vbox flex="1">
+    <html:div id="oc-root" flex="1"/>
+    <hbox class="oc-buttons" align="center">
+      <button id="oc-select-all" data-l10n-id="oc-dialog-select-all"/>
+      <button id="oc-select-none" data-l10n-id="oc-dialog-select-none"/>
+      <spacer flex="1"/>
+      <button id="oc-cancel" data-l10n-id="oc-dialog-cancel"/>
+      <button id="oc-apply" data-l10n-id="oc-dialog-apply" default="true"/>
+    </hbox>
+  </vbox>
+  <script src="chrome://oscola-check/content/scripts/review.js"/>
+</window>

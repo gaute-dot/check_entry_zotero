@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "OSCOLA Check",
+  "version": "__VERSION__",
+  "description": "Checks items against OSCOLA requirements and suggests missing metadata from Crossref, Open Library, legislation.gov.uk, Find Case Law, EUR-Lex, HUDOC and Lovdata.",
+  "author": "check_entry_zotero contributors",
+  "homepage_url": "https://github.com/gaute-dot/check_entry_zotero",
+  "icons": {
+    "48": "content/icons/icon.svg",
+    "96": "content/icons/icon.svg"
+  },
+  "applications": {
+    "zotero": {
+      "id": "oscola-check@check-entry-zotero",
+      "update_url": "https://raw.githubusercontent.com/gaute-dot/check_entry_zotero/main/updates.json",
+      "strict_min_version": "8.0",
+      "strict_max_version": "99.*"
+    }
+  }
+}

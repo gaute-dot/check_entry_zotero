@@ -1,0 +1,9 @@
+pref("extensions.oscola-check.source.crossref", true);
+pref("extensions.oscola-check.source.openalex", true);
+pref("extensions.oscola-check.source.openlibrary", true);
+pref("extensions.oscola-check.source.legislation-gov-uk", true);
+pref("extensions.oscola-check.source.find-case-law", true);
+pref("extensions.oscola-check.source.eur-lex", true);
+pref("extensions.oscola-check.source.hudoc", true);
+pref("extensions.oscola-check.source.lovdata", true);
+pref("extensions.oscola-check.contactEmail", "");

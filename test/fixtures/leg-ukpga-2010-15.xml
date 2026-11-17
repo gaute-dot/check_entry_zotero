@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Legislation xmlns="http://www.legislation.gov.uk/namespaces/legislation" xmlns:ukm="http://www.legislation.gov.uk/namespaces/metadata" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <ukm:Metadata>
+    <dc:title>Equality Act 2010</dc:title>
+    <ukm:PrimaryMetadata>
+      <ukm:DocumentClassification><ukm:DocumentCategory Value="primary"/><ukm:DocumentMainType Value="UnitedKingdomPublicGeneralAct"/></ukm:DocumentClassification>
+      <ukm:Year Value="2010"/><ukm:Number Value="15"/>
+      <ukm:EnactmentDate Date="2010-04-08"/>
+    </ukm:PrimaryMetadata>
+  </ukm:Metadata>
+</Legislation>
