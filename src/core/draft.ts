@@ -28,9 +28,25 @@ export class Draft {
 	private alternatives = new Map<string, Change[]>();
 	private suggestedType?: Change;
 
-	constructor(item: ItemData) {
+	/**
+	 * @param item the item to work on (possibly already converted to the item type it should have)
+	 * @param fromType its type in Zotero, when that differs: a type change is then suggested
+	 * @param typeReason why the type should change
+	 * @param tickType whether the type change starts ticked
+	 */
+	constructor(item: ItemData, fromType?: string, typeReason?: Message, tickType = false) {
 		this.original = item;
+		if (fromType && fromType !== item.itemType) {
+			this.suggestedType = { value: item.itemType, source: "rules", reason: typeReason ?? { id: "oc-reason-item-type", args: { type: item.itemType } }, preselect: tickType };
+			this.fromType = fromType;
+		}
 	}
+
+	/** Set by checkItem before the last rule pass (after online look-ups) */
+	finalPass = false;
+
+	/** Item type in Zotero, before any suggested change */
+	fromType?: string;
 
 	get itemType(): string {
 		return this.original.itemType;
@@ -121,9 +137,11 @@ export class Draft {
 			const changedByOtherSource = this.changes.has(field) && this.changes.get(field)!.source !== "rules";
 			if (changedByOtherSource) continue;
 			// Empty in the item (even if a rule derived a value): the fetched value wins
-			if (!current.trim() || !this.originalValue(field).trim()) {
+			// Empty, or a rule only derived a less precise value ("2015" from a citation, source has "2015-03-11")
+			const derived = !this.originalValue(field).trim() && normalizeForCompare(value).startsWith(normalizeForCompare(current));
+			if (!current.trim() || derived) {
 				this.set(field, value, c.source, { id: "oc-reason-filled", args: { source: c.source } }, true);
-			} else if (extends_(current, value)) {
+			} else if (c.tickExtensions !== false && extends_(current, value)) {
 				// The source adds to what is there (e.g. a subtitle, or the phase of an ICJ case)
 				this.set(field, value, c.source, { id: "oc-reason-extended", args: { source: c.source } }, true);
 			} else if (
@@ -151,11 +169,11 @@ export class Draft {
 		if (this.suggestedType) {
 			suggestions.push({
 				field: "itemType",
-				current: this.itemType,
+				current: this.fromType ?? this.itemType,
 				suggested: this.suggestedType.value,
 				source: "rules",
 				reason: this.suggestedType.reason,
-				preselect: false,
+				preselect: this.suggestedType.preselect,
 			});
 		}
 		for (const [field, c] of this.changes) {

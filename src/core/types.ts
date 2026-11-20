@@ -82,6 +82,8 @@ export interface Candidate {
 	confidence: number;
 	/** Notes for the user (shown as "info" in the review dialog) */
 	notes?: Message[];
+	/** Tick a fetched value that only adds to the user's value (default true) */
+	tickExtensions?: boolean;
 }
 
 /**

@@ -86,3 +86,17 @@ export function isoDate(y: number | string, m?: number | string, d?: number | st
 	if (m && d) s += "-" + String(d).padStart(2, "0");
 	return s;
 }
+
+const MONTHS: Record<string, number> = {
+	jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12,
+};
+
+/** "10 December 1984", "8 Jan. 2016", "3 Sept. 2019" -> ISO date; "" if not recognised */
+export function englishDateToISO(s: string | undefined): string {
+	if (!s) return "";
+	const iso = /\b(\d{4})-(\d{2})-(\d{2})\b/.exec(s);
+	if (iso) return iso[0];
+	const m = /\b(\d{1,2})\s+([A-Za-z]{3})[a-z]*\.?,?\s+(\d{4})\b/.exec(s);
+	if (!m || !MONTHS[m[2].toLowerCase()]) return "";
+	return `${m[3]}-${String(MONTHS[m[2].toLowerCase()]).padStart(2, "0")}-${m[1].padStart(2, "0")}`;
+}

@@ -63,3 +63,23 @@ live("live international sources", () => {
 		expect(n.by.dateDecided).toBe("1986-06-27");
 	}, T);
 });
+
+live("live: UN documents without a symbol", () => {
+	it("the item from the screenshot: a whole citation in the Title of a Document", async () => {
+		const res = await checkItem(item("document", { title: "UN Human Rights Committee (HRC), 'General Comment No 22' (30 July 1993)" }), liveEnv);
+		const by: Record<string, (typeof res.suggestions)[number]> = {};
+		for (const s of res.suggestions) if (!(s.field in by)) by[s.field] = s;
+		if (process.env.SHOW) console.log(JSON.stringify({ s: res.suggestions.map((s) => [s.field, s.suggested, s.preselect, s.source]), i: res.issues.map((i) => i.message) }, null, 1));
+		expect(by.itemType).toMatchObject({ suggested: "report", preselect: true });
+		expect(by.title).toMatchObject({ suggested: "General Comment No 22", preselect: true });
+		expect(by.date).toMatchObject({ suggested: "1993-07-30", preselect: true });
+		expect(by.creators.creators).toEqual([{ creatorType: "author", name: "UN Human Rights Committee" }]);
+		expect(by.reportNumber).toMatchObject({ suggested: "CCPR/C/21/Rev.1/Add.4", preselect: true });
+		expect(by.reportType).toMatchObject({ suggested: "UN Doc", preselect: true });
+	}, T);
+
+	it("a Special Rapporteur report found by title", async () => {
+		const res = await checkItem(item("report", { title: "Right to privacy: Report of the Special Rapporteur on the Right to Privacy", date: "2020" }, [{ creatorType: "author", name: "Human Rights Council" }]), liveEnv);
+		expect(res.suggestions.find((s) => s.field === "reportNumber")?.suggested).toBe("A/HRC/43/52");
+	}, T);
+});

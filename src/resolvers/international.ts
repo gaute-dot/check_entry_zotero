@@ -7,25 +7,15 @@
  * All three were checked against the live services; test/fixtures holds
  * trimmed copies of real responses.
  */
-import { collapse, similarity } from "../core/text";
-import type { Message } from "../core/types";
+import { collapse, englishDateToISO, similarity } from "../core/text";
+
+export { englishDateToISO };
+import type { Candidate, Env, Message } from "../core/types";
 import UNTC_INDEX from "./data/untc-index.json";
+import UN_GENERAL_COMMENTS from "./data/un-general-comments.json";
+import { parseUNSymbol, type UNSymbol } from "../core/citations";
 import type { Resolver } from "./index";
 import { byLocalName, getXML } from "./util";
-
-const MONTHS: Record<string, number> = {
-	jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12,
-};
-
-/** "10 December 1984", "8 Jan. 2016", "3 Sept. 2019" -> ISO date; "" if not recognised */
-export function englishDateToISO(s: string | undefined): string {
-	if (!s) return "";
-	const iso = /\b(\d{4})-(\d{2})-(\d{2})\b/.exec(s);
-	if (iso) return iso[0];
-	const m = /\b(\d{1,2})\s+([A-Za-z]{3})[a-z]*\.?,?\s+(\d{4})\b/.exec(s);
-	if (!m || !MONTHS[m[2].toLowerCase()]) return "";
-	return `${m[3]}-${String(MONTHS[m[2].toLowerCase()]).padStart(2, "0")}-${m[1].padStart(2, "0")}`;
-}
 
 function htmlText(html: string): string {
 	return collapse(
@@ -67,6 +57,10 @@ const first = (fields: MarcField[], tag: string, code: string) => fields.find((f
 /** Title from MARC 245 $a/$b without the cataloguing punctuation and generic subtitles. */
 export function undlTitle(fields: MarcField[]): string {
 	const strip = (s: string) => s.replace(/\s*[:/;,.]\s*$/, "").trim();
+	// Older general comments: 245 is generic ("General comment adopted by the Human Rights
+	// Committee under article 40 …"); the numbered title is in 246
+	const alt = fields.filter((f) => f.tag === "246").map((f) => f.sub.a?.[0] ?? "").find((t) => /general (comment|recommendation) no/i.test(t));
+	if (alt && !/\bno\.? ?\d/i.test(first(fields, "245", "a"))) return tidyGeneralCommentTitle(strip(alt));
 	const a = strip(first(fields, "245", "a"));
 	let b = strip(first(fields, "245", "b"));
 	// "resolution / adopted by the General Assembly" carries no title information
@@ -79,35 +73,103 @@ export function undlTitle(fields: MarcField[]): string {
 	return tidy(`${a}: ${b.charAt(0).toUpperCase()}${b.slice(1)}`);
 }
 
-export const unDigitalLibrary: Resolver = {
-	id: "un-digital-library",
-	applies: (_item, d) => d.jurisdiction === "un" && !!d.unSymbol,
-	async resolve(item, d, env) {
-		const un = d.unSymbol!;
-		const doc = await getXML(env, `https://digitallibrary.un.org/search?p=${encodeURIComponent(`191__q:${un.key}`)}&of=xm&rg=10`);
-		const target = un.symbol.replace(/\s/g, "").toUpperCase();
-		const rec = marcRecords(doc).find((r) =>
+interface UNGeneralComment {
+	committee: string;
+	number: number;
+	symbol: string;
+	date: string;
+	title: string;
+}
+
+/** Symbol of a treaty body's general comment/recommendation, from the bundled list. */
+export function findGeneralComment(committee: string, number: number): UNGeneralComment | null {
+	return (UN_GENERAL_COMMENTS as UNGeneralComment[]).find((g) => g.committee === committee && g.number === number) ?? null;
+}
+
+/** "General comment no. 22 (48) (article 18), Freedom of …": drop the session number "(48)". */
+export function tidyGeneralCommentTitle(t: string): string {
+	return collapse(t.replace(/^(general (?:comment|recommendation) no\.? ?\d+)\s*\(\d{1,3}\)/i, "$1").replace(/\s+:\s+/g, ": "));
+}
+
+const undlSearch = (env: Env, q: string) => getXML(env, `https://digitallibrary.un.org/search?p=${encodeURIComponent(q)}&of=xm&rg=10`);
+
+function recordToCandidate(rec: { id: string; fields: MarcField[] }, symbolHint: UNSymbol | null, titleOverride?: string): Candidate {
+	const symbol = (first(rec.fields, "191", "a") || symbolHint?.symbol || "").replace(/\s?\(/, " (");
+	const un = parseUNSymbol(symbol) ?? symbolHint;
+	const adopted = un?.resolution ? first(rec.fields, "992", "a") : "";
+	const date = adopted || englishDateToISO(first(rec.fields, "269", "a")) || englishDateToISO(first(rec.fields, "260", "c"));
+	return {
+		source: "un-digital-library",
+		fields: { title: titleOverride ?? undlTitle(rec.fields), date, reportType: "UN Doc", reportNumber: symbol },
+		creators: un ? [{ creatorType: "author", name: un.body }] : undefined,
+		extraLines: rec.id ? [`UN Digital Library: https://digitallibrary.un.org/record/${rec.id}`] : [],
+		confidence: 1,
+		// a catalogue title is not a reason to replace the user's own title
+		tickExtensions: false,
+	};
+}
+
+async function bySymbol(env: Env, un: UNSymbol) {
+	const doc = await undlSearch(env, `191__q:${un.key}`);
+	const target = un.symbol.replace(/\s/g, "").toUpperCase();
+	return (
+		marcRecords(doc).find((r) =>
 			r.fields
 				.filter((f) => f.tag === "191")
 				.some((f) => (f.sub.a ?? []).some((a) => a.replace(/\s/g, "").toUpperCase() === target) || (f.sub.q ?? []).includes(un.key)),
-		);
-		if (!rec) return null;
-		const symbol = first(rec.fields, "191", "a") || un.symbol;
-		const adopted = un.resolution ? first(rec.fields, "992", "a") : "";
-		const date = adopted || englishDateToISO(first(rec.fields, "269", "a")) || englishDateToISO(first(rec.fields, "260", "c"));
-		const fields: Record<string, string> = {
-			title: undlTitle(rec.fields),
-			date,
-			reportType: "UN Doc",
-			reportNumber: symbol.replace(/\s?\(/, " ("),
-		};
-		return {
-			source: "un-digital-library",
-			fields,
-			creators: [{ creatorType: "author", name: un.body }],
-			extraLines: rec.id ? [`UN Digital Library: https://digitallibrary.un.org/record/${rec.id}`] : [],
-			confidence: 1,
-		};
+		) ?? null
+	);
+}
+
+export const unDigitalLibrary: Resolver = {
+	id: "un-digital-library",
+	applies: (item, d) => d.jurisdiction === "un" && (!!d.unSymbol || !!d.generalComment || !!(d.titleCitation?.title || item.fields.title)),
+	async resolve(item, d, env) {
+		// 1. By symbol
+		if (d.unSymbol) {
+			const rec = await bySymbol(env, d.unSymbol);
+			return rec ? recordToCandidate(rec, d.unSymbol) : null;
+		}
+		// 2. General comments and recommendations: symbol from the bundled list
+		if (d.generalComment) {
+			const gc = findGeneralComment(d.generalComment.committee, d.generalComment.number);
+			if (gc) {
+				const un = parseUNSymbol(gc.symbol)!;
+				const rec = await bySymbol(env, un);
+				const title = tidyGeneralCommentTitle(gc.title);
+				if (rec) return recordToCandidate(rec, un, title);
+				return { source: "un-digital-library", fields: { title, date: gc.date, reportType: "UN Doc", reportNumber: gc.symbol }, confidence: 1, tickExtensions: false };
+			}
+			return {
+				source: "un-digital-library",
+				fields: {},
+				confidence: 1,
+				notes: [{ id: "oc-issue-un-gc-not-listed", args: { number: d.generalComment.number } }],
+			};
+		}
+		// 3. Search by title (and body, and year when known); accept only one clear match
+		const title = d.titleCitation?.title || item.fields.title || "";
+		if (title.length < 8) return null;
+		const year = /\b(19[4-9]\d|20\d\d)\b/.exec([item.fields.date, d.titleCitation?.date].filter(Boolean).join(" "))?.[1];
+		// (the body is only used to filter the hits: the catalogue does not know "UNHRC")
+		const doc = await undlSearch(env, [title, year ? `269__a:${year}*` : ""].filter(Boolean).join(" "));
+		const hits: { rec: { id: string; fields: MarcField[] }; score: number; symbol: string }[] = [];
+		for (const rec of marcRecords(doc)) {
+			const symbol = first(rec.fields, "191", "a");
+			const sym = parseUNSymbol(symbol);
+			if (d.unBody && sym && sym.body !== "UN" && sym.body !== d.unBody.body) continue;
+			const titles = [undlTitle(rec.fields), first(rec.fields, "245", "a"), ...rec.fields.filter((f) => f.tag === "246").map((f) => f.sub.a?.[0] ?? "")];
+			const score = Math.max(...titles.map((t) => similarity(title, t)));
+			if (score >= 0.85) hits.push({ rec, score, symbol });
+		}
+		hits.sort((a, b) => b.score - a.score);
+		const best = hits[0];
+		if (!best) return null;
+		// Recurring reports share a title; without a year two documents may match equally well
+		if (hits.some((h) => h.symbol !== best.symbol && best.score - h.score < 0.05)) {
+			return { source: "un-digital-library", fields: {}, confidence: 1, notes: [{ id: "oc-issue-un-ambiguous", args: { symbols: hits.slice(0, 4).map((h) => h.symbol).join(", ") } }] };
+		}
+		return { ...recordToCandidate(best.rec, null), confidence: best.score };
 	},
 };
 

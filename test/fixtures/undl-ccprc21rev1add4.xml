@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Search-Engine-Total-Number-Of-Results: 1 -->
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+<record>
+  <controlfield tag="000">01140cam\\2200361#\\4500</controlfield>
+  <controlfield tag="001">182777</controlfield>
+  <controlfield tag="005">20250502191557.0</controlfield>
+  <controlfield tag="008">940309s1993\\\\che\\\\\r\\\\\\\\\\\eng\u</controlfield>
+  <datafield tag="029" ind1=" " ind2=" ">
+    <subfield code="a">JN</subfield>
+    <subfield code="b">G9318602 E</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">D339299X</subfield>
+    <subfield code="z">D0152198</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">(DHL)339299</subfield>
+  </datafield>
+  <datafield tag="039" ind1=" " ind2=" ">
+    <subfield code="a">DHU</subfield>
+  </datafield>
+  <datafield tag="040" ind1=" " ind2=" ">
+    <subfield code="a">NNUN</subfield>
+    <subfield code="b">eng</subfield>
+  </datafield>
+  <datafield tag="041" ind1=" " ind2=" ">
+    <subfield code="a">araengfrerusspa</subfield>
+  </datafield>
+  <datafield tag="049" ind1=" " ind2=" ">
+    <subfield code="a">che</subfield>
+  </datafield>
+  <datafield tag="069" ind1=" " ind2=" ">
+    <subfield code="a">HUR</subfield>
+    <subfield code="b">0201</subfield>
+  </datafield>
+  <datafield tag="089" ind1=" " ind2=" ">
+    <subfield code="b">B26</subfield>
+  </datafield>
+  <datafield tag="091" ind1=" " ind2=" ">
+    <subfield code="a">GEN</subfield>
+  </datafield>
+  <datafield tag="099" ind1=" " ind2=" ">
+    <subfield code="a">UNH</subfield>
+    <subfield code="b">DHU</subfield>
+  </datafield>
+  <datafield tag="191" ind1=" " ind2=" ">
+    <subfield code="a">CCPR/C/21/Rev.1/Add.4</subfield>
+    <subfield code="b">CCPR/C/</subfield>
+    <subfield code="d">CCPR/C/</subfield>
+    <subfield code="e">21/Rev.1/Add.4</subfield>
+    <subfield code="f">003972</subfield>
+    <subfield code="q">CCPRC21REV1ADD4</subfield>
+    <subfield code="r">CCPRC</subfield>
+    <subfield code="0">(DHLAUTH)356013</subfield>
+  </datafield>
+  <datafield tag="245" ind1="1" ind2="0">
+    <subfield code="a">General comment adopted by the Human Rights Committee under article 40, paragraph 4, of the International Covenant on Civil and Political Rights.</subfield>
+  </datafield>
+  <datafield tag="246" ind1="3" ind2=" ">
+    <subfield code="a">General comment no. 22 (48) (article 18), Freedom of thought, conscience or religion</subfield>
+  </datafield>
+  <datafield tag="260" ind1=" " ind2=" ">
+    <subfield code="a">Geneva :</subfield>
+    <subfield code="b">UN,</subfield>
+    <subfield code="c">27 Sept. 1993.</subfield>
+  </datafield>
+  <datafield tag="269" ind1=" " ind2=" ">
+    <subfield code="a">1993-09-27</subfield>
+  </datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="a">4 p.</subfield>
+  </datafield>
+  <datafield tag="505" ind1="0" ind2=" ">
+    <subfield code="a">General comment no. 22 (48) (art. 18).</subfield>
+  </datafield>
+
+  <datafield tag="630" ind1="0" ind2="7">
+    <subfield code="a">International Covenant on Civil and Political Rights (1966)</subfield>
+    <subfield code="0">(DHLAUTH)34889</subfield>
+  </datafield>
+  <datafield tag="650" ind1="0" ind2="7">
+    <subfield code="a">CIVIL AND POLITICAL RIGHTS</subfield>
+    <subfield code="0">(DHLAUTH)269028</subfield>
+  </datafield>
+  <datafield tag="650" ind1="0" ind2="7">
+    <subfield code="a">FREEDOM OF THOUGHT</subfield>
+    <subfield code="0">(DHLAUTH)268491</subfield>
+  </datafield>
+  <datafield tag="650" ind1="0" ind2="7">
+    <subfield code="a">RELIGIOUS FREEDOM</subfield>
+    <subfield code="0">(DHLAUTH)274441</subfield>
+  </datafield>
+  <datafield tag="650" ind1="0" ind2="7">
+    <subfield code="a">TREATIES</subfield>
+    <subfield code="0">(DHLAUTH)9632</subfield>
+  </datafield>
+  <datafield tag="710" ind1="2" ind2="0">
+    <subfield code="a">UN. Human Rights Committee (48th sess. : 1993 : Geneva)</subfield>
+    <subfield code="0">(DHLAUTH)223315</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="u">https://digitallibrary.un.org/record/182777/files/CCPR_C_21_Rev.1_Add.4-AR.pdf</subfield>
+    <subfield code="y">العربية</subfield>
+    <subfield code="9">efe7bbb2-5b24-470f-a38d-72e9d3c9105f</subfield>
+    <subfield code="s">166447</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="u">https://digitallibrary.un.org/record/182777/files/CCPR_C_21_Rev.1_Add.4-EN.pdf</subfield>
+    <subfield code="y">English</subfield>
+    <subfield code="9">ac033fc4-c1c0-4128-8ded-afb1b4d550e3</subfield>
+    <subfield code="s">10675</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="u">https://digitallibrary.un.org/record/182777/files/CCPR_C_21_Rev.1_Add.4-ES.pdf</subfield>
+    <subfield code="y">Español</subfield>
+    <subfield code="9">c2f5be7a-ad69-4e48-87e7-97fdffe512c3</subfield>
+    <subfield code="s">10409</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="u">https://digitallibrary.un.org/record/182777/files/CCPR_C_21_Rev.1_Add.4-FR.pdf</subfield>
+    <subfield code="y">Français</subfield>
+    <subfield code="9">d467ebdc-1252-4f42-b265-b6c7c9b5da81</subfield>
+    <subfield code="s">12259</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="u">https://digitallibrary.un.org/record/182777/files/CCPR_C_21_Rev.1_Add.4-RU.pdf</subfield>
+    <subfield code="y">Русский</subfield>
+    <subfield code="9">5109fad2-dd90-4a63-a40e-00e78fa95bfc</subfield>
+    <subfield code="s">274384</subfield>
+  </datafield>
+  <datafield tag="930" ind1=" " ind2=" ">
+    <subfield code="a">UNDJUL94</subfield>
+  </datafield>
+  <datafield tag="930" ind1=" " ind2=" ">
+    <subfield code="a">HUR</subfield>
+    <subfield code="b">002417</subfield>
+  </datafield>
+  <datafield tag="930" ind1=" " ind2=" ">
+    <subfield code="a">CHCMAR94</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="a">07845400</subfield>
+  </datafield>
+  <datafield tag="980" ind1=" " ind2=" ">
+    <subfield code="a">BIB</subfield>
+  </datafield>
+  <datafield tag="981" ind1=" " ind2=" ">
+    <subfield code="a">Human Rights Bodies</subfield>
+    <subfield code="b">Treaty-Based Human Rights Bodies</subfield>
+    <subfield code="c">Human Rights Committee</subfield>
+  </datafield>
+  <datafield tag="989" ind1=" " ind2=" ">
+    <subfield code="a">Documents and Publications</subfield>
+  </datafield>
+  <datafield tag="998" ind1=" " ind2=" ">
+    <subfield code="a">19961228000000</subfield>
+    <subfield code="c">20090730085400</subfield>
+    <subfield code="d">gsacat</subfield>
+    <subfield code="x">0x000100008dc64b78</subfield>
+    <subfield code="z">20200217173843</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">mpu20080205</subfield>
+    <subfield code="b">20080205</subfield>
+    <subfield code="c">u</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">mpu20090730</subfield>
+    <subfield code="b">20090730</subfield>
+    <subfield code="c">u</subfield>
+  </datafield>
+</record>
+</collection>

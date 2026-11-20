@@ -60,10 +60,7 @@ export function applyRules(draft: Draft, d: Detected = detect(draft.original)): 
 		default:
 			requireFields(draft, ["title", "date"]);
 	}
-	if (d.impliedType) {
-		draft.suggestItemType(d.impliedType, R("oc-reason-item-type", { type: d.impliedType }));
-		draft.issue("warning", "oc-issue-item-type", { type: d.impliedType });
-	}
+	// (Item type changes are handled in checkItem, which checks the item as its new type.)
 }
 
 // ---------------------------------------------------------------- general

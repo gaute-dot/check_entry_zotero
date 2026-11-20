@@ -487,3 +487,77 @@ export function parseICJReport(s: string | undefined): { year: string; page: str
 	if (m) return { year: m[1], page: m[2], text: m[0] };
 	return null;
 }
+
+// ---------------------------------------------------------------- UN documents without a symbol
+
+/** UN treaty bodies: id used in the general-comment list, OSCOLA name, name patterns. */
+export const UN_COMMITTEES: { id: string; body: string; re: RegExp }[] = [
+	{ id: "CCPR", body: "UN Human Rights Committee", re: /\bHuman Rights Committee\b|\bCCPR\b/i },
+	{ id: "CESCR", body: "UN Committee on Economic, Social and Cultural Rights", re: /Committee on Economic,? Social and Cultural Rights|\bCESCR\b/i },
+	{ id: "CERD", body: "UN Committee on the Elimination of Racial Discrimination", re: /Committee on the Elimination of Racial Discrimination|\bCERD\b/i },
+	{ id: "CEDAW", body: "UN Committee on the Elimination of Discrimination against Women", re: /Committee on the Elimination of Discrimination against Women|\bCEDAW\b/i },
+	{ id: "CRC", body: "UN Committee on the Rights of the Child", re: /Committee on the Rights of the Child|\bCRC\b/i },
+	{ id: "CAT", body: "UN Committee against Torture", re: /Committee against Torture|\bCAT\b/ },
+	{ id: "CMW", body: "UN Committee on Migrant Workers", re: /Committee on (?:the Protection of the Rights of All )?Migrant Workers|\bCMW\b/i },
+	{ id: "CRPD", body: "UN Committee on the Rights of Persons with Disabilities", re: /Committee on the Rights of Persons with Disabilities|\bCRPD\b/i },
+	{ id: "CED", body: "UN Committee on Enforced Disappearances", re: /Committee on Enforced Disappearances|\bCED\b/ },
+];
+
+const UN_ORGANS: [RegExp, string][] = [
+	[/\bHuman Rights Council\b|\bUNHRC\b/i, "UNHRC"],
+	[/\bGeneral Assembly\b|\bUNGA\b/i, "UNGA"],
+	[/\bSecurity Council\b|\bUNSC\b/i, "UNSC"],
+	[/\bCommission on Human Rights\b|\bUNCHR\b/i, "UNCHR"],
+	[/\bEconomic and Social Council\b|\bECOSOC\b/i, "ECOSOC"],
+	[/\bInternational Law Commission\b|\bILC\b/, "ILC"],
+	[/\bSecretary-General\b/i, "UN Secretary-General"],
+];
+
+/** The UN body named in a text, in OSCOLA form; treaty bodies are checked first. */
+export function unBodyFromText(s: string | undefined): { body: string; committee?: string } | null {
+	if (!s) return null;
+	for (const c of UN_COMMITTEES) if (c.re.test(s)) return { body: c.body, committee: c.id };
+	for (const [re, body] of UN_ORGANS) if (re.test(s)) return { body };
+	return null;
+}
+
+/** "General Comment No 22", "general recommendation no. 35" */
+export function parseGeneralComment(s: string | undefined): { kind: "comment" | "recommendation"; number: number } | null {
+	if (!s) return null;
+	const m = /\bgeneral\s+(comment|recommendation)\s*(?:no\.?|number|nr\.?)?\s*(\d{1,3})\b/i.exec(s);
+	return m ? { kind: m[1].toLowerCase() as "comment" | "recommendation", number: Number(m[2]) } : null;
+}
+
+export interface TitleCitation {
+	/** Author as written, e.g. "UN Human Rights Committee (HRC)" */
+	author: string;
+	/** Title without quotation marks; for resolutions "" */
+	title: string;
+	/** Resolution number for "UNGA Res 70/1 (…)" */
+	resolution?: string;
+	/** Date as written, e.g. "30 July 1993" */
+	date: string;
+	symbol?: string;
+}
+
+/**
+ * A complete OSCOLA citation typed into the Title field, e.g.
+ *   UN Human Rights Committee (HRC), 'General Comment No 22' (30 July 1993)
+ *   UNGA Res 70/1 (25 September 2015) UN Doc A/RES/70/1
+ */
+export function parseCitationInTitle(s: string | undefined): TitleCitation | null {
+	if (!s) return null;
+	const t = s.trim().replace(/\.$/, "");
+	const doc = /\s*UN\s*Doc\.?\s*(.+)$/i;
+	let m = /^(UNGA|UNSC|UNHRC|UNCHR|ECOSOC|HRC)\s+Res(?:olution)?\.?\s+([0-9]+(?:\/[0-9]+)?(?:\s?\([IVXLC]+\))?)\s*\(([^()]*\d{4})\)(.*)$/i.exec(t);
+	if (m) {
+		const rest = m[4].trim();
+		return { author: m[1].toUpperCase().replace(/^HRC$/, "UNHRC"), title: "", resolution: m[2], date: m[3].trim(), symbol: doc.exec(rest)?.[1]?.trim() };
+	}
+	m = /^(.+?),?\s*['‘"“](.+?)['’"”],?\s*\(([^()]*\d{4})\)(.*)$/.exec(t);
+	if (m) {
+		const rest = m[4].trim();
+		return { author: m[1].trim(), title: m[2].trim(), date: m[3].trim(), symbol: doc.exec(rest)?.[1]?.trim() };
+	}
+	return null;
+}

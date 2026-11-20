@@ -145,7 +145,8 @@ describe("secondary sources", () => {
 	it("suggests item type 'case' for a web page from Find Case Law", async () => {
 		const r = await rulesOnly(item("webpage", { title: "R (Miller) v Secretary of State [2017] UKSC 5", url: "https://caselaw.nationalarchives.gov.uk/uksc/2017/5" }));
 		expect(r.by.itemType.suggested).toBe("case");
-		expect(r.by.itemType.preselect).toBe(false);
+		// a web page is a generic type, so the change starts ticked
+		expect(r.by.itemType.preselect).toBe(true);
 	});
 
 	it("collapses stray whitespace", async () => {

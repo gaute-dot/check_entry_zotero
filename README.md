@@ -46,7 +46,7 @@ Settings (**Zotero Settings → OSCOLA Check**):
 | [EUR-Lex](https://eur-lex.europa.eu) (Publications Office SPARQL endpoint) | EU legislation and CJEU/General Court cases | CELEX, case number (C-/T-), ECLI |
 | [HUDOC](https://hudoc.echr.coe.int) | European Court of Human Rights | Application number |
 | [Lovdata](https://lovdata.no) (public pages) | Norwegian acts and regulations | Lovdata ID, URL, or "lov 17. juni 2005 nr. 62" |
-| [UN Digital Library](https://digitallibrary.un.org) | UN resolutions, reports, treaty body documents (any document with a UN symbol) | Document symbol, e.g. `A/RES/70/1`, `A/HRC/43/52`, `CCPR/C/GC/36` |
+| [UN Digital Library](https://digitallibrary.un.org) | UN resolutions, reports, treaty body documents | Document symbol (e.g. `A/RES/70/1`, `A/HRC/43/52`, `CCPR/C/GC/36`); for general comments/recommendations the committee and number; otherwise title + body (+ year) |
 | [UN Treaty Collection](https://treaties.un.org) | Multilateral treaties deposited with the UN Secretary-General (about 420) | Title (matched against a bundled index), or a treaties.un.org URL |
 | [International Court of Justice](https://www.icj-cij.org) | ICJ judgments and advisory opinions | Case name, or an icj-cij.org case URL |
 
@@ -88,7 +88,13 @@ The plugin fills in the fields below. The adjusted style then prints them as OSC
 
 The issuing body is taken from the document symbol, in OSCOLA's abbreviations: `A/` → UNGA, `S/` → UNSC, `A/HRC/` → UNHRC, `E/` → ECOSOC, `E/CN.4/` → UNCHR, `A/CN.4/` → ILC, `CCPR/` → UN Human Rights Committee, `CRC/`, `CEDAW/`, `CERD/`, `CAT/`, `E/C.12/` and others → the UN committee by name.
 
-Items saved with another type (for example a resolution saved as a Document, Web Page or Statute) get an unticked suggestion to change the type. Run the check again after changing it.
+**Items saved with another type** (for example a resolution saved as a Document, Web Page or Statute) are checked as the type they should have, so all fields are suggested at once together with the type change. The type change starts ticked for generic types (Document, Web Page, Manuscript) and unticked otherwise.
+
+**UN documents without a symbol** are recognised from the issuing body (in the author or title, e.g. "UN Human Rights Committee", "UNGA", "Committee on the Rights of the Child") and looked up:
+- *General comments and recommendations* ("General Comment No 22") through a bundled list of 105 treaty-body documents and their symbols (`src/resolvers/data/un-general-comments.json`, generated from the UN Digital Library by `node scripts/build-un-gc-index.mjs`). Older ones that were only published in annual reports have no symbol of their own; the plugin says so.
+- *Other documents* by a title search, narrowed to the year when the item has one. A result is only used if exactly one document matches clearly; recurring reports with the same title each year need the year or the symbol.
+
+**A whole citation typed into the Title field**, such as `UN Human Rights Committee (HRC), 'General Comment No 22' (30 July 1993)` or `UNGA Res 70/1 (25 September 2015) UN Doc A/RES/70/1`, is split into Author, Title and Date (and the symbol, if given). Dates you entered stay ticked; a different date from the catalogue (e.g. the issue date instead of the adoption date) is offered as an unticked alternative.
 
 The adjusted style is built from the official OSCOLA style by `scripts/build-style.py`. Only the treaty and UN-resolution output differs; tests check that everything else prints identically. The style is licensed CC BY-SA 3.0, like the original.
 
@@ -102,6 +108,7 @@ The adjusted style is built from the official OSCOLA style by `scripts/build-sty
 - **ICJ Reports page numbers are not available online** in a usable form. The plugin fills in the case name, phase and date; add Reporter `ICJ Rep` and the first page yourself. If a case has several decisions and the item has no year, the plugin lists the decisions and asks for the year.
 - **UN Treaty Collection:** only treaties deposited with the UN Secretary-General are covered. The title index (`src/resolvers/data/untc-index.json`) is bundled; refresh it with `node scripts/build-untc-index.mjs`.
 - **Lovdata's public pages are parsed as HTML.** Check Lovdata's terms of use before relying on this source, and switch it off in the settings if needed. Only one page is fetched per item, and only when you run a check.
+- **Items nothing could be looked up for** get a note saying which identifier to add, instead of "No problems found".
 - **Sources can change their format.** If one does, the check shows *"Could not reach …"* or *"Nothing found in …"* for that source and carries on with the others. The live tests show which source broke.
 
 ## Development

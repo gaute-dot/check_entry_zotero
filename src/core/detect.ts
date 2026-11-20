@@ -11,6 +11,10 @@ import {
 	parseReportCitation,
 	parseUKLegislationRef,
 	parseUNSymbol,
+	parseCitationInTitle,
+	parseGeneralComment,
+	unBodyFromText,
+	type TitleCitation,
 	parseTreatySeries,
 	parseICJReport,
 	looksLikeTreatyTitle,
@@ -44,6 +48,12 @@ export interface Detected {
 	isbn: string | null;
 	/** UN document symbol, e.g. A/RES/70/1 */
 	unSymbol: UNSymbol | null;
+	/** A whole citation typed into the Title field */
+	titleCitation: TitleCitation | null;
+	/** UN body named in the author or title, in OSCOLA form, when there is no symbol */
+	unBody: { body: string; committee?: string } | null;
+	/** "General Comment No 22" of a treaty body */
+	generalComment: { committee: string; number: number } | null;
 	/** The item is (or should be) a treaty */
 	treaty: boolean;
 	treatySeries: TreatySeriesRef | null;
@@ -83,6 +93,9 @@ export function detect(item: ItemData): Detected {
 		doi: normalizeDOI(f.DOI) ?? normalizeDOI(f.url) ?? normalizeDOI(f.extra),
 		isbn: normalizeISBN(f.ISBN),
 		unSymbol: parseUNSymbol([f.reportNumber, f.number, f.publicLawNumber, f.billNumber, f.documentNumber, f.title, f.shortTitle, f.extra, decodeURIComponent(f.url ?? "").replace(/^https?:\/\/[^/]+\//, " ")].filter(Boolean).join("\n")),
+		titleCitation: null,
+		unBody: null,
+		generalComment: null,
 		treaty: false,
 		treatySeries: parseTreatySeries(
 			[f.title, f.extra, f.history, [f.codeNumber, f.code, f.pages].filter(Boolean).join(" "), [f.code, f.publicLawNumber].filter(Boolean).join(" ")]
@@ -94,6 +107,19 @@ export function detect(item: ItemData): Detected {
 		icjCaseId: /icj-cij\.org\/(?:en\/)?case\/(\d+)/.exec(f.url ?? "")?.[1] ?? null,
 		impliedType: null,
 	};
+
+	// UN documents entered without a symbol
+	if (!["case", "journalArticle", "book", "bookSection", "thesis"].includes(item.itemType)) {
+		d.titleCitation = parseCitationInTitle(f.title);
+		if (!d.unSymbol && d.titleCitation?.symbol) d.unSymbol = parseUNSymbol(d.titleCitation.symbol);
+		const authorText = item.creators.map((c) => c.name ?? [c.firstName, c.lastName].filter(Boolean).join(" ")).join("; ");
+		d.unBody =
+			unBodyFromText(d.titleCitation?.author) ??
+			unBodyFromText(authorText) ??
+			(/^(UN|United Nations|De forente nasjoner|FN)\b/i.test(f.title ?? "") || parseGeneralComment(f.title) ? unBodyFromText(f.title) : null);
+		const gc = parseGeneralComment([d.titleCitation?.title, f.title, f.shortTitle].filter(Boolean).join("\n"));
+		if (gc && d.unBody?.committee) d.generalComment = { committee: d.unBody.committee, number: gc.number };
+	}
 
 	const untc = /treaties\.un\.org\/[^\s]*mtdsg_no=([A-Z]+-\d+(?:-[a-z])?)[^\s]*?chapter=(\d+)/i.exec(f.url ?? "");
 	if (untc) d.untcNo = { no: untc[1].toUpperCase().replace(/-([A-Z])$/, (m) => m.toLowerCase()), chapter: untc[2] };
@@ -121,7 +147,7 @@ export function detect(item: ItemData): Detected {
 		d.jurisdiction = "icj";
 	} else if (d.treaty) {
 		d.jurisdiction = "treaty";
-	} else if (d.unSymbol && item.itemType !== "case") {
+	} else if ((d.unSymbol || d.unBody) && UN_DOC_TYPES.includes(item.itemType) && !(item.itemType === "book" && d.isbn)) {
 		d.jurisdiction = "un";
 	} else if (d.noCase || d.noAct || /lovdata\.no/.test(f.url ?? "") || /^(no|nb|nn|nob|nno)\b/i.test(f.language ?? "")) {
 		d.jurisdiction = "no";

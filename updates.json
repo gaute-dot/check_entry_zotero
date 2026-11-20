@@ -3,8 +3,8 @@
     "oscola-check@check-entry-zotero": {
       "updates": [
         {
-          "version": "0.1.0",
-          "update_link": "https://github.com/gaute-dot/check_entry_zotero/releases/download/v0.1.0/oscola-check-0.1.0.xpi",
+          "version": "0.2.0",
+          "update_link": "https://github.com/gaute-dot/check_entry_zotero/releases/download/v0.2.0/oscola-check-0.2.0.xpi",
           "applications": {
             "zotero": {
               "strict_min_version": "8.0"
@@ -12,8 +12,8 @@
           }
         },
         {
-          "version": "0.2.0",
-          "update_link": "https://github.com/gaute-dot/check_entry_zotero/releases/download/v0.2.0/oscola-check-0.2.0.xpi",
+          "version": "0.3.0",
+          "update_link": "https://github.com/gaute-dot/check_entry_zotero/releases/download/v0.3.0/oscola-check-0.3.0.xpi",
           "applications": {
             "zotero": {
               "strict_min_version": "8.0"

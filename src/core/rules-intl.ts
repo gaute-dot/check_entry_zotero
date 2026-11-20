@@ -21,7 +21,8 @@
  *    Court and Docket Number empty (the style would otherwise print them)
  *    -> Legality of the Threat or Use of Nuclear Weapons (Advisory Opinion) [1996] ICJ Rep 226
  */
-import { parseICJReport, type UNSymbol } from "./citations";
+import { parseICJReport, parseUNSymbol, unBodyFromText, type UNSymbol } from "./citations";
+import { englishDateToISO } from "./text";
 import type { Detected } from "./detect";
 import type { Draft } from "./draft";
 
@@ -47,16 +48,25 @@ export function oscolaBody(name: string): string | null {
 // ---------------------------------------------------------------- UN documents
 
 export function unDocRules(draft: Draft, d: Detected): void {
-	const un = d.unSymbol as UNSymbol;
+	const un: UNSymbol | null = d.unSymbol ?? parseUNSymbol(draft.get("reportNumber")) ?? parseUNSymbol(draft.get("extra"));
+	const body = un && un.body !== "UN" ? un.body : (d.unBody?.body ?? un?.body ?? "");
+
+	// A whole citation typed into the Title field: split it into its fields
+	const tc = d.titleCitation;
+	if (tc && draft.get("title") === draft.originalValue("title")) {
+		const reason = R("oc-reason-title-citation");
+		draft.set("title", tc.title, "rules", reason);
+		if (!draft.originalValue("date").trim()) {
+			const iso = englishDateToISO(tc.date) || /\b(\d{4})\b/.exec(tc.date)?.[1] || "";
+			if (iso) draft.set("date", iso, "rules", reason);
+		}
+	}
+	// Resolutions are cited by number; if no source supplied a title, use "Resolution 70/1"
+	if (draft.finalPass && !draft.has("title") && un?.resolution) {
+		draft.set("title", `Resolution ${un.resolution}`, "rules", R("oc-reason-un-resolution-title"));
+	}
 	requireField(draft, "title");
 	requireField(draft, "date");
-
-	if (draft.get("reportType") !== "UN Doc") draft.set("reportType", "UN Doc", "rules", R("oc-reason-un-doc-type"));
-	const number = draft.get("reportNumber");
-	if (!number) draft.set("reportNumber", un.symbol, "rules", R("oc-reason-un-symbol"));
-	else if (number.replace(/\s/g, "") !== un.symbol.replace(/\s/g, "")) {
-		draft.set("reportNumber", un.symbol, "rules", R("oc-reason-un-symbol"), !/\d/.test(number));
-	}
 
 	// OSCOLA names the issuing body, not "United Nations" as publisher
 	if (/^(UN|United Nations|De forente nasjoner|FN)$/i.test(draft.get("institution").trim())) {
@@ -64,15 +74,27 @@ export function unDocRules(draft: Draft, d: Detected): void {
 	}
 
 	const creators = draft.creators();
-	if (creators.length === 0) {
-		draft.setCreators([{ creatorType: "author", name: un.body }], "rules", R("oc-reason-un-body", { body: un.body }));
-	} else if (creators.length === 1 && creators[0].name) {
-		const abbr = oscolaBody(creators[0].name);
-		if (abbr && abbr !== creators[0].name) {
-			draft.setCreators([{ ...creators[0], name: abbr }], "rules", R("oc-reason-un-body", { body: abbr }));
+	const single = creators.length === 1 ? (creators[0].name ?? [creators[0].firstName, creators[0].lastName].filter(Boolean).join(" ")) : "";
+	if (creators.length === 0 && body) {
+		draft.setCreators([{ creatorType: "author", name: body }], "rules", R("oc-reason-un-body", { body }));
+	} else if (single && (creators[0].name || !creators[0].firstName)) {
+		const abbr = oscolaBody(single) ?? unBodyFromText(single)?.body;
+		if (abbr && abbr !== single) {
+			draft.setCreators([{ creatorType: "author", name: abbr }], "rules", R("oc-reason-un-body", { body: abbr }));
 		}
-	} else if (creators.some((c) => c.lastName && !c.name)) {
-		draft.issue("info", "oc-issue-un-personal-author", { body: un.body }, "creators");
+	} else if (creators.some((c) => c.lastName && !c.name) && body) {
+		draft.issue("info", "oc-issue-un-personal-author", { body }, "creators");
+	}
+
+	if (!un) {
+		draft.issue("warning", "oc-issue-un-no-symbol", undefined, "reportNumber");
+		return;
+	}
+	if (draft.get("reportType") !== "UN Doc") draft.set("reportType", "UN Doc", "rules", R("oc-reason-un-doc-type"));
+	const number = draft.get("reportNumber");
+	if (!number) draft.set("reportNumber", un.symbol, "rules", R("oc-reason-un-symbol"));
+	else if (number.replace(/\s/g, "") !== un.symbol.replace(/\s/g, "")) {
+		draft.set("reportNumber", un.symbol, "rules", R("oc-reason-un-symbol"), !/\d/.test(number));
 	}
 
 	if (un.resolution) {
