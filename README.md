@@ -147,7 +147,11 @@ For a quick development loop, use a separate Zotero profile and point a proxy fi
 
 ### Releasing
 
+Zotero updates the plugin by reading `updates.json` on the `main` branch and downloading the `.xpi` from the GitHub release it points to.
+
 1. Bump `version` in `package.json`.
-2. Run `npm run build`.
-3. Attach the `.xpi` to a GitHub release tagged `v<version>`.
-4. Add the version to `updates.json`. Zotero checks that file for updates.
+2. Add the version to `updates.json` (the `update_link` follows the pattern of the existing entries).
+3. Merge to `main`.
+4. Push a tag `v<version>` (e.g. `git tag v0.3.0 && git push origin v0.3.0`). The *Release* workflow builds the plugin, checks the version numbers and publishes the release with the `.xpi`.
+
+Zotero checks for updates about once a day; **Tools → Plugins → ⚙ → Check for Updates** checks immediately.
