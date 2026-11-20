@@ -151,7 +151,6 @@ Zotero updates the plugin by reading `updates.json` on the `main` branch and dow
 
 1. Bump `version` in `package.json`.
 2. Add the version to `updates.json` (the `update_link` follows the pattern of the existing entries).
-3. Merge to `main`.
-4. Push a tag `v<version>` (e.g. `git tag v0.3.0 && git push origin v0.3.0`). The *Release* workflow builds the plugin, checks the version numbers and publishes the release with the `.xpi`.
+3. Merge to `main`. The *Release* workflow notices the new version, builds the plugin, checks the version numbers and publishes release `v<version>` with the `.xpi` (it creates the tag itself). It can also be started by hand under **Actions → Release → Run workflow**.
 
 Zotero checks for updates about once a day; **Tools → Plugins → ⚙ → Check for Updates** checks immediately.

@@ -1,11 +1,12 @@
 name: Release
 
-# Pushing a tag such as v0.2.0 builds the plugin and publishes a GitHub
-# release with the .xpi attached. Zotero finds it through updates.json on main.
+# When main has a version (package.json) that has no GitHub release yet, this
+# builds the plugin and publishes release v<version> with the .xpi attached
+# (creating the tag). Zotero finds it through updates.json on main.
 on:
   push:
-    tags:
-      - "v*"
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -15,22 +16,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Read version
+        id: version
+        run: echo "tag=v$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+      - name: Skip if this version is already released
+        id: exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
+            echo "Release ${{ steps.version.outputs.tag }} already exists; nothing to do."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.exists.outputs.skip != 'true'
+        name: Check that updates.json lists this version
+        run: node -e "const t='${{ steps.version.outputs.tag }}';const u=require('./updates.json').addons['oscola-check@check-entry-zotero'].updates; if(!u.some(x=>'v'+x.version===t&&x.update_link.includes('/'+t+'/'))){console.error('updates.json has no correct entry for '+t);process.exit(1)}"
+      - if: steps.exists.outputs.skip != 'true'
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - name: Check that the tag matches package.json
-        run: |
-          version=$(node -p "require('./package.json').version")
-          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
-            echo "Tag $GITHUB_REF_NAME does not match package.json version $version" >&2
-            exit 1
-          fi
-      - name: Check that updates.json lists this version
-        run: node -e "const u=require('./updates.json').addons['oscola-check@check-entry-zotero'].updates; if(!u.some(x=>'v'+x.version===process.env.GITHUB_REF_NAME)){console.error('updates.json has no entry for '+process.env.GITHUB_REF_NAME);process.exit(1)}"
-      - run: npm run check
-      - uses: softprops/action-gh-release@v2
+      - if: steps.exists.outputs.skip != 'true'
+        run: npm ci && npm run check
+      - if: steps.exists.outputs.skip != 'true'
+        uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          target_commitish: ${{ github.sha }}
           files: build/*.xpi
           generate_release_notes: true
