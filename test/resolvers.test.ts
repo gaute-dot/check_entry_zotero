@@ -92,7 +92,7 @@ describe("Find Case Law", () => {
 		const env = fakeEnv({ "uksc/2015/11/data.xml": fixture("fcl-uksc-2015-11.xml") });
 		const res = await checkItem(item("case", { caseName: "", docketNumber: "[2015] UKSC 11" }), env);
 		const s = byField(res);
-		expect(s.caseName.suggested).toBe("Montgomery v Lanarkshire Health Board (Scotland)");
+		expect(s.caseName.suggested).toBe("Montgomery v Lanarkshire Health Board");
 		expect(s.dateDecided.suggested).toBe("2015-03-11");
 		expect(s.court.suggested).toBe("UKSC");
 		expect(s.docketNumber.suggested).toBe("11");
@@ -115,7 +115,8 @@ describe("EUR-Lex", () => {
 		const res = await checkItem(item("statute", { nameOfAct: "Regulation (EU) 2016/679" }), env);
 		const s = byField(res);
 		expect(s.nameOfAct.suggested).toMatch(/^Regulation \(EU\) 2016\/679 of the European Parliament.*\(General Data Protection Regulation\)$/);
-		expect(s.nameOfAct.preselect).toBe(false); // differs from what the user typed
+		// the official title extends what the user typed, so it is ticked
+		expect(s.nameOfAct).toMatchObject({ preselect: true, reason: { id: "oc-reason-extended" } });
 		expect(s.dateEnacted.suggested).toBe("2016-04-27");
 	});
 });
@@ -154,15 +155,24 @@ describe("source settings", () => {
 });
 
 describe("rules and online data together", () => {
-	it("keeps the tidied user value ticked and offers the online value as an unticked alternative", async () => {
-		const env = fakeEnv({ "uksc/2015/11/data.xml": fixture("fcl-uksc-2015-11.xml") });
+	it("keeps the tidied user value ticked and offers a differing online value as an unticked alternative", async () => {
+		const env = fakeEnv({ "uksc/2015/11/data.xml": fixture("fcl-uksc-2015-11.xml").replace("Montgomery v Lanarkshire Health Board (Scotland)", "Montgomery v Lanarkshire HB") });
 		const res = await checkItem(item("case", { caseName: "Montgomery v. Lanarkshire Health Board [2015] UKSC 11, [2015] AC 1430" }), env);
 		const names = res.suggestions.filter((s) => s.field === "caseName");
 		expect(names).toHaveLength(2);
 		expect(names[0]).toMatchObject({ suggested: "Montgomery v Lanarkshire Health Board", preselect: true, source: "rules" });
-		expect(names[1]).toMatchObject({ suggested: "Montgomery v Lanarkshire Health Board (Scotland)", preselect: false, source: "find-case-law" });
+		expect(names[1]).toMatchObject({ suggested: "Montgomery v Lanarkshire HB", preselect: false, source: "find-case-law" });
 		// the precise date from the source replaces the year derived from the citation
 		expect(res.suggestions.find((s) => s.field === "dateDecided")).toMatchObject({ suggested: "2015-03-11", preselect: true });
 		expect(res.issues.map((i) => i.message.id)).not.toContain("oc-issue-missing-field");
+	});
+});
+
+describe("online values that extend the user's value", () => {
+	it("are ticked (e.g. the ICJ phase)", async () => {
+		const env = fakeEnv({ "icj-cij.org/list-of-all-cases": fixture("icj-list.html"), "icj-cij.org/case/95": fixture("icj-case-95.html") });
+		const res = await checkItem(item("case", { caseName: "Legality of the Threat or Use of Nuclear Weapons", court: "ICJ" }), env);
+		const name = res.suggestions.find((s) => s.field === "caseName");
+		expect(name).toMatchObject({ suggested: "Legality of the Threat or Use of Nuclear Weapons (Advisory Opinion)", preselect: true, source: "icj" });
 	});
 });

@@ -1,5 +1,5 @@
 import { isValidField } from "./schema";
-import { sameValue } from "./text";
+import { normalizeForCompare, sameValue } from "./text";
 import type { Candidate, Creator, Issue, ItemData, Message, Severity, SourceId, Suggestion } from "./types";
 
 interface Change {
@@ -123,6 +123,9 @@ export class Draft {
 			// Empty in the item (even if a rule derived a value): the fetched value wins
 			if (!current.trim() || !this.originalValue(field).trim()) {
 				this.set(field, value, c.source, { id: "oc-reason-filled", args: { source: c.source } }, true);
+			} else if (extends_(current, value)) {
+				// The source adds to what is there (e.g. a subtitle, or the phase of an ICJ case)
+				this.set(field, value, c.source, { id: "oc-reason-extended", args: { source: c.source } }, true);
 			} else if (
 				!sameValue(current, value) &&
 				!sameValue(this.originalValue(field), value) &&
@@ -137,6 +140,7 @@ export class Draft {
 		if (c.creators?.length && this.creators().length === 0) {
 			this.setCreators(c.creators, c.source, { id: "oc-reason-filled", args: { source: c.source } });
 		}
+		for (const note of c.notes ?? []) this.issue("info", note.id, note.args);
 		for (const line of c.extraLines ?? []) {
 			this.addExtraLine(line, c.source, { id: "oc-reason-extra", args: { source: c.source } });
 		}
@@ -188,6 +192,13 @@ export class Draft {
 		}
 		return { issues: this.issues, suggestions };
 	}
+}
+
+/** True when `value` is `current` plus more text, ignoring case and punctuation. */
+function extends_(current: string, value: string): boolean {
+	const a = normalizeForCompare(current);
+	const b = normalizeForCompare(value);
+	return a.length >= 8 && b.length > a.length && b.startsWith(a + " ");
 }
 
 /** "2015" vs "2015-03-11": don't offer a less precise date as a change. */

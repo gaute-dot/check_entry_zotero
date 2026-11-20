@@ -1,6 +1,6 @@
 {
   "name": "check_entry_zotero",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Zotero plugin that checks items against OSCOLA requirements and suggests metadata from online sources",
   "license": "UNLICENSED",
@@ -14,6 +14,7 @@
   "devDependencies": {
     "@types/node": "^22.20.5",
     "@xmldom/xmldom": "^0.9.12",
+    "citeproc": "^2.4.63",
     "esbuild": "^0.28.2",
     "typescript": "^5.9.3",
     "vitest": "^5.1.0"

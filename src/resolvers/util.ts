@@ -1,7 +1,7 @@
 import type { Creator, Env } from "../core/types";
 
-export async function getJSON<T = any>(env: Env, url: string, headers?: Record<string, string>): Promise<T> {
-	const text = await env.fetchText(url, { accept: "application/json", headers });
+export async function getJSON<T = any>(env: Env, url: string, accept = "application/json"): Promise<T> {
+	const text = await env.fetchText(url, { accept });
 	return JSON.parse(text) as T;
 }
 

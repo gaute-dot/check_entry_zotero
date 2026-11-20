@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Search-Engine-Total-Number-Of-Results: 1 -->
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+<record>
+  <controlfield tag="001">3872507</controlfield>
+  <controlfield tag="005">20200926000743.0</controlfield>
+  <datafield tag="029" ind1=" " ind2=" ">
+    <subfield code="a">JN</subfield>
+    <subfield code="b">G2004403 E</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">(DHL)1267722</subfield>
+  </datafield>
+  <datafield tag="039" ind1=" " ind2=" ">
+    <subfield code="a">GUN</subfield>
+  </datafield>
+  <datafield tag="040" ind1=" " ind2=" ">
+    <subfield code="a">SzGeBNU</subfield>
+    <subfield code="b">eng</subfield>
+  </datafield>
+  <datafield tag="041" ind1=" " ind2=" ">
+    <subfield code="a">eng</subfield>
+  </datafield>
+  <datafield tag="049" ind1=" " ind2=" ">
+    <subfield code="a">che</subfield>
+  </datafield>
+  <datafield tag="089" ind1=" " ind2=" ">
+    <subfield code="b">B16</subfield>
+  </datafield>
+  <datafield tag="091" ind1=" " ind2=" ">
+    <subfield code="a">GEN</subfield>
+  </datafield>
+  <datafield tag="099" ind1=" " ind2=" ">
+    <subfield code="a">UNG</subfield>
+    <subfield code="b">GUN</subfield>
+  </datafield>
+  <datafield tag="191" ind1=" " ind2=" ">
+    <subfield code="a">A/HRC/43/52</subfield>
+    <subfield code="b">A/HRC/</subfield>
+    <subfield code="c">43</subfield>
+    <subfield code="q">AHRC4352</subfield>
+    <subfield code="r">AHRC43</subfield>
+    <subfield code="0">(DHLAUTH)908875</subfield>
+  </datafield>
+  <datafield tag="245" ind1="1" ind2="0">
+    <subfield code="a">Right to privacy :</subfield>
+    <subfield code="b">report of the Special Rapporteur on the Right to Privacy</subfield>
+  </datafield>
+  <datafield tag="260" ind1=" " ind2=" ">
+    <subfield code="a">Geneva :</subfield>
+    <subfield code="b">UN,</subfield>
+    <subfield code="c">24 Mar. 2020</subfield>
+  </datafield>
+  <datafield tag="269" ind1=" " ind2=" ">
+    <subfield code="a">2020-03-24</subfield>
+  </datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="a">25 p.</subfield>
+  </datafield>
+  <datafield tag="500" ind1=" " ind2=" ">
+    <subfield code="a">Submitted pursuant to Human Rights Council resolution 28/16. Highlights activities undertaken in 2019 and contains recommendations for protecting against gender-based privacy infringements.</subfield>
+  </datafield>
+  <datafield tag="610" ind1="2" ind2="7">
+    <subfield code="a">UN. Human Rights Council. Special Rapporteur on the Right to Privacy</subfield>
+    <subfield code="g">Recommendations</subfield>
+    <subfield code="2">unbisn</subfield>
+    <subfield code="0">(DHLAUTH)889966</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">RIGHT TO PRIVACY</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269234</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">GENDER</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)444326</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">GENDER EQUALITY</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)441178</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">DATA PROTECTION</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269230</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">HUMAN RIGHTS</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)274431</subfield>
+  </datafield>
+  <datafield tag="710" ind1="2" ind2=" ">
+    <subfield code="a">UN. Human Rights Council. Special Rapporteur on the Right to Privacy</subfield>
+    <subfield code="0">(DHLAUTH)865598</subfield>
+  </datafield>
+  <datafield tag="830" ind1="0" ind2=" ">
+    <subfield code="a">Report of the Special Procedure of the Human Rights Council</subfield>
+    <subfield code="0">(DHLAUTH)887654</subfield>
+  </datafield>
+  <datafield tag="830" ind1="0" ind2=" ">
+    <subfield code="a">Report of the Special Rapporteur on the Right to Privacy</subfield>
+    <subfield code="0">(DHLAUTH)887795</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">العربية</subfield>
+    <subfield code="9">b3893d0d-ebd3-4f87-a93c-c26b2f3d6ff4</subfield>
+    <subfield code="s">492070</subfield>
+    <subfield code="u">http://digitallibrary.un.org/record/3872507/files/A_HRC_43_52-AR.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">English</subfield>
+    <subfield code="9">02deb18c-4164-4ca0-a902-8666920ce041</subfield>
+    <subfield code="s">276195</subfield>
+    <subfield code="u">http://digitallibrary.un.org/record/3872507/files/A_HRC_43_52-EN.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Español</subfield>
+    <subfield code="9">2b5f8ef8-dd31-4871-84db-0e2bda853cbb</subfield>
+    <subfield code="s">264981</subfield>
+    <subfield code="u">http://digitallibrary.un.org/record/3872507/files/A_HRC_43_52-ES.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Français</subfield>
+    <subfield code="9">b88e75fe-453a-434f-9bdf-0d3375a335a2</subfield>
+    <subfield code="s">357265</subfield>
+    <subfield code="u">http://digitallibrary.un.org/record/3872507/files/A_HRC_43_52-FR.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Русский</subfield>
+    <subfield code="9">6f2a115f-778e-4f91-8204-eac23d16d835</subfield>
+    <subfield code="s">390320</subfield>
+    <subfield code="u">http://digitallibrary.un.org/record/3872507/files/A_HRC_43_52-RU.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">中文</subfield>
+    <subfield code="9">2b61d361-5b2b-41f1-8254-40e35ecae254</subfield>
+    <subfield code="s">667599</subfield>
+    <subfield code="u">http://digitallibrary.un.org/record/3872507/files/A_HRC_43_52-ZH.pdf</subfield>
+  </datafield>
+  <datafield tag="930" ind1=" " ind2=" ">
+    <subfield code="a">UNDJL20</subfield>
+  </datafield>
+  <datafield tag="980" ind1=" " ind2=" ">
+    <subfield code="a">BIB</subfield>
+  </datafield>
+  <datafield tag="981" ind1=" " ind2=" ">
+    <subfield code="a">General Assembly</subfield>
+    <subfield code="b">Human Rights Council</subfield>
+  </datafield>
+  <datafield tag="981" ind1=" " ind2=" ">
+    <subfield code="a">Human Rights Bodies</subfield>
+    <subfield code="b">Charter-Based Human Rights Bodies</subfield>
+    <subfield code="c">Human Rights Council</subfield>
+  </datafield>
+  <datafield tag="989" ind1=" " ind2=" ">
+    <subfield code="a">Documents and Publications</subfield>
+  </datafield>
+  <datafield tag="991" ind1=" " ind2=" ">
+    <subfield code="a">A/HRC/43/1</subfield>
+    <subfield code="b">3</subfield>
+    <subfield code="c">Promotion and protection of all human rights, civil, political, economic, social and cultural rights, including the right to development.</subfield>
+    <subfield code="0">(DHLAUTH)908876</subfield>
+  </datafield>
+  <datafield tag="998" ind1=" " ind2=" ">
+    <subfield code="a">20200722071400</subfield>
+    <subfield code="b">jccat2</subfield>
+    <subfield code="c">20200925075100</subfield>
+    <subfield code="d">jccat2</subfield>
+    <subfield code="x">0x00010000c1685866</subfield>
+    <subfield code="z">20200925172103</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">jcc20200722</subfield>
+    <subfield code="b">20200722</subfield>
+    <subfield code="c">c</subfield>
+  </datafield>
+</record>
+</collection>

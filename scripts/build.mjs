@@ -9,6 +9,8 @@ const out = "build/addon";
 rmSync("build", { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 cpSync("addon", out, { recursive: true });
+mkdirSync(join(out, "content/styles"), { recursive: true });
+cpSync("styles/oscola-international.csl", join(out, "content/styles/oscola-international.csl"));
 
 const common = { bundle: true, target: "firefox128", format: "iife", logLevel: "info", charset: "utf8" };
 await build({

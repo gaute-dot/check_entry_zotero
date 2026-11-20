@@ -17,6 +17,7 @@
 import { REPORTERS, norwegianDate, yearOf, type ReportCitation } from "./citations";
 import { detect, type Detected } from "./detect";
 import { Draft } from "./draft";
+import { icjRules, treatyRules, unDocRules } from "./rules-intl";
 import { collapse, tidyCaseName } from "./text";
 
 const R = (id: string, args?: Record<string, string | number>) => ({ id, args });
@@ -28,7 +29,8 @@ export function applyRules(draft: Draft, d: Detected = detect(draft.original)): 
 			caseRules(draft, d);
 			break;
 		case "statute":
-			statuteRules(draft, d);
+			if (d.jurisdiction === "treaty") treatyRules(draft, d);
+			else statuteRules(draft, d);
 			break;
 		case "journalArticle":
 			journalRules(draft);
@@ -42,6 +44,10 @@ export function applyRules(draft: Draft, d: Detected = detect(draft.original)): 
 			requireCreators(draft, ["author"]);
 			break;
 		case "report":
+			if (d.jurisdiction === "un") {
+				unDocRules(draft, d);
+				break;
+			}
 			requireFields(draft, ["title", "date"]);
 			if (!draft.has("institution") && draft.creators().length === 0) {
 				draft.issue("warning", "oc-issue-report-no-author", undefined, "institution");
@@ -229,6 +235,9 @@ function caseRules(draft: Draft, d: Detected): void {
 	}
 
 	switch (d.jurisdiction) {
+		case "icj":
+			icjRules(draft, d);
+			return;
 		case "no":
 			caseNorway(draft, d);
 			return;

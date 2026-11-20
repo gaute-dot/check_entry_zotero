@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Search-Engine-Total-Number-Of-Results: 2 -->
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+<record>
+  <controlfield tag="000">00000nam a2200025#a 4500</controlfield>
+  <controlfield tag="001">3923923</controlfield>
+  <controlfield tag="005">20240525001103.0</controlfield>
+  <controlfield tag="008">151022s2015    usa    #r     |||1| eng d</controlfield>
+  <datafield tag="029" ind1=" " ind2=" ">
+    <subfield code="a">JN</subfield>
+    <subfield code="b">N1516301 E</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">(DHL)1067192</subfield>
+  </datafield>
+  <datafield tag="039" ind1=" " ind2=" ">
+    <subfield code="a">DHU</subfield>
+  </datafield>
+  <datafield tag="040" ind1=" " ind2=" ">
+    <subfield code="a">NNUN</subfield>
+    <subfield code="b">eng</subfield>
+  </datafield>
+  <datafield tag="041" ind1=" " ind2=" ">
+    <subfield code="a">arachiengfrerusspa</subfield>
+  </datafield>
+  <datafield tag="049" ind1=" " ind2=" ">
+    <subfield code="a">usa</subfield>
+  </datafield>
+  <datafield tag="089" ind1=" " ind2=" ">
+    <subfield code="b">B01</subfield>
+  </datafield>
+  <datafield tag="089" ind1=" " ind2=" ">
+    <subfield code="b">A08</subfield>
+  </datafield>
+  <datafield tag="091" ind1=" " ind2=" ">
+    <subfield code="a">GEN</subfield>
+  </datafield>
+  <datafield tag="099" ind1=" " ind2=" ">
+    <subfield code="a">UNH</subfield>
+    <subfield code="b">DHU</subfield>
+  </datafield>
+  <datafield tag="191" ind1=" " ind2=" ">
+    <subfield code="a">A/RES/70/1</subfield>
+    <subfield code="b">A/</subfield>
+    <subfield code="c">70</subfield>
+    <subfield code="9">G99</subfield>
+    <subfield code="q">ARES701</subfield>
+    <subfield code="r">A70</subfield>
+    <subfield code="0">(DHLAUTH)844972</subfield>
+  </datafield>
+  <datafield tag="245" ind1="1" ind2="0">
+    <subfield code="a">Transforming our world : the 2030 Agenda for Sustainable Development :</subfield>
+    <subfield code="b">resolution /</subfield>
+    <subfield code="c">adopted by the General Assembly</subfield>
+  </datafield>
+  <datafield tag="260" ind1=" " ind2=" ">
+    <subfield code="a">[New York] :</subfield>
+    <subfield code="b">UN,</subfield>
+    <subfield code="c">21 Oct. 2015</subfield>
+  </datafield>
+  <datafield tag="269" ind1=" " ind2=" ">
+    <subfield code="a">2015-10-21</subfield>
+  </datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="a">35 p.</subfield>
+  </datafield>
+  <datafield tag="500" ind1=" " ind2=" ">
+    <subfield code="a">Issued in GAOR, 70th sess., Suppl. no. 49.</subfield>
+  </datafield>
+  <datafield tag="610" ind1="2" ind2="7">
+    <subfield code="a">UN. Summit for the Adoption of the Post-2015 Development Agenda (2015 : New York)</subfield>
+    <subfield code="2">unbisn</subfield>
+    <subfield code="0">(DHLAUTH)860547</subfield>
+  </datafield>
+  <datafield tag="610" ind1="2" ind2="7">
+    <subfield code="a">Global Partnership for Sustainable Development</subfield>
+    <subfield code="2">unbisn</subfield>
+    <subfield code="0">(DHLAUTH)868715</subfield>
+  </datafield>
+  <datafield tag="630" ind1="0" ind2="7">
+    <subfield code="a">2030 Agenda for Sustainable Development</subfield>
+    <subfield code="2">unbisn</subfield>
+    <subfield code="0">(DHLAUTH)869489</subfield>
+  </datafield>
+  <datafield tag="630" ind1="0" ind2="7">
+    <subfield code="a">Sustainable Development Goals</subfield>
+    <subfield code="2">unbisn</subfield>
+    <subfield code="0">(DHLAUTH)869473</subfield>
+  </datafield>
+  <datafield tag="630" ind1="0" ind2="7">
+    <subfield code="a">Addis Ababa Action Agenda of the Third International Conference on Financing for Development (2015)</subfield>
+    <subfield code="2">unbisn</subfield>
+    <subfield code="0">(DHLAUTH)866257</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">SUSTAINABLE DEVELOPMENT</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269920</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">DEVELOPMENT STRATEGIES</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269884</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">PEACE</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)268448</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">PARTNERSHIP</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269206</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">POVERTY MITIGATION</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)274700</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">HUNGER</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)273675</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">FOOD SECURITY</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)273653</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">HEALTH</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)273713</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">EDUCATION</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)268926</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">GENDER EQUALITY</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)441178</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">WATER MANAGEMENT</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)270919</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">SUSTAINABLE ENERGY</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)469656</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">EMPLOYMENT</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269797</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">INDUSTRIALIZATION</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269846</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">INCOME DISTRIBUTION</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269628</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">HUMAN SETTLEMENTS</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)273542</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">SUSTAINABLE CONSUMPTION</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)548505</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">CLIMATE CHANGE</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)275343</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">MARINE RESOURCES</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269561</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">TERRESTRIAL ECOSYSTEMS</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)270624</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">JUSTICE</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269359</subfield>
+  </datafield>
+  <datafield tag="710" ind1="2" ind2=" ">
+    <subfield code="a">UN. General Assembly (70th sess. : 2015-2016)</subfield>
+    <subfield code="0">(DHLAUTH)827874</subfield>
+  </datafield>
+  <datafield tag="730" ind1="0" ind2=" ">
+    <subfield code="a">2030 Agenda for Sustainable Development</subfield>
+    <subfield code="0">(DHLAUTH)869489</subfield>
+  </datafield>
+  <datafield tag="793" ind1=" " ind2=" ">
+    <subfield code="a">PL</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">العربية</subfield>
+    <subfield code="9">991b1c6e-5ec2-4d14-9449-f6d78b6f39e6</subfield>
+    <subfield code="s">700110</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3923923/files/A_RES_70_1-AR.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Other</subfield>
+    <subfield code="9">e464b1b1-f348-4ec3-8384-0abc9850c194</subfield>
+    <subfield code="s">296419</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3923923/files/A_RES_70_1-DE.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">English</subfield>
+    <subfield code="9">b616254d-a99a-4d59-a49f-52e5deef6084</subfield>
+    <subfield code="s">446402</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3923923/files/A_RES_70_1-EN.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Español</subfield>
+    <subfield code="9">1f735414-362a-4b3c-b47e-ff152b0b5451</subfield>
+    <subfield code="s">432157</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3923923/files/A_RES_70_1-ES.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Français</subfield>
+    <subfield code="9">0aff2538-a7a3-4874-90dc-4ab72a1fce94</subfield>
+    <subfield code="s">497060</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3923923/files/A_RES_70_1-FR.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Русский</subfield>
+    <subfield code="9">894d2fbf-ec10-4dd9-88bc-78db2fa5224d</subfield>
+    <subfield code="s">569124</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3923923/files/A_RES_70_1-RU.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">中文</subfield>
+    <subfield code="9">4e6ccbab-dca0-41ad-ae16-c9b1770bfec9</subfield>
+    <subfield code="s">831241</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3923923/files/A_RES_70_1-ZH.pdf</subfield>
+  </datafield>
+  <datafield tag="930" ind1=" " ind2=" ">
+    <subfield code="a">UNDOC15</subfield>
+  </datafield>
+  <datafield tag="980" ind1=" " ind2=" ">
+    <subfield code="a">BIB</subfield>
+  </datafield>
+  <datafield tag="981" ind1=" " ind2=" ">
+    <subfield code="a">General Assembly</subfield>
+    <subfield code="b">General Assembly Plenary</subfield>
+  </datafield>
+  <datafield tag="989" ind1=" " ind2=" ">
+    <subfield code="a">Documents and Publications</subfield>
+    <subfield code="b">Resolutions and Decisions</subfield>
+    <subfield code="c">Resolutions</subfield>
+  </datafield>
+  <datafield tag="991" ind1="1" ind2=" ">
+    <subfield code="a">A/70/251</subfield>
+    <subfield code="b">15</subfield>
+    <subfield code="c">Integrated and coordinated implementation of and follow-up to the outcomes of the major United Nations conferences and summits in the economic, social and related fields.</subfield>
+    <subfield code="d">UN CONFERENCES</subfield>
+    <subfield code="z">I</subfield>
+    <subfield code="0">(DHLAUTH)863290</subfield>
+  </datafield>
+  <datafield tag="991" ind1="1" ind2=" ">
+    <subfield code="a">A/70/251</subfield>
+    <subfield code="b">116</subfield>
+    <subfield code="c">Follow-up to the outcome of the Millennium Summit.</subfield>
+    <subfield code="d">MILLENNIUM SUMMIT--CONFERENCES</subfield>
+    <subfield code="z">I</subfield>
+    <subfield code="0">(DHLAUTH)863642</subfield>
+  </datafield>
+  <datafield tag="992" ind1=" " ind2=" ">
+    <subfield code="a">2015-09-25</subfield>
+  </datafield>
+  <datafield tag="993" ind1="2" ind2=" ">
+    <subfield code="a">A/70/L.1</subfield>
+  </datafield>
+  <datafield tag="993" ind1="4" ind2=" ">
+    <subfield code="a">A/70/PV.4</subfield>
+  </datafield>
+  <datafield tag="996" ind1=" " ind2=" ">
+    <subfield code="a">Adopted without vote, 4th plenary meeting</subfield>
+  </datafield>
+  <datafield tag="998" ind1=" " ind2=" ">
+    <subfield code="a">20151022145500</subfield>
+    <subfield code="b">pacat</subfield>
+    <subfield code="c">20191119134700</subfield>
+    <subfield code="d">vvcat</subfield>
+    <subfield code="x">0x00010000bf382598</subfield>
+    <subfield code="z">20200217173843</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">vvc20151027</subfield>
+    <subfield code="b">20151027</subfield>
+    <subfield code="c">c</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">pgr20151029</subfield>
+    <subfield code="b">20151029</subfield>
+    <subfield code="c">r</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">paq20151022</subfield>
+    <subfield code="b">20151022</subfield>
+    <subfield code="c">q</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">vwt20151102</subfield>
+    <subfield code="b">20151102</subfield>
+    <subfield code="c">t</subfield>
+  </datafield>
+</record>
+<record>
+  <controlfield tag="000">01304naa\\2200361z\\4500</controlfield>
+  <controlfield tag="001">211213</controlfield>
+  <controlfield tag="005">20261102104658.0</controlfield>
+  <controlfield tag="008">960429s1953\\\\usa\\\\\r\\\\\\\\\\\eng\u</controlfield>
+  <datafield tag="029" ind1=" " ind2=" ">
+    <subfield code="a">JN</subfield>
+    <subfield code="b">NR019997 E</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">D386824X</subfield>
+    <subfield code="z">D0183114</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">(DHL)386824</subfield>
+  </datafield>
+  <datafield tag="039" ind1=" " ind2=" ">
+    <subfield code="a">DHU</subfield>
+  </datafield>
+  <datafield tag="040" ind1=" " ind2=" ">
+    <subfield code="a">NNUN</subfield>
+    <subfield code="b">eng</subfield>
+  </datafield>
+  <datafield tag="041" ind1=" " ind2=" ">
+    <subfield code="a">chiengfrerusspa</subfield>
+  </datafield>
+  <datafield tag="049" ind1=" " ind2=" ">
+    <subfield code="a">usa</subfield>
+  </datafield>
+  <datafield tag="089" ind1=" " ind2=" ">
+    <subfield code="a">Resolutions and decisions (UN)</subfield>
+    <subfield code="b">B01</subfield>
+  </datafield>
+  <datafield tag="091" ind1=" " ind2=" ">
+    <subfield code="a">GEN</subfield>
+  </datafield>
+  <datafield tag="099" ind1=" " ind2=" ">
+    <subfield code="a">UNH</subfield>
+    <subfield code="b">DHU</subfield>
+    <subfield code="c">UNA(01)/R3</subfield>
+    <subfield code="q">UNA01R3</subfield>
+  </datafield>
+  <datafield tag="191" ind1=" " ind2=" ">
+    <subfield code="a">A/RES/701(VII)</subfield>
+    <subfield code="b">A/</subfield>
+    <subfield code="c">7</subfield>
+    <subfield code="q">ARES701VII</subfield>
+    <subfield code="q">ARES701</subfield>
+    <subfield code="r">A7</subfield>
+    <subfield code="0">(DHLAUTH)456093</subfield>
+  </datafield>
+  <datafield tag="245" ind1="1" ind2="0">
+    <subfield code="a">Korea: reports of the United Nations Agent General for Korean Reconstruction.</subfield>
+  </datafield>
+  <datafield tag="269" ind1=" " ind2=" ">
+    <subfield code="a">1953</subfield>
+  </datafield>
+  <datafield tag="500" ind1=" " ind2=" ">
+    <subfield code="a">Adopted at the 414th plenary meeting, 11 Mar. 1953.</subfield>
+  </datafield>
+  <datafield tag="580" ind1=" " ind2=" ">
+    <subfield code="a">In: Resolutions adopted by the General Assembly during its resumed 7th session, 24 February-23 April 1953. - A/2361/Add.1. - 1953. - p. 2. - (GAOR, resumed 7th sess., Suppl. no. 20a).</subfield>
+  </datafield>
+  <datafield tag="610" ind1="2" ind2="7">
+    <subfield code="a">UN Korean Reconstruction Agency</subfield>
+    <subfield code="0">(DHLAUTH)107597</subfield>
+  </datafield>
+  <datafield tag="610" ind1="2" ind2="7">
+    <subfield code="a">UN Korean Reconstruction Agency. Agent General</subfield>
+    <subfield code="0">(DHLAUTH)294008</subfield>
+  </datafield>
+  <datafield tag="650" ind1="0" ind2="7">
+    <subfield code="a">EMERGENCY RELIEF</subfield>
+    <subfield code="0">(DHLAUTH)273708</subfield>
+  </datafield>
+  <datafield tag="650" ind1="0" ind2="7">
+    <subfield code="a">RECONSTRUCTION</subfield>
+    <subfield code="0">(DHLAUTH)268666</subfield>
+  </datafield>
+  <datafield tag="650" ind1="0" ind2="7">
+    <subfield code="a">REPUBLIC OF KOREA</subfield>
+    <subfield code="0">(DHLAUTH)269066</subfield>
+  </datafield>
+  <datafield tag="650" ind1="0" ind2="7">
+    <subfield code="a">BUDGET CONTRIBUTIONS</subfield>
+    <subfield code="0">(DHLAUTH)275750</subfield>
+  </datafield>
+  <datafield tag="650" ind1="0" ind2="7">
+    <subfield code="a">CONSULTATIONS</subfield>
+    <subfield code="0">(DHLAUTH)268747</subfield>
+  </datafield>
+  <datafield tag="650" ind1="0" ind2="7">
+    <subfield code="a">NON-GOVERNMENTAL ORGANIZATIONS</subfield>
+    <subfield code="0">(DHLAUTH)268665</subfield>
+  </datafield>
+  <datafield tag="650" ind1="0" ind2="7">
+    <subfield code="a">FINANCIAL ASSISTANCE</subfield>
+    <subfield code="0">(DHLAUTH)270308</subfield>
+  </datafield>
+  <datafield tag="710" ind1="2" ind2="0">
+    <subfield code="a">UN. General Assembly (7th sess. : 1952-1953)</subfield>
+    <subfield code="0">(DHLAUTH)85602</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">English</subfield>
+    <subfield code="9">c4eb5bf9-b46c-4d0b-a5e9-a1a89f7cb503</subfield>
+    <subfield code="s">84283</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/211213/files/A_RES_701%28VII%29-EN.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Español</subfield>
+    <subfield code="9">981626d3-bef5-41ce-8e70-5959a91b9d7b</subfield>
+    <subfield code="s">72393</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/211213/files/A_RES_701%28VII%29-ES.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Français</subfield>
+    <subfield code="9">fe45d86d-eb36-4643-83c5-67d8d4205758</subfield>
+    <subfield code="s">81288</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/211213/files/A_RES_701%28VII%29-FR.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Русский</subfield>
+    <subfield code="9">99cec150-7343-476d-b712-af596a1f2de4</subfield>
+    <subfield code="s">81629</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/211213/files/A_RES_701%28VII%29-RU.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">中文</subfield>
+    <subfield code="9">1d8edf6a-a188-468e-8bfd-6bc6c235bd06</subfield>
+    <subfield code="s">81069</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/211213/files/A_RES_701%28VII%29-ZH.pdf</subfield>
+  </datafield>
+  <datafield tag="930" ind1=" " ind2=" ">
+    <subfield code="a">ODS</subfield>
+  </datafield>
+  <datafield tag="930" ind1=" " ind2=" ">
+    <subfield code="a">UND</subfield>
+  </datafield>
+  <datafield tag="955" ind1=" " ind2=" ">
+    <subfield code="a">07062500</subfield>
+  </datafield>
+  <datafield tag="980" ind1=" " ind2=" ">
+    <subfield code="a">BIB</subfield>
+  </datafield>
+  <datafield tag="981" ind1=" " ind2=" ">
+    <subfield code="a">General Assembly</subfield>
+    <subfield code="b">General Assembly Plenary</subfield>
+  </datafield>
+  <datafield tag="989" ind1=" " ind2=" ">
+    <subfield code="a">Documents and Publications</subfield>
+    <subfield code="b">Resolutions and Decisions</subfield>
+    <subfield code="c">Resolutions</subfield>
+  </datafield>
+  <datafield tag="989" ind1=" " ind2=" ">
+    <subfield code="a">Documents and Publications</subfield>
+    <subfield code="b">Reports</subfield>
+  </datafield>
+  <datafield tag="992" ind1=" " ind2=" ">
+    <subfield code="a">1953-03-11</subfield>
+  </datafield>
+  <datafield tag="998" ind1=" " ind2=" ">
+    <subfield code="a">19970724000000</subfield>
+    <subfield code="c">20220624111700</subfield>
+    <subfield code="d">sh35cat</subfield>
+    <subfield code="x">0x00010000c6b3ac1a</subfield>
+    <subfield code="z">20220624152232</subfield>
+  </datafield>
+</record>
+</collection>

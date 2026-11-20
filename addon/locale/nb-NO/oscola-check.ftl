@@ -54,6 +54,9 @@ oc-source-find-case-law = Find Case Law (The National Archives)
 oc-source-eur-lex = EUR-Lex
 oc-source-hudoc = HUDOC (EMD)
 oc-source-lovdata = Lovdata
+oc-source-un-digital-library = FNs digitale bibliotek (UN Digital Library)
+oc-source-untc = FNs traktatsamling (UN Treaty Collection)
+oc-source-icj = Den internasjonale domstolen (ICJ)
 
 ## Begrunnelser for foreslåtte endringer
 
@@ -89,6 +92,16 @@ oc-reason-echr-docket-with-report = Med en domssamlingsreferanse ville klagenumm
 oc-reason-eu-case-prefix = OSCOLA setter saksnummeret først: «Case C-176/03 Commission v Council».
 oc-reason-eu-docket = Saksnummeret står nå i saksnavnet. Blir det stående i Saksnummer, skriver stilen det ut som en nøytral referanse.
 oc-reason-no-case = Norsk avgjørelse { $citation }.
+oc-reason-extended = { $source } utvider den nåværende verdien.
+oc-reason-un-doc-type = FN-dokumenter siteres med «UN Doc» og dokumentsymbolet.
+oc-reason-un-symbol = FN-dokumentets symbol.
+oc-reason-un-institution = OSCOLA oppgir organet som utgav dokumentet som forfatter, ikke «United Nations» som utgiver.
+oc-reason-un-body = OSCOLA-forkortelse for organet: { $body }.
+oc-reason-un-resolution = Resolusjonsnummer ({ $number }), slik at den tilpassede OSCOLA-stilen kan skrive «Res { $number }».
+oc-reason-treaty-type = Merker elementet som en traktat, slik at stilen formaterer det som en.
+oc-reason-treaty-series = Traktatsamlingsreferansen { $citation } er delt opp i Code, Code Number og Pages (eller Public Law Number).
+oc-reason-icj-report = ICJ Reports-referansen { $citation } er delt opp i Reporter, First Page og år.
+oc-reason-icj-court = OSCOLA navngir ikke domstolen for ICJ-avgjørelser. Stilen ville skrevet den ut.
 
 ## Merknader (problemer uten automatisk retting)
 
@@ -112,6 +125,14 @@ oc-issue-no-case-unrecognised = Fant ingen norsk avgjørelsesreferanse (f.eks. H
 oc-issue-source-failed = Fikk ikke kontakt med { $source }: { $error }
 oc-issue-source-no-match = Fant ingenting i { $source }.
 oc-issue-source-low-confidence = { $source } fant en lignende, men ikke samsvarende post. Ignorert.
+oc-issue-un-personal-author = OSCOLA siterer FN-dokumenter med organet som utgav dem ({ $body }), ikke med personlige forfattere som en spesialrapportør.
+oc-issue-intl-style = For helt riktig OSCOLA-format, bruk stilen «OSCOLA (international materials)» (Innstillinger → OSCOLA Check). Den vanlige OSCOLA-stilen skriver dette elementet litt annerledes.
+oc-issue-treaty-series = Fant ingen traktatsamlingsreferanse (f.eks. «1465 UNTS 85» eller «ETS 5»).
+oc-issue-treaty-adopted = Vedtaksdatoen (Date Enacted) mangler.
+oc-issue-treaty-eif = Ingen ikrafttredelsesdato. Legg til en linje «event-date: ÅÅÅÅ-MM-DD» i Ekstra hvis traktaten er i kraft.
+oc-issue-icj-no-report = Fant ingen ICJ Reports-referanse. Legg til Reporter «ICJ Rep» og første side når avgjørelsen er publisert i ICJ Reports.
+oc-issue-icj-phase = OSCOLA legger til fasen etter saksnavnet, f.eks. «(Merits)», «(Preliminary Objections)» eller «(Advisory Opinion)».
+oc-issue-icj-several = Saken har flere avgjørelser: { $dates }. Skriv året i avgjørelsesdatoen og kjør kontrollen på nytt.
 
 ## Innstillinger
 
@@ -136,3 +157,13 @@ oc-prefs-source-hudoc =
     .label = HUDOC (Den europeiske menneskerettsdomstolen)
 oc-prefs-source-lovdata =
     .label = Lovdata (norske lover og forskrifter, åpne sider)
+oc-prefs-source-un-digital-library =
+    .label = FNs digitale bibliotek (FN-resolusjoner og -dokumenter)
+oc-prefs-source-untc =
+    .label = FNs traktatsamling (multilaterale traktater)
+oc-prefs-source-icj =
+    .label = Den internasjonale domstolen (dommer og rådgivende uttalelser)
+oc-prefs-style = Siteringsstil for internasjonale kilder
+oc-prefs-style-help = Den vanlige OSCOLA-stilen kan ikke skrive FN-resolusjoner («UNGA Res 70/1 (25 September 2015) UN Doc A/RES/70/1») eller traktater («(adopted …, entered into force …) 1465 UNTS 85») slik OSCOLA krever. Den tilpassede stilen «OSCOLA 4th edition (international materials)» gjør det. Alt annet skrives nøyaktig som med den vanlige stilen.
+oc-prefs-style-install =
+    .label = Installer den tilpassede OSCOLA-stilen …

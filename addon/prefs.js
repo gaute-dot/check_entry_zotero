@@ -6,4 +6,7 @@ pref("extensions.oscola-check.source.find-case-law", true);
 pref("extensions.oscola-check.source.eur-lex", true);
 pref("extensions.oscola-check.source.hudoc", true);
 pref("extensions.oscola-check.source.lovdata", true);
+pref("extensions.oscola-check.source.un-digital-library", true);
+pref("extensions.oscola-check.source.untc", true);
+pref("extensions.oscola-check.source.icj", true);
 pref("extensions.oscola-check.contactEmail", "");

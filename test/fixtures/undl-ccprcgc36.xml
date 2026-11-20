@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Search-Engine-Total-Number-Of-Results: 1 -->
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+<record>
+  <controlfield tag="000">00433nam a2200205#a 4500</controlfield>
+  <controlfield tag="001">3884724</controlfield>
+  <controlfield tag="005">20220610114919.0</controlfield>
+  <controlfield tag="008">200929s2019    che    #r     |||1| eng d</controlfield>
+  <datafield tag="029" ind1=" " ind2=" ">
+    <subfield code="a">JN</subfield>
+    <subfield code="b">G1915012 E</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">(DHL)1278281</subfield>
+  </datafield>
+  <datafield tag="039" ind1=" " ind2=" ">
+    <subfield code="a">GUN</subfield>
+  </datafield>
+  <datafield tag="040" ind1=" " ind2=" ">
+    <subfield code="a">SzGeBNU</subfield>
+    <subfield code="b">eng</subfield>
+  </datafield>
+  <datafield tag="041" ind1=" " ind2=" ">
+    <subfield code="a">eng</subfield>
+  </datafield>
+  <datafield tag="049" ind1=" " ind2=" ">
+    <subfield code="a">che</subfield>
+  </datafield>
+  <datafield tag="089" ind1=" " ind2=" ">
+    <subfield code="b">B26</subfield>
+  </datafield>
+  <datafield tag="091" ind1=" " ind2=" ">
+    <subfield code="a">GEN</subfield>
+  </datafield>
+  <datafield tag="099" ind1=" " ind2=" ">
+    <subfield code="a">UNG</subfield>
+    <subfield code="b">GUN</subfield>
+  </datafield>
+  <datafield tag="191" ind1=" " ind2=" ">
+    <subfield code="a">CCPR/C/GC/36</subfield>
+    <subfield code="b">CCPR/C/</subfield>
+    <subfield code="c">124</subfield>
+    <subfield code="q">CCPRCGC36</subfield>
+    <subfield code="r">CCPRC124</subfield>
+    <subfield code="0">(DHLAUTH)895316</subfield>
+  </datafield>
+  <datafield tag="245" ind1="1" ind2="0">
+    <subfield code="a">General comment no. 36 :</subfield>
+    <subfield code="b">Article 6, Right to life : Human Rights Committee</subfield>
+  </datafield>
+  <datafield tag="260" ind1=" " ind2=" ">
+    <subfield code="a">Geneva :</subfield>
+    <subfield code="b">UN,</subfield>
+    <subfield code="c">3 Sept. 2019</subfield>
+  </datafield>
+  <datafield tag="269" ind1=" " ind2=" ">
+    <subfield code="a">2019-09-03</subfield>
+  </datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="a">21 p.</subfield>
+  </datafield>
+  <datafield tag="500" ind1=" " ind2=" ">
+    <subfield code="a">Adopted by the Committee at its 124th session (8 Oct.-2 Nov. 2018).</subfield>
+  </datafield>
+  <datafield tag="630" ind1="0" ind2="7">
+    <subfield code="a">International Covenant on Civil and Political Rights (1966)</subfield>
+    <subfield code="2">unbisn</subfield>
+    <subfield code="0">(DHLAUTH)34889</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">CIVIL AND POLITICAL RIGHTS</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269028</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">RIGHT TO LIFE</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)274454</subfield>
+  </datafield>
+  <datafield tag="710" ind1="2" ind2=" ">
+    <subfield code="a">UN. Human Rights Committee (124th sess. : 2018 : Geneva)</subfield>
+    <subfield code="0">(DHLAUTH)895317</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">العربية</subfield>
+    <subfield code="9">d30c5f88-5e87-4e68-83be-ede54768b309</subfield>
+    <subfield code="s">542632</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3884724/files/CCPR_C_GC_36-AR.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">中文</subfield>
+    <subfield code="9">e5089b1d-b4fc-4370-b196-ebccfe4df180</subfield>
+    <subfield code="s">561914</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3884724/files/CCPR_C_GC_36-ZH.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">English</subfield>
+    <subfield code="9">fd3f3f5e-6cb4-46c4-a277-d9b0eac22373</subfield>
+    <subfield code="s">308422</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3884724/files/CCPR_C_GC_36-EN.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Français</subfield>
+    <subfield code="9">fa5a602d-49a2-48c3-9753-3abcee942db7</subfield>
+    <subfield code="s">510775</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3884724/files/CCPR_C_GC_36-FR.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Русский</subfield>
+    <subfield code="9">821c65e7-cfd9-4c4a-a1e5-a2f984f834ea</subfield>
+    <subfield code="s">584741</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3884724/files/CCPR_C_GC_36-RU.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Español</subfield>
+    <subfield code="9">00a30234-5945-4336-af5c-7c7a09eaa07d</subfield>
+    <subfield code="s">332242</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/3884724/files/CCPR_C_GC_36-ES.pdf</subfield>
+  </datafield>
+  <datafield tag="930" ind1=" " ind2=" ">
+    <subfield code="a">UNDSE20</subfield>
+  </datafield>
+  <datafield tag="980" ind1=" " ind2=" ">
+    <subfield code="a">BIB</subfield>
+  </datafield>
+  <datafield tag="981" ind1=" " ind2=" ">
+    <subfield code="a">Human Rights Bodies</subfield>
+    <subfield code="b">Treaty-Based Human Rights Bodies</subfield>
+    <subfield code="c">Human Rights Committee</subfield>
+  </datafield>
+  <datafield tag="989" ind1=" " ind2=" ">
+    <subfield code="a">Documents and Publications</subfield>
+  </datafield>
+  <datafield tag="998" ind1=" " ind2=" ">
+    <subfield code="a">20200929093300</subfield>
+    <subfield code="b">jccat2</subfield>
+    <subfield code="c">20201106172900</subfield>
+    <subfield code="d">jccat2</subfield>
+    <subfield code="x">0x00010000c1c50953</subfield>
+    <subfield code="z">20201109120236</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">jcc20200929</subfield>
+    <subfield code="b">20200929</subfield>
+    <subfield code="c">c</subfield>
+  </datafield>
+</record>
+</collection>

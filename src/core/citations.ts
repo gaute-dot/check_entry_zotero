@@ -128,6 +128,7 @@ export const REPORTERS: Record<string, { square: boolean }> = {
 	"P & CR": { square: false },
 	"LGR": { square: false },
 	"Rt": { square: true },
+	"ICJ Rep": { square: true },
 };
 
 const REPORTER_RE_PART = Object.keys(REPORTERS)
@@ -383,4 +384,106 @@ export function yearOf(date: string | undefined): string | null {
 	if (!date) return null;
 	const m = /\b(1[5-9]\d\d|20\d\d)\b/.exec(date);
 	return m ? m[1] : null;
+}
+
+// ---------------------------------------------------------------- United Nations documents
+
+/**
+ * Issuing body by symbol prefix, in OSCOLA's abbreviated form. Longest
+ * prefix wins, so "A/HRC/" beats "A/".
+ */
+const UN_BODIES: [string, string][] = [
+	["A/HRC/", "UNHRC"],
+	["A/CN.4/", "ILC"],
+	["A/", "UNGA"],
+	["S/", "UNSC"],
+	["E/CN.4/", "UNCHR"],
+	["E/C.12/", "UN Committee on Economic, Social and Cultural Rights"],
+	["E/", "ECOSOC"],
+	["CCPR/", "UN Human Rights Committee"],
+	["CRC/", "UN Committee on the Rights of the Child"],
+	["CEDAW/", "UN Committee on the Elimination of Discrimination against Women"],
+	["CERD/", "UN Committee on the Elimination of Racial Discrimination"],
+	["CAT/", "UN Committee against Torture"],
+	["CRPD/", "UN Committee on the Rights of Persons with Disabilities"],
+	["CMW/", "UN Committee on Migrant Workers"],
+	["CED/", "UN Committee on Enforced Disappearances"],
+	["HRI/", "UN International Human Rights Instruments"],
+	["ST/", "UN Secretariat"],
+];
+
+const UN_PREFIX_RE = "(?:A|S|E|ST|CCPR|CRC|CEDAW|CERD|CAT|CRPD|CMW|CED|HRI|TD|UNEP|FCCC|DP|ICEF)";
+
+export interface UNSymbol {
+	/** As found, tidied: "A/RES/70/1", "S/RES/2334 (2016)" */
+	symbol: string;
+	/** OSCOLA body abbreviation, e.g. "UNGA" */
+	body: string;
+	/** For resolutions: the number OSCOLA prints after "Res", e.g. "70/1", "2334", "2625 (XXV)" */
+	resolution?: string;
+	/** Key used by the UN Digital Library's 191__q index: "ARES701" */
+	key: string;
+}
+
+export function parseUNSymbol(s: string | undefined): UNSymbol | null {
+	if (!s) return null;
+	const re = new RegExp(
+		"(?:^|[\\s(\\[,;:]|UN\\s*Doc\\.?\\s*)(" + UN_PREFIX_RE + "\\/[A-Za-z0-9.\\-]+(?:\\/[A-Za-z0-9.\\-]+){0,6}(?:\\s?\\((?:19|20)\\d{2}\\)|\\s?\\([IVXLC]+\\))?)",
+	);
+	const m = re.exec(s);
+	if (!m) return null;
+	const symbol = m[1].replace(/[.,;:]+$/, "").replace(/\s?\(/, " (");
+	if (!/\d/.test(symbol)) return null; // real symbols always contain a number
+	const body = UN_BODIES.find(([prefix]) => symbol.startsWith(prefix))?.[1] ?? "UN";
+	let resolution: string | undefined;
+	const r =
+		/^(?:A|E)(?:\/HRC)?\/RES\/(\d+)\/(\d+)(?:\s[A-Z])?$/.exec(symbol) ?? // A/RES/70/1, A/HRC/RES/31/32
+		/^E\/RES\/(\d{4})\/(\d+)$/.exec(symbol);
+	if (r) resolution = `${r[1]}/${r[2]}`;
+	const sc = /^S\/RES\/(\d+)(?: \((\d{4})\))?$/.exec(symbol);
+	if (sc) resolution = sc[1];
+	const old = /^A\/RES\/(\d+) \(([IVXLC]+)\)$/.exec(symbol) ?? /^A\/RES\/(\d+)\(([IVXLC]+)\)$/.exec(m[1]);
+	if (old) resolution = `${old[1]} (${old[2]})`;
+	return { symbol, body, resolution, key: symbol.replace(/[^A-Za-z0-9]/g, "").toUpperCase() };
+}
+
+// ---------------------------------------------------------------- Treaties
+
+export interface TreatySeriesRef {
+	/** "UNTS", "ETS", "CETS", "LNTS" */
+	series: string;
+	volume?: string;
+	page?: string;
+	/** For ETS/CETS: the treaty number */
+	number?: string;
+	text: string;
+}
+
+export function parseTreatySeries(s: string | undefined): TreatySeriesRef | null {
+	if (!s) return null;
+	let m = /\b(\d{1,4})\s+(UNTS|LNTS)\s+(\d{1,5})\b/.exec(s);
+	if (m) return { series: m[2], volume: m[1], page: m[3], text: m[0] };
+	m = /United Nations,?\s*Treaty Series,?\s*vol\.?\s*(\d+),?\s*p\.?\s*(\d+)/i.exec(s);
+	if (m) return { series: "UNTS", volume: m[1], page: m[2], text: m[0] };
+	m = /\b(C?ETS)\s*(?:No\.?|n°|nr\.?)?\s*(\d{1,3})\b/.exec(s);
+	if (m) return { series: m[1], number: String(parseInt(m[2], 10)), text: m[0] };
+	return null;
+}
+
+const TREATY_TITLE_RE =
+	/^(?:(?:International|European|American|African|Inter-American|Framework|Optional|Additional|Second Optional)\s+)*(Convention|Covenant|Protocol|Treaty|Charter|Agreement|Statute of|Vienna Convention|Rome Statute|Constitution of the)\b/i;
+
+export function looksLikeTreatyTitle(title: string | undefined): boolean {
+	return !!title && TREATY_TITLE_RE.test(title.trim());
+}
+
+// ---------------------------------------------------------------- ICJ
+
+export function parseICJReport(s: string | undefined): { year: string; page: string; text: string } | null {
+	if (!s) return null;
+	let m = /\[(\d{4})\]\s*I\.?\s?C\.?\s?J\.?\s*Rep(?:orts)?\.?\s+(\d+)/.exec(s);
+	if (m) return { year: m[1], page: m[2], text: m[0] };
+	m = /I\.\s?C\.\s?J\.\s*Reports\s+(\d{4}),?\s*p\.?\s*(\d+)/.exec(s);
+	if (m) return { year: m[1], page: m[2], text: m[0] };
+	return null;
 }

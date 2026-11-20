@@ -1,5 +1,6 @@
 import type { Detected } from "../core/detect";
 import type { Candidate, Env, ItemData, SourceId } from "../core/types";
+import { icj, unDigitalLibrary, untc } from "./international";
 import { eurLex, findCaseLaw, hudoc, legislationGovUk, lovdata } from "./legal";
 import { crossref, openalex, openlibrary } from "./scholarly";
 
@@ -18,6 +19,9 @@ export const RESOLVERS: Resolver[] = [
 	eurLex,
 	legislationGovUk,
 	lovdata,
+	unDigitalLibrary,
+	untc,
+	icj,
 	crossref,
 	openalex,
 	openlibrary,

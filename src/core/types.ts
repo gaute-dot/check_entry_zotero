@@ -47,7 +47,10 @@ export type SourceId =
 	| "find-case-law"
 	| "eur-lex"
 	| "hudoc"
-	| "lovdata";
+	| "lovdata"
+	| "un-digital-library"
+	| "untc"
+	| "icj";
 
 /** A proposed change to one field of one item. */
 export interface Suggestion {
@@ -77,6 +80,8 @@ export interface Candidate {
 	extraLines?: string[];
 	/** 0..1 — how sure the resolver is that this is the same work */
 	confidence: number;
+	/** Notes for the user (shown as "info" in the review dialog) */
+	notes?: Message[];
 }
 
 /**

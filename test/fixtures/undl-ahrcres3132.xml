@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Search-Engine-Total-Number-Of-Results: 1 -->
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+<record>
+  <controlfield tag="000">02039nam a2200457#a 4500</controlfield>
+  <controlfield tag="001">835946</controlfield>
+  <controlfield tag="005">20210622135306.0</controlfield>
+  <controlfield tag="008">160804s2016    che    #r     ||| | eng d</controlfield>
+  <datafield tag="029" ind1=" " ind2=" ">
+    <subfield code="a">JN</subfield>
+    <subfield code="b">G1606484 E</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">(DHL)1097423</subfield>
+  </datafield>
+  <datafield tag="039" ind1=" " ind2=" ">
+    <subfield code="a">GUN</subfield>
+  </datafield>
+  <datafield tag="040" ind1=" " ind2=" ">
+    <subfield code="a">SzGeBNU</subfield>
+    <subfield code="b">eng</subfield>
+  </datafield>
+  <datafield tag="041" ind1=" " ind2=" ">
+    <subfield code="a">arachiengfrerusspa</subfield>
+  </datafield>
+  <datafield tag="049" ind1=" " ind2=" ">
+    <subfield code="a">che</subfield>
+  </datafield>
+  <datafield tag="089" ind1=" " ind2=" ">
+    <subfield code="b">B01</subfield>
+  </datafield>
+  <datafield tag="091" ind1=" " ind2=" ">
+    <subfield code="a">GEN</subfield>
+  </datafield>
+  <datafield tag="099" ind1=" " ind2=" ">
+    <subfield code="a">UNG</subfield>
+    <subfield code="b">GUN</subfield>
+  </datafield>
+  <datafield tag="191" ind1=" " ind2=" ">
+    <subfield code="a">A/HRC/RES/31/32</subfield>
+    <subfield code="b">A/HRC/</subfield>
+    <subfield code="c">31</subfield>
+    <subfield code="q">AHRCRES3132</subfield>
+    <subfield code="r">AHRC31</subfield>
+    <subfield code="0">(DHLAUTH)872496</subfield>
+  </datafield>
+  <datafield tag="245" ind1="1" ind2="0">
+    <subfield code="a">Protecting human rights defenders, whether individuals, groups or organs of society, addressing economic, social and cultural rights :</subfield>
+    <subfield code="b">resolution /</subfield>
+    <subfield code="c">adopted by the Human Rights Council on 24 March 2016</subfield>
+  </datafield>
+  <datafield tag="260" ind1=" " ind2=" ">
+    <subfield code="a">Geneva :</subfield>
+    <subfield code="b">UN,</subfield>
+    <subfield code="c">20 Apr. 2016</subfield>
+  </datafield>
+  <datafield tag="269" ind1=" " ind2=" ">
+    <subfield code="a">2016-04-20</subfield>
+  </datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="a">6 p.</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">HUMAN RIGHTS ACTIVISTS</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)274704</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">ECONOMIC, SOCIAL AND CULTURAL RIGHTS</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)273561</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">RIGHT TO SECURITY OF PERSON</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)276662</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">HUMAN RIGHTS MONITORING</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)276661</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">CORPORATE SOCIAL RESPONSIBILITY</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269390</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">DEVELOPMENT</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269844</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">REPRISALS</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)268779</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">ACCOUNTABILITY</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269310</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">LAWS AND REGULATIONS</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)268352</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">INTERNATIONAL LAW</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)268669</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">INFORMATION DISSEMINATION</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)275051</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">POPULAR PARTICIPATION</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)268478</subfield>
+  </datafield>
+  <datafield tag="650" ind1="2" ind2="7">
+    <subfield code="a">BUSINESS ENTERPRISES</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269199</subfield>
+  </datafield>
+  <datafield tag="710" ind1="2" ind2=" ">
+    <subfield code="a">UN. Human Rights Council (31st sess. : 2016 : Geneva)</subfield>
+    <subfield code="0">(DHLAUTH)874384</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">العربية</subfield>
+    <subfield code="9">1d31d412-5016-48fc-b59d-95b59f57e0e8</subfield>
+    <subfield code="s">164505</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/835946/files/A_HRC_RES_31_32-AR.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">English</subfield>
+    <subfield code="9">fd0ded46-9159-435b-adf8-303002cc8525</subfield>
+    <subfield code="s">142685</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/835946/files/A_HRC_RES_31_32-EN.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Español</subfield>
+    <subfield code="9">1c52fdaf-d133-4780-ba79-1b363bfd556f</subfield>
+    <subfield code="s">148109</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/835946/files/A_HRC_RES_31_32-ES.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Français</subfield>
+    <subfield code="9">27fac0f4-ce62-4aa6-8a25-e9b0b9584826</subfield>
+    <subfield code="s">268929</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/835946/files/A_HRC_RES_31_32-FR.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Русский</subfield>
+    <subfield code="9">1cec81da-6c0c-41bb-a5b1-f9491dca6a63</subfield>
+    <subfield code="s">283510</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/835946/files/A_HRC_RES_31_32-RU.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">中文</subfield>
+    <subfield code="9">027424ab-6f75-4476-b3f1-65a1b9d13093</subfield>
+    <subfield code="s">290230</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/835946/files/A_HRC_RES_31_32-ZH.pdf</subfield>
+  </datafield>
+  <datafield tag="930" ind1=" " ind2=" ">
+    <subfield code="a">UNDAU16</subfield>
+  </datafield>
+  <datafield tag="980" ind1=" " ind2=" ">
+    <subfield code="a">BIB</subfield>
+  </datafield>
+  <datafield tag="981" ind1=" " ind2=" ">
+    <subfield code="a">General Assembly</subfield>
+    <subfield code="b">Human Rights Council</subfield>
+  </datafield>
+  <datafield tag="981" ind1=" " ind2=" ">
+    <subfield code="a">Human Rights Bodies</subfield>
+    <subfield code="b">Charter-Based Human Rights Bodies</subfield>
+    <subfield code="c">Human Rights Council</subfield>
+  </datafield>
+  <datafield tag="989" ind1=" " ind2=" ">
+    <subfield code="a">Documents and Publications</subfield>
+    <subfield code="b">Resolutions and Decisions</subfield>
+    <subfield code="c">Resolutions</subfield>
+  </datafield>
+  <datafield tag="991" ind1=" " ind2=" ">
+    <subfield code="a">A/HRC/31/1</subfield>
+    <subfield code="b">3</subfield>
+    <subfield code="c">Promotion and protection of all human rights, civil, political, economic, social and cultural rights, including the right to development.</subfield>
+    <subfield code="0">(DHLAUTH)872549</subfield>
+  </datafield>
+  <datafield tag="992" ind1=" " ind2=" ">
+    <subfield code="a">2016-03-24</subfield>
+  </datafield>
+  <datafield tag="993" ind1="2" ind2=" ">
+    <subfield code="a">A/HRC/31/L.28</subfield>
+  </datafield>
+  <datafield tag="996" ind1=" " ind2=" ">
+    <subfield code="a">Adopted 33-6-8, 65th meeting</subfield>
+  </datafield>
+  <datafield tag="998" ind1=" " ind2=" ">
+    <subfield code="a">20160804145900</subfield>
+    <subfield code="b">jccat2</subfield>
+    <subfield code="c">20160811072100</subfield>
+    <subfield code="d">jccat2</subfield>
+    <subfield code="x">0x00010000b41425e8</subfield>
+    <subfield code="z">20210622173837</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">jcc20160804</subfield>
+    <subfield code="b">20160804</subfield>
+    <subfield code="c">c</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">jcu20160811</subfield>
+    <subfield code="b">20160811</subfield>
+    <subfield code="c">u</subfield>
+  </datafield>
+</record>
+</collection>

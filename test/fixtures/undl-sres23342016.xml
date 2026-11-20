@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Search-Engine-Total-Number-Of-Results: 1 -->
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+<record>
+  <controlfield tag="000">00000nam a2200025#a 4500</controlfield>
+  <controlfield tag="001">853446</controlfield>
+  <controlfield tag="005">20240301135546.0</controlfield>
+  <controlfield tag="008">161227s2016    usa    #r     |||1| eng d</controlfield>
+  <datafield tag="029" ind1=" " ind2=" ">
+    <subfield code="a">JN</subfield>
+    <subfield code="b">N1622920 E</subfield>
+  </datafield>
+  <datafield tag="035" ind1=" " ind2=" ">
+    <subfield code="a">(DHL)1116096</subfield>
+  </datafield>
+  <datafield tag="039" ind1=" " ind2=" ">
+    <subfield code="a">DHU</subfield>
+  </datafield>
+  <datafield tag="040" ind1=" " ind2=" ">
+    <subfield code="a">NNUN</subfield>
+    <subfield code="b">eng</subfield>
+  </datafield>
+  <datafield tag="041" ind1=" " ind2=" ">
+    <subfield code="a">arachiengfrerusspa</subfield>
+  </datafield>
+  <datafield tag="049" ind1=" " ind2=" ">
+    <subfield code="a">usa</subfield>
+  </datafield>
+  <datafield tag="089" ind1=" " ind2=" ">
+    <subfield code="b">B01</subfield>
+  </datafield>
+  <datafield tag="091" ind1=" " ind2=" ">
+    <subfield code="a">GEN</subfield>
+  </datafield>
+  <datafield tag="099" ind1=" " ind2=" ">
+    <subfield code="a">UNH</subfield>
+    <subfield code="b">DHU</subfield>
+  </datafield>
+  <datafield tag="191" ind1=" " ind2=" ">
+    <subfield code="a">S/RES/2334 (2016)</subfield>
+    <subfield code="b">S/</subfield>
+    <subfield code="c">71</subfield>
+    <subfield code="9">X99</subfield>
+    <subfield code="q">SRES23342016</subfield>
+    <subfield code="q">SRES2334</subfield>
+    <subfield code="r">S71</subfield>
+    <subfield code="0">(DHLAUTH)871545</subfield>
+  </datafield>
+  <datafield tag="239" ind1="1" ind2="0">
+    <subfield code="a">Security Council resolution 2334 (2016) [on cessation of Israeli settlement activities in the Occupied Palestinian Territory, including East Jerusalem]</subfield>
+  </datafield>
+  <datafield tag="245" ind1="0" ind2="0">
+    <subfield code="a">Resolution 2334 (2016) /</subfield>
+    <subfield code="c">adopted by the Security Council at its 7853rd meeting, on 23 December 2016</subfield>
+  </datafield>
+  <datafield tag="260" ind1=" " ind2=" ">
+    <subfield code="a">[New York] :</subfield>
+    <subfield code="b">UN,</subfield>
+    <subfield code="c">23 Dec. 2016</subfield>
+  </datafield>
+  <datafield tag="269" ind1=" " ind2=" ">
+    <subfield code="a">2016-12-23</subfield>
+  </datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="a">3 p.</subfield>
+  </datafield>
+  <datafield tag="500" ind1=" " ind2=" ">
+    <subfield code="a">Issued in: Resolutions and decisions of the Security Council, 1 August 2016-31 July 2017 - S/INF/72 - (SCOR, 72nd year).</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">TERRITORIES OCCUPIED BY ISRAEL</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)268687</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">SETTLEMENT POLICY</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)269906</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">ISRAEL</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)268556</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">PALESTINE QUESTION</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)268363</subfield>
+  </datafield>
+  <datafield tag="650" ind1="1" ind2="7">
+    <subfield code="a">MIDDLE EAST SITUATION</subfield>
+    <subfield code="2">unbist</subfield>
+    <subfield code="0">(DHLAUTH)8818</subfield>
+  </datafield>
+  <datafield tag="710" ind1="2" ind2=" ">
+    <subfield code="a">UN. Security Council (71st year : 2016)</subfield>
+    <subfield code="0">(DHLAUTH)871826</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">العربية</subfield>
+    <subfield code="9">f605444e-cdfc-4d74-b3a3-1fd9d31ff59a</subfield>
+    <subfield code="s">194326</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/853446/files/S_RES_2334_%282016%29-AR.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">中文</subfield>
+    <subfield code="9">69470ff5-a287-4fa4-8bbe-aaae4fa68ec5</subfield>
+    <subfield code="s">233429</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/853446/files/S_RES_2334_%282016%29-ZH.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">English</subfield>
+    <subfield code="9">115148f6-76e5-40e5-ba95-f3ceeb9053a5</subfield>
+    <subfield code="s">220588</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/853446/files/S_RES_2334_%282016%29-EN.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Français</subfield>
+    <subfield code="9">9ab7dfa7-c808-4cf1-a049-c0253eaea4ba</subfield>
+    <subfield code="s">51135</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/853446/files/S_RES_2334_%282016%29-FR.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Русский</subfield>
+    <subfield code="9">0172b29f-05b4-4dbb-9b51-e2e98ba827e9</subfield>
+    <subfield code="s">234658</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/853446/files/S_RES_2334_%282016%29-RU.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Español</subfield>
+    <subfield code="9">a774cf45-6bdc-42b7-b1ee-b6e9b41c714b</subfield>
+    <subfield code="s">218849</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/853446/files/S_RES_2334_%282016%29-ES.pdf</subfield>
+  </datafield>
+  <datafield tag="856" ind1="4" ind2=" ">
+    <subfield code="y">Other</subfield>
+    <subfield code="9">bd624adc-1123-4e6d-9acf-4050d4468e06</subfield>
+    <subfield code="s">156383</subfield>
+    <subfield code="u">https://digitallibrary.un.org/record/853446/files/S_RES_2334_%282016%29-DE.pdf</subfield>
+  </datafield>
+  <datafield tag="930" ind1=" " ind2=" ">
+    <subfield code="a">UNDDE16</subfield>
+  </datafield>
+  <datafield tag="980" ind1=" " ind2=" ">
+    <subfield code="a">BIB</subfield>
+  </datafield>
+  <datafield tag="981" ind1=" " ind2=" ">
+    <subfield code="a">Security Council</subfield>
+  </datafield>
+  <datafield tag="989" ind1=" " ind2=" ">
+    <subfield code="a">Documents and Publications</subfield>
+    <subfield code="b">Resolutions and Decisions</subfield>
+    <subfield code="c">Resolutions</subfield>
+  </datafield>
+  <datafield tag="991" ind1="3" ind2=" ">
+    <subfield code="a">S/71</subfield>
+    <subfield code="b">[53]</subfield>
+    <subfield code="d">TERRITORIES OCCUPIED BY ISRAEL</subfield>
+    <subfield code="z">I</subfield>
+    <subfield code="0">(DHLAUTH)871636</subfield>
+  </datafield>
+  <datafield tag="991" ind1="3" ind2=" ">
+    <subfield code="a">S/71</subfield>
+    <subfield code="b">[50]</subfield>
+    <subfield code="d">PALESTINE QUESTION</subfield>
+    <subfield code="z">I</subfield>
+    <subfield code="0">(DHLAUTH)871633</subfield>
+  </datafield>
+  <datafield tag="991" ind1="3" ind2=" ">
+    <subfield code="a">S/71</subfield>
+    <subfield code="b">[54]</subfield>
+    <subfield code="d">MIDDLE EAST SITUATION</subfield>
+    <subfield code="z">I</subfield>
+    <subfield code="0">(DHLAUTH)871637</subfield>
+  </datafield>
+  <datafield tag="991" ind1="3" ind2=" ">
+    <subfield code="a">S/</subfield>
+    <subfield code="b">X</subfield>
+    <subfield code="c">The situation in the Middle East, including the Palestinian question.</subfield>
+    <subfield code="0">(DHLAUTH)921728</subfield>
+  </datafield>
+  <datafield tag="992" ind1=" " ind2=" ">
+    <subfield code="a">2016-12-23</subfield>
+  </datafield>
+  <datafield tag="993" ind1="2" ind2=" ">
+    <subfield code="a">S/2016/1100</subfield>
+  </datafield>
+  <datafield tag="993" ind1="4" ind2=" ">
+    <subfield code="a">S/PV.7853</subfield>
+  </datafield>
+  <datafield tag="996" ind1=" " ind2=" ">
+    <subfield code="a">Adopted 14-0-1, 7853rd meeting</subfield>
+  </datafield>
+  <datafield tag="998" ind1=" " ind2=" ">
+    <subfield code="a">20161227124100</subfield>
+    <subfield code="b">pnser</subfield>
+    <subfield code="c">20170502115600</subfield>
+    <subfield code="d">gbcatsa</subfield>
+    <subfield code="x">0x00010000b6d24198</subfield>
+    <subfield code="z">20200217173843</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">pnq20161227</subfield>
+    <subfield code="b">20161227</subfield>
+    <subfield code="c">q</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">tbc20161227</subfield>
+    <subfield code="b">20161227</subfield>
+    <subfield code="c">c</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">vwt20161228</subfield>
+    <subfield code="b">20161228</subfield>
+    <subfield code="c">t</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">vvr20170103</subfield>
+    <subfield code="b">20170103</subfield>
+    <subfield code="c">r</subfield>
+  </datafield>
+  <datafield tag="999" ind1=" " ind2=" ">
+    <subfield code="a">mmu20240301</subfield>
+    <subfield code="b">20240301</subfield>
+    <subfield code="c">u</subfield>
+  </datafield>
+</record>
+</collection>

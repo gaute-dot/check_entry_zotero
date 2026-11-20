@@ -75,7 +75,9 @@ export function parseFCLJudgment(doc: Document): { name: string; date: string; n
 	const dates = byLocalName(doc, "FRBRdate");
 	const judgmentDate = dates.find((e) => /judgment|decision/i.test(e.getAttribute("name") ?? "")) ?? dates[0];
 	const ncn = textOf(firstByLocalName(doc, "cite"));
-	return { name: collapse(name), date: judgmentDate?.getAttribute("date") ?? "", ncn };
+	// Find Case Law tags appeals from Scotland/Northern Ireland in the name; OSCOLA does not
+	const tidy = collapse(name).replace(/\s*\((?:Scotland|Northern Ireland|NI)\)\s*$/, "");
+	return { name: tidy, date: judgmentDate?.getAttribute("date") ?? "", ncn };
 }
 
 export const findCaseLaw: Resolver = {
@@ -131,7 +133,8 @@ interface SparqlRow {
 
 async function sparql(env: Env, query: string): Promise<SparqlRow[]> {
 	const url = `${SPARQL}?query=${encodeURIComponent(query)}&format=${encodeURIComponent("application/sparql-results+json")}`;
-	const res = await getJSON<{ results: { bindings: SparqlRow[] } }>(env, url);
+	// The endpoint answers 406 to a plain "application/json" Accept header
+	const res = await getJSON<{ results: { bindings: SparqlRow[] } }>(env, url, "application/sparql-results+json");
 	return res.results?.bindings ?? [];
 }
 
@@ -213,6 +216,7 @@ interface HudocResult {
 		ecli?: string;
 		languageisocode?: string;
 		doctypebranch?: string;
+		documentcollectionid2?: string;
 	};
 }
 
@@ -233,10 +237,15 @@ export const hudoc: Resolver = {
 		const url =
 			"https://hudoc.echr.coe.int/app/query/results?query=" +
 			encodeURIComponent(query) +
-			"&select=itemid,docname,appno,kpdate,ecli,languageisocode,doctypebranch&sort=&start=0&length=20";
+			"&select=itemid,docname,appno,kpdate,ecli,languageisocode,doctypebranch,documentcollectionid2&sort=&start=0&length=50";
 		const res = await getJSON<{ results?: HudocResult[] }>(env, url);
 		const rows = (res.results ?? []).map((r) => r.columns);
-		const row = rows.find((r) => r.languageisocode === "ENG") ?? rows[0];
+		// Prefer the English judgment over admissibility decisions and translations
+		const isJudgment = (r: HudocResult["columns"]) => /(^|;)JUDGMENTS(;|$)/.test(r.documentcollectionid2 ?? "");
+		const row =
+			rows.find((r) => r.languageisocode === "ENG" && isJudgment(r)) ??
+			rows.find((r) => r.languageisocode === "ENG") ??
+			rows[0];
 		if (!row) return null;
 		const extraLines = row.ecli ? [`ECLI: ${row.ecli}`] : [];
 		return {
@@ -269,9 +278,10 @@ export function parseLovdataPage(html: string): { title: string; meta: Record<st
 	const re = /<(?:th|dt)[^>]*>([\s\S]*?)<\/(?:th|dt)>\s*<(?:td|dd)[^>]*>([\s\S]*?)<\/(?:td|dd)>/gi;
 	let m: RegExpExecArray | null;
 	while ((m = re.exec(html))) meta[strip(m[1]).replace(/:$/, "")] = strip(m[2]);
-	const h1 = /<h1[^>]*>([\s\S]*?)<\/h1>/i.exec(html)?.[1];
+	// Lovdata pages have several screen-reader <h1>s ("Hovedmeny"); the <title> is reliable
 	const t = /<title>([\s\S]*?)<\/title>/i.exec(html)?.[1];
-	const title = strip(meta["Tittel"] ?? h1 ?? (t ?? "").replace(/\s*-\s*Lovdata\s*$/i, ""));
+	const h1 = /<h1(?![^>]*sr-only)[^>]*>([\s\S]*?)<\/h1>/i.exec(html)?.[1];
+	const title = strip(meta["Tittel"] ?? (t ? t.replace(/\s*-\s*Lovdata\s*$/i, "") : h1 ?? ""));
 	return { title, meta };
 }
 

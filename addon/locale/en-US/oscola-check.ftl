@@ -54,6 +54,9 @@ oc-source-find-case-law = Find Case Law (The National Archives)
 oc-source-eur-lex = EUR-Lex
 oc-source-hudoc = HUDOC (ECtHR)
 oc-source-lovdata = Lovdata
+oc-source-un-digital-library = UN Digital Library
+oc-source-untc = UN Treaty Collection
+oc-source-icj = International Court of Justice
 
 ## Reasons for suggested changes
 
@@ -89,6 +92,16 @@ oc-reason-echr-docket-with-report = With a report citation the application numbe
 oc-reason-eu-case-prefix = OSCOLA puts the case number first: “Case C-176/03 Commission v Council”.
 oc-reason-eu-docket = The case number is now in the case name. If it stays in Docket Number the style prints it as a neutral citation.
 oc-reason-no-case = Norwegian case { $citation }.
+oc-reason-extended = { $source } adds to the current value.
+oc-reason-un-doc-type = UN documents are cited with “UN Doc” and the document symbol.
+oc-reason-un-symbol = The UN document symbol.
+oc-reason-un-institution = OSCOLA names the issuing body as author, not “United Nations” as publisher.
+oc-reason-un-body = OSCOLA abbreviation of the issuing body: { $body }.
+oc-reason-un-resolution = Resolution number ({ $number }), so the adjusted OSCOLA style can print “Res { $number }”.
+oc-reason-treaty-type = Marks the item as a treaty, so the style formats it as one.
+oc-reason-treaty-series = Treaty series reference { $citation } split into Code, Code Number and Pages (or Public Law Number).
+oc-reason-icj-report = ICJ Reports citation { $citation } split into Reporter, First Page and year.
+oc-reason-icj-court = OSCOLA does not name the court for ICJ decisions. The style would print it.
 
 ## Notes (problems without an automatic fix)
 
@@ -112,6 +125,14 @@ oc-issue-no-case-unrecognised = No Norwegian case reference recognised (e.g. HR-
 oc-issue-source-failed = Could not reach { $source }: { $error }
 oc-issue-source-no-match = Nothing found in { $source }.
 oc-issue-source-low-confidence = { $source } found a similar but not matching record. Ignored.
+oc-issue-un-personal-author = OSCOLA cites UN documents by the issuing body ({ $body }), not by personal authors such as a Special Rapporteur.
+oc-issue-intl-style = For exactly correct OSCOLA output, use the “OSCOLA (international materials)” style (Settings → OSCOLA Check). The standard OSCOLA style prints this item slightly differently.
+oc-issue-treaty-series = No treaty series found (e.g. “1465 UNTS 85” or “ETS 5”).
+oc-issue-treaty-adopted = The adoption date (Date Enacted) is missing.
+oc-issue-treaty-eif = No entry-into-force date. Add a line “event-date: YYYY-MM-DD” to Extra if the treaty is in force.
+oc-issue-icj-no-report = No ICJ Reports citation found. Add Reporter “ICJ Rep” and the first page when the decision is published in the ICJ Reports.
+oc-issue-icj-phase = OSCOLA adds the phase after the case name, e.g. “(Merits)”, “(Preliminary Objections)” or “(Advisory Opinion)”.
+oc-issue-icj-several = The case has several decisions: { $dates }. Enter the year in Date Decided and run the check again.
 
 ## Preferences
 
@@ -136,3 +157,13 @@ oc-prefs-source-hudoc =
     .label = HUDOC (European Court of Human Rights)
 oc-prefs-source-lovdata =
     .label = Lovdata (Norwegian acts and regulations, public pages)
+oc-prefs-source-un-digital-library =
+    .label = UN Digital Library (UN resolutions and documents)
+oc-prefs-source-untc =
+    .label = UN Treaty Collection (multilateral treaties)
+oc-prefs-source-icj =
+    .label = International Court of Justice (judgments and advisory opinions)
+oc-prefs-style = Citation style for international materials
+oc-prefs-style-help = The standard OSCOLA style cannot print UN resolutions (“UNGA Res 70/1 (25 September 2015) UN Doc A/RES/70/1”) or treaties (“(adopted …, entered into force …) 1465 UNTS 85”) exactly as OSCOLA requires. The adjusted style “OSCOLA 4th edition (international materials)” does. Everything else is printed exactly as by the standard style.
+oc-prefs-style-install =
+    .label = Install the adjusted OSCOLA style…

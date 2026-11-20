@@ -13,7 +13,7 @@ declare const Zotero: any;
 
 const PREF = "extensions.oscola-check.";
 const MENU_ID = "oscola-check-item-menu";
-const SOURCES: SourceId[] = ["crossref", "openalex", "openlibrary", "legislation-gov-uk", "find-case-law", "eur-lex", "hudoc", "lovdata"];
+const SOURCES: SourceId[] = ["crossref", "openalex", "openlibrary", "legislation-gov-uk", "find-case-law", "eur-lex", "hudoc", "lovdata", "un-digital-library", "untc", "icj"];
 
 let pluginID = "";
 let rootURI = "";
@@ -58,6 +58,7 @@ export async function startup(data: { id: string; rootURI: string }): Promise<vo
 	prefPaneID = await Zotero.PreferencePanes.register({
 		pluginID,
 		src: rootURI + "content/preferences.xhtml",
+		scripts: [rootURI + "content/preferences.js"],
 		image: rootURI + "content/icons/icon.svg",
 	});
 }
@@ -74,6 +75,14 @@ export function shutdown(): void {
 	Zotero.MenuManager.unregisterMenu(MENU_ID);
 	if (prefPaneID) Zotero.PreferencePanes.unregister(prefPaneID);
 	for (const win of Zotero.getMainWindows()) onMainWindowUnload(win);
+}
+
+/**
+ * Install the adjusted OSCOLA style shipped with the plugin. Zotero shows
+ * its usual confirmation dialog first.
+ */
+export async function installStyle(): Promise<void> {
+	await Zotero.Styles.install({ url: rootURI + "content/styles/oscola-international.csl" }, "OSCOLA Check", false);
 }
 
 // ---------------------------------------------------------------- environment for the core
