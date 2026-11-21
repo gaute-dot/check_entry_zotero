@@ -138,3 +138,20 @@ live("live: existing items missing author or year", () => {
 		expect(s.creators?.suggested).toBe("Lemkin, Raphael");
 	}, T);
 });
+
+live("live: book catalogues", () => {
+	it("finds the author of a book from its title alone when two catalogues agree", async () => {
+		const { findBook } = await import("../src/resolvers/catalogues");
+		const c = await findBook(liveEnv, "The Concept of Law", []);
+		expect(c?.creators?.[0]?.lastName).toBe("Hart");
+		const l = await findBook(liveEnv, "Axis Rule in Occupied Europe", []);
+		expect(l?.creators?.[0]?.lastName).toBe("Lemkin");
+	}, T);
+
+	it("with an author, takes that author's book", async () => {
+		const { findBook } = await import("../src/resolvers/catalogues");
+		const c = await findBook(liveEnv, "The Concept of Law", [{ creatorType: "author", firstName: "H. L. A.", lastName: "Hart" }]);
+		expect(c?.fields.date).toMatch(/^19\d\d|20\d\d$/);
+		expect(await findBook(liveEnv, "The Concept of Law", [{ creatorType: "author", firstName: "A", lastName: "Nobody" }])).toBeNull();
+	}, T);
+});

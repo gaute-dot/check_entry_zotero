@@ -8,7 +8,8 @@
 import { convertItem } from "./convert";
 import { expandSearch, missingBasics, type Basic } from "./expand";
 import { formatCreators } from "./draft";
-import type { CheckResult, Env, ItemData, Suggestion } from "./types";
+import { isValidField } from "./schema";
+import type { CheckResult, Env, ItemData, Issue, Suggestion } from "./types";
 
 /** Legal material has its own sources and rules; author and year guesses would do more harm than good. */
 const SKIP = ["case", "statute", "bill", "hearing", "patent", "standard"];
@@ -28,16 +29,21 @@ export function applyTicked(original: ItemData, result: CheckResult): ItemData {
 	return item;
 }
 
-export async function ensureBasics(original: ItemData, result: CheckResult, env: Env, getText?: () => Promise<string>): Promise<CheckResult> {
+export async function ensureBasics(
+	original: ItemData,
+	result: CheckResult,
+	env: Env,
+	getText?: () => Promise<{ text: string; issues?: Issue[] }>,
+): Promise<CheckResult> {
 	const current = applyTicked(original, result);
 	if (SKIP.includes(current.itemType) || current.fields.reportType === "UN Doc") return result;
 	const missing: Basic[] = missingBasics(current);
 	if (!missing.length) return result;
 
-	const text = getText ? await getText().catch(() => "") : "";
-	const exp = await expandSearch(current, text, env);
+	const read = getText ? await getText().catch(() => ({ text: "", issues: [] })) : { text: "", issues: [] };
+	const exp = await expandSearch(current, read.text, env);
 	const suggestions = [...result.suggestions];
-	const issues = [...result.issues];
+	const issues = [...result.issues, ...(read.issues ?? [])];
 
 	// Item type found online for a generic item (e.g. a Document that is a book)
 	if (exp.item.itemType !== current.itemType) {
@@ -66,13 +72,19 @@ export async function ensureBasics(original: ItemData, result: CheckResult, env:
 			continue;
 		}
 		const value = exp.item.fields[field];
-		if (!value || current.fields[field]?.trim()) continue;
+		if (!value || current.fields[field]?.trim() || !isValidField(exp.item.itemType, field)) continue;
 		const i = suggestions.findIndex((s) => s.field === field);
 		const row: Suggestion = { field, current: original.fields[field] ?? "", suggested: value, source, reason, preselect: true };
 		if (i >= 0) suggestions[i] = row;
 		else suggestions.push(row);
 	}
 
+	// notes about fields that are now filled no longer apply
+	const filled = new Set(suggestions.filter((x) => x.preselect && x.suggested).map((x) => x.field));
+	for (let i = issues.length - 1; i >= 0; i--) {
+		const f = issues[i].field;
+		if (f && filled.has(f) && /oc-issue-missing-(field|creator)/.test(issues[i].message.id)) issues.splice(i, 1);
+	}
 	const still = missingBasics(exp.item);
 	if (exp.guessed) issues.push({ severity: "warning", message: { id: "oc-issue-basics-guessed-item" } });
 	if (still.length) issues.push({ severity: "warning", message: { id: "oc-issue-basics-missing", args: { fields: still.join(", ") } } });

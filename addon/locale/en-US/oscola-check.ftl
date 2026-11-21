@@ -54,6 +54,7 @@ oc-source-find-case-law = Find Case Law (The National Archives)
 oc-source-eur-lex = EUR-Lex
 oc-source-hudoc = HUDOC (ECtHR)
 oc-source-lovdata = Lovdata
+oc-source-nb = Norwegian National Library
 oc-source-un-digital-library = UN Digital Library
 oc-source-untc = UN Treaty Collection
 oc-source-icj = International Court of Justice
@@ -155,6 +156,9 @@ oc-issue-basics-guessed = Some values were guessed from the text of the file (no
 oc-issue-basics-missing = Still missing after reading more of the file and searching online: { $fields }. Fill these in by hand.
 oc-reason-basics-guessed = Guessed from the item's PDF (not found online). Check before applying.
 oc-issue-basics-guessed-item = Title, author or year was missing; some values were guessed from the item's PDF. Check them before applying.
+oc-issue-ocr-used = The PDF is a scan without text; its first pages were read with text recognition (OCR). Check the values.
+oc-issue-ocr-missing = The PDF is a scan without text. Text recognition needs { $tools }. On a Mac: install Homebrew (brew.sh), then run “brew install tesseract poppler” in Terminal, and check again.
+oc-issue-ocr-failed = Text recognition (OCR) of the scan failed: { $error }
 oc-issue-file-no-text = No text could be read from the file. It may be a scan without text recognition (OCR).
 oc-issue-file-not-identified = The file could not be identified. The proposed item is built from the first lines of the text and nothing is ticked: check and tick what is correct, or add the item by hand.
 
@@ -191,3 +195,19 @@ oc-prefs-style = Citation style for international materials
 oc-prefs-style-help = The standard OSCOLA style cannot print UN resolutions (“UNGA Res 70/1 (25 September 2015) UN Doc A/RES/70/1”) or treaties (“(adopted …, entered into force …) 1465 UNTS 85”) exactly as OSCOLA requires. The adjusted style “OSCOLA 4th edition (international materials)” does. Everything else is printed exactly as by the standard style.
 oc-prefs-style-install =
     .label = Install the adjusted OSCOLA style…
+oc-prefs-source-nb =
+    .label = Norwegian National Library (books, also English)
+oc-prefs-openalex-key =
+    .value = OpenAlex API key (optional, free at openalex.org/settings/api):
+oc-prefs-ocr = Scanned PDFs (text recognition)
+oc-prefs-ocr-help = For PDFs that are scans without text, the plugin can read the first pages with Tesseract, a free text-recognition program installed on this computer. Nothing is uploaded. On a Mac: install Homebrew (brew.sh), then run “brew install tesseract poppler” in Terminal.
+oc-prefs-ocr-enabled =
+    .label = Recognise text in scanned PDFs
+oc-prefs-ocr-pages =
+    .value = Pages to read:
+oc-prefs-ocr-lang =
+    .value = Languages (Tesseract codes, e.g. eng or eng+nor):
+oc-prefs-ocr-tesseract =
+    .value = Path to tesseract (empty = find automatically):
+oc-prefs-ocr-pdftoppm =
+    .value = Path to pdftoppm (empty = find automatically):

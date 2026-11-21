@@ -50,7 +50,9 @@ export function guessMeta(text: string): Guess {
 		let used = 1;
 		// the title continues on the next line: in lower case, or after a small word ("AXIS RULE IN / OCCUPIED EUROPE")
 		const next = lines[ti + 1];
-		if (next && isTitle(next, ti + 1) && !isBy(next) && (/^[a-z:–-]/.test(next) || /\b(in|of|the|and|for|on|to|a|an)$/i.test(title) || (caps(title) && caps(next) && STOP_RE.test(next) && !isAuthor(next)))) {
+		// (a continuation may be short: "OF LAW")
+		const isCont = (l: string, i: number) => /[A-Za-z]{2}/.test(l) && l.length <= 160 && !JUNK.test(l) && !/[.;,]$/.test(l) && !isProse(i);
+		if (next && isCont(next, ti + 1) && !isBy(next) && (/^[a-z:–-]/.test(next) || /\b(in|of|the|and|for|on|to|a|an)$/i.test(title) || (caps(title) && caps(next) && STOP_RE.test(next) && !isAuthor(next)))) {
 			title += " " + next;
 			used = 2;
 		}

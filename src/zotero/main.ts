@@ -15,7 +15,7 @@ declare const Zotero: any;
 
 const PREF = "extensions.oscola-check.";
 const MENU_ID = "oscola-check-item-menu";
-const SOURCES: SourceId[] = ["crossref", "openalex", "openlibrary", "legislation-gov-uk", "find-case-law", "eur-lex", "hudoc", "lovdata", "un-digital-library", "untc", "icj"];
+const SOURCES: SourceId[] = ["crossref", "openalex", "openlibrary", "legislation-gov-uk", "find-case-law", "eur-lex", "hudoc", "lovdata", "un-digital-library", "untc", "icj", "nb"];
 
 let pluginID = "";
 let rootURI = "";
@@ -107,6 +107,7 @@ function makeEnv(): Env {
 			return new win.DOMParser().parseFromString(text, "application/xml");
 		},
 		contactEmail: String(Zotero.Prefs.get(PREF + "contactEmail", true) ?? "").trim(),
+		apiKeys: { openalex: String(Zotero.Prefs.get(PREF + "openalexKey", true) ?? "").trim() },
 		enabledSources,
 	};
 }

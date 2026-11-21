@@ -31,6 +31,22 @@ The interface is available in English and Norwegian (Bokmål). It follows Zotero
 
 **Title, author and year** are the minimum for every item. When an existing item would still lack any of them after the check, the search is widened in the same way as for new files (below): the item's PDF is read, and Open Library and Crossref are searched by title and author. Only empty fields get suggestions; values guessed from the PDF are marked, and anything still missing is named. Cases, legislation and UN documents are left to their own sources. Without an author to compare with, a book is only accepted from Open Library if its title matches exactly and no other book has a similar title.
 
+### Scanned PDFs (text recognition)
+
+A scan is only a picture of each page, so there is no text to read the author from. For PDFs without text, the plugin recognises the text of the first pages with **Tesseract**, a free text-recognition (OCR) program on your own computer; nothing is uploaded. Install it once:
+
+- **Mac:** install [Homebrew](https://brew.sh), then run `brew install tesseract poppler` in Terminal.
+- **Windows:** install Tesseract from [UB Mannheim](https://github.com/UB-Mannheim/tesseract/wiki) and poppler; set their paths in the settings if they are not found.
+- **Linux:** `sudo apt install tesseract-ocr poppler-utils`.
+
+Settings → OCR Check: switch recognition on/off, the number of pages to read (default 4), the languages (default `eng`; e.g. `eng+nor` after `brew install tesseract-lang`), and the program paths if they are not found automatically. If the programs are missing, the review window says so and how to install them.
+
+Recognised values are confirmed in the book catalogues where possible (see below) and are otherwise marked as guessed.
+
+### Book catalogues
+
+Books missing an author or year are looked up by title in **Open Library**, the **Norwegian National Library** (which also holds many English books) and **OpenAlex**. If the item names an author, only that author's book is accepted. If it does not, an author is accepted only when two catalogues agree on it, or when one catalogue has a single, exact title match. Year and publisher are taken from the same catalogue record; no place is suggested, as catalogues mix the places of different editions (and OSCOLA does not print the place). OpenAlex allows a small free quota per network without a key; a free key can be entered in the settings.
+
 ### Files without an item
 
 Select one or more files that have no Zotero item yet (PDFs, EPUBs or snapshots shown at the top level of the library) and choose **Check for OSCOLA…**. The plugin then:

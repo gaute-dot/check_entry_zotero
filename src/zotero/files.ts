@@ -9,17 +9,80 @@ import { newItemRows } from "../core/newitem";
 import { expandSearch, itemFromRows, missingBasics } from "../core/expand";
 import type { Creator, Env, ItemData, Suggestion } from "../core/types";
 import type { Issue } from "../core/types";
+import { looksLikeScan, ocrPDF, type OcrHost, type OcrResult } from "../ocr";
 
 declare const Zotero: any;
 declare const ZOTERO_CONFIG: any;
 
+const PREF = "extensions.oscola-check.";
+
+/** Zotero's file system and process functions, for the OCR module */
+function zoteroHost(): OcrHost {
+	const w = Zotero.getMainWindow();
+	const IO = (globalThis as any).IOUtils ?? w.IOUtils;
+	const Path = (globalThis as any).PathUtils ?? w.PathUtils;
+	return {
+		exists: async (p) => {
+			try {
+				return await IO.exists(p);
+			} catch {
+				return false;
+			}
+		},
+		run: async (cmd, args) => {
+			await Zotero.Utilities.Internal.exec(cmd, args);
+		},
+		tempDir: async () => {
+			const dir = Path.join(Zotero.getTempDirectory().path, `oscola-ocr-${Date.now()}`);
+			await IO.makeDirectory(dir);
+			return dir;
+		},
+		join: (...parts) => Path.join(...parts),
+		list: (dir) => IO.getChildren(dir),
+		readText: (p) => IO.readUTF8(p),
+		remove: (dir) => IO.remove(dir, { recursive: true }),
+	};
+}
+
+/** OCR results per attachment, so a scan is only recognised once per check */
+const ocrCache = new Map<number, Promise<OcrResult>>();
+
+/**
+ * Text of a file. For a PDF that is a scan without text, the text is
+ * recognised with Tesseract (if installed and switched on in the settings).
+ */
+export async function readText(att: any, pages = 3): Promise<{ text: string; issues: Issue[] }> {
+	const text = await fileText(att, pages);
+	if (!att.isPDFAttachment?.() || !looksLikeScan(text)) return { text, issues: [] };
+	if (Zotero.Prefs.get(PREF + "ocr.enabled", true) === false) {
+		return { text, issues: [{ severity: "warning", message: { id: "oc-issue-file-no-text" } }] };
+	}
+	if (!ocrCache.has(att.id)) {
+		const path = await att.getFilePathAsync();
+		ocrCache.set(
+			att.id,
+			ocrPDF(zoteroHost(), path, {
+				pages: Number(Zotero.Prefs.get(PREF + "ocr.pages", true)) || 4,
+				lang: String(Zotero.Prefs.get(PREF + "ocr.lang", true) || "eng"),
+				tesseractPath: String(Zotero.Prefs.get(PREF + "ocr.tesseractPath", true) || ""),
+				pdftoppmPath: String(Zotero.Prefs.get(PREF + "ocr.pdftoppmPath", true) || ""),
+			}),
+		);
+	}
+	const r = await ocrCache.get(att.id)!;
+	if (r.ok) return { text: r.text, issues: [{ severity: "info", message: { id: "oc-issue-ocr-used" } }] };
+	ocrCache.delete(att.id);
+	if (r.reason === "missing-tools") return { text, issues: [{ severity: "warning", message: { id: "oc-issue-ocr-missing", args: { tools: r.detail ?? "" } } }] };
+	return { text, issues: [{ severity: "warning", message: { id: "oc-issue-ocr-failed", args: { error: (r.detail ?? "").slice(0, 200) } } }] };
+}
+
 /** Text of an existing item's best attachment (its PDF), for the widened search. */
-export async function itemText(item: any, pages = 12): Promise<string> {
+export async function itemText(item: any, pages = 12): Promise<{ text: string; issues: Issue[] }> {
 	try {
 		const att = await item.getBestAttachment();
-		return att && (att.isPDFAttachment() || att.isEPUBAttachment?.() || att.isSnapshotAttachment?.()) ? await fileText(att, pages) : "";
+		return att && (att.isPDFAttachment() || att.isEPUBAttachment?.() || att.isSnapshotAttachment?.()) ? await readText(att, pages) : { text: "", issues: [] };
 	} catch {
-		return "";
+		return { text: "", issues: [] };
 	}
 }
 
@@ -117,8 +180,9 @@ export async function proposeForFile(att: any, env: Env): Promise<FileProposal> 
 	}
 
 	// 2. The plugin's identification from text and file name (cover pages, legal and UN material)
-	const text = await fileText(att);
-	if (!text.trim()) issues.push({ severity: "warning", message: { id: "oc-issue-file-no-text" } });
+	const read = await readText(att);
+	const text = read.text;
+	issues.push(...read.issues);
 	const id = identifyFile({ text, filename, title: att.getField("title") });
 	let result = await checkItem(id.item, env);
 	let rows = newItemRows(id.item, result, "file", id.identified, id.via);
@@ -126,7 +190,7 @@ export async function proposeForFile(att: any, env: Env): Promise<FileProposal> 
 	// 3. Title, author and year are the minimum. If any is missing, widen the search.
 	let proposed = itemFromRows(rows);
 	if (missingBasics(proposed).length || !id.identified) {
-		const more = await fileText(att, 12);
+		const more = (await readText(att, 12)).text;
 		const exp = await expandSearch(proposed, more || text, env);
 		const complete = missingBasics(exp.item).length === 0;
 		result = await checkItem(exp.item, env);

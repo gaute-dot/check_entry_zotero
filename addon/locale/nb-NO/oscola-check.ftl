@@ -54,6 +54,7 @@ oc-source-find-case-law = Find Case Law (The National Archives)
 oc-source-eur-lex = EUR-Lex
 oc-source-hudoc = HUDOC (EMD)
 oc-source-lovdata = Lovdata
+oc-source-nb = Nasjonalbiblioteket
 oc-source-un-digital-library = FNs digitale bibliotek (UN Digital Library)
 oc-source-untc = FNs traktatsamling (UN Treaty Collection)
 oc-source-icj = Den internasjonale domstolen (ICJ)
@@ -155,6 +156,9 @@ oc-issue-basics-guessed = Noen verdier er gjettet ut fra teksten i filen (ikke f
 oc-issue-basics-missing = Mangler fortsatt etter at mer av filen er lest og det er søkt på nett: { $fields }. Fyll inn dette manuelt.
 oc-reason-basics-guessed = Gjettet ut fra elementets PDF (ikke funnet på nett). Kontroller før du tar det i bruk.
 oc-issue-basics-guessed-item = Tittel, forfatter eller år manglet; noen verdier er gjettet ut fra elementets PDF. Kontroller dem før du tar dem i bruk.
+oc-issue-ocr-used = PDF-en er en skanning uten tekst; de første sidene ble lest med tekstgjenkjenning (OCR). Kontroller verdiene.
+oc-issue-ocr-missing = PDF-en er en skanning uten tekst. Tekstgjenkjenning krever { $tools }. På Mac: installer Homebrew (brew.sh), kjør «brew install tesseract poppler» i Terminal, og kontroller på nytt.
+oc-issue-ocr-failed = Tekstgjenkjenning (OCR) av skanningen mislyktes: { $error }
 oc-issue-file-no-text = Ingen tekst kunne leses fra filen. Den kan være en skanning uten tekstgjenkjenning (OCR).
 oc-issue-file-not-identified = Filen kunne ikke identifiseres. Det foreslåtte elementet er bygd fra de første linjene i teksten, og ingenting er avkrysset: kontroller og kryss av det som stemmer, eller legg inn elementet manuelt.
 
@@ -191,3 +195,19 @@ oc-prefs-style = Siteringsstil for internasjonale kilder
 oc-prefs-style-help = Den vanlige OSCOLA-stilen kan ikke skrive FN-resolusjoner («UNGA Res 70/1 (25 September 2015) UN Doc A/RES/70/1») eller traktater («(adopted …, entered into force …) 1465 UNTS 85») slik OSCOLA krever. Den tilpassede stilen «OSCOLA 4th edition (international materials)» gjør det. Alt annet skrives nøyaktig som med den vanlige stilen.
 oc-prefs-style-install =
     .label = Installer den tilpassede OSCOLA-stilen …
+oc-prefs-source-nb =
+    .label = Nasjonalbiblioteket (bøker, også engelske)
+oc-prefs-openalex-key =
+    .value = OpenAlex API-nøkkel (valgfritt, gratis på openalex.org/settings/api):
+oc-prefs-ocr = Skannede PDF-er (tekstgjenkjenning)
+oc-prefs-ocr-help = For PDF-er som er skanninger uten tekst, kan tillegget lese de første sidene med Tesseract, et gratis tekstgjenkjenningsprogram installert på denne maskinen. Ingenting lastes opp. På Mac: installer Homebrew (brew.sh), og kjør «brew install tesseract poppler» i Terminal.
+oc-prefs-ocr-enabled =
+    .label = Gjenkjenn tekst i skannede PDF-er
+oc-prefs-ocr-pages =
+    .value = Antall sider som leses:
+oc-prefs-ocr-lang =
+    .value = Språk (Tesseract-koder, f.eks. eng eller eng+nor):
+oc-prefs-ocr-tesseract =
+    .value = Sti til tesseract (tomt = finn automatisk):
+oc-prefs-ocr-pdftoppm =
+    .value = Sti til pdftoppm (tomt = finn automatisk):

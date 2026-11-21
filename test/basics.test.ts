@@ -4,7 +4,7 @@ import { checkItem } from "../src/core/check";
 import { fakeEnv, fixture, item } from "./helpers";
 
 const run = async (it: ReturnType<typeof item>, env: ReturnType<typeof fakeEnv>, text?: string) =>
-	ensureBasics(it, await checkItem(it, env), env, text === undefined ? undefined : async () => text);
+	ensureBasics(it, await checkItem(it, env), env, text === undefined ? undefined : async () => ({ text }));
 const by = (r: Awaited<ReturnType<typeof run>>) => Object.fromEntries(r.suggestions.map((s) => [s.field, s]));
 
 describe("existing items: title, author and year", () => {

@@ -9,7 +9,8 @@ import { fieldForBase } from "./schema";
 import { guessMeta } from "./textmeta";
 import { convertItem } from "./convert";
 import type { Candidate, Env, ItemData, SourceId, Suggestion } from "./types";
-import { openlibrary, crossref } from "../resolvers/scholarly";
+import { findBook } from "../resolvers/catalogues";
+import { crossref } from "../resolvers/scholarly";
 
 export type Basic = "title" | "creators" | "date";
 
@@ -80,19 +81,26 @@ export async function expandSearch(base: ItemData, moreText: string, env: Env): 
 	missing = missingBasics(item);
 	const title = item.fields[tf()];
 	const generic = ["document", "webpage", "manuscript"].includes(item.itemType);
-	if ((missing.length || generic) && title) {
-		const tries: [typeof openlibrary, string][] = [
-			[openlibrary, "book"],
-			[crossref, "journalArticle"],
-		];
+	// also when values were only guessed from the text: confirm them in a catalogue if possible
+	if ((missing.length || generic || Object.values(sources).includes("file")) && title) {
 		let best: { c: Candidate; type: string } | null = null;
-		for (const [resolver, type] of tries) {
-			if (env.enabledSources?.[resolver.id] === false) continue;
-			if (!generic && item.itemType !== type && !(type === "book" && item.itemType === "bookSection")) continue;
-			const probe: ItemData = { itemType: type, fields: { title }, creators: item.creators };
+		// Books: several catalogues (Open Library, National Library, OpenAlex)
+		if (generic || item.itemType === "book" || item.itemType === "thesis" || item.itemType === "report") {
+			// creators guessed from the text are not used to filter the catalogues
+			const known = sources.creators === "file" ? [] : item.creators;
+			const c = await findBook(env, title, known).catch(() => null);
+			if (c && c.confidence >= 0.85) {
+				// a guessed author must agree with the catalogue's
+				const guess = sources.creators === "file" ? item.creators[0]?.lastName?.toLowerCase() : null;
+				if (!guess || c.creators?.some((x) => (x.lastName ?? "").toLowerCase() === guess)) best = { c, type: "book" };
+			}
+		}
+		// Articles: Crossref
+		if (!best && (generic || item.itemType === "journalArticle") && env.enabledSources?.crossref !== false) {
+			const probe: ItemData = { itemType: "journalArticle", fields: { title }, creators: item.creators };
 			try {
-				const c = await resolver.resolve(probe, detect(probe), env);
-				if (c && c.confidence >= 0.85 && (!best || c.confidence > best.c.confidence)) best = { c, type };
+				const c = await crossref.resolve(probe, detect(probe), env);
+				if (c && c.confidence >= 0.85) best = { c, type: "journalArticle" };
 			} catch {
 				// a source that cannot be reached is simply skipped here
 			}

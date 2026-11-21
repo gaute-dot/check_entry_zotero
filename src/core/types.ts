@@ -50,6 +50,7 @@ export type SourceId =
 	| "eur-lex"
 	| "hudoc"
 	| "lovdata"
+	| "nb"
 	| "un-digital-library"
 	| "untc"
 	| "icj";
@@ -97,6 +98,8 @@ export interface Env {
 	parseXML(text: string): Document;
 	/** Optional e-mail for Crossref's "polite pool". Empty = not sent. */
 	contactEmail?: string;
+	/** Optional API keys, e.g. OpenAlex (free; avoids the shared daily limit) */
+	apiKeys?: { openalex?: string };
 	/** Which sources are enabled (all by default) */
 	enabledSources?: Partial<Record<SourceId, boolean>>;
 }

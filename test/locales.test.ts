@@ -31,7 +31,7 @@ describe("localisation", () => {
 	});
 
 	it("every source has a label", () => {
-		for (const s of ["rules", "file", "zotero", "crossref", "openalex", "openlibrary", "legislation-gov-uk", "find-case-law", "eur-lex", "hudoc", "lovdata", "un-digital-library", "untc", "icj"]) {
+		for (const s of ["rules", "file", "zotero", "crossref", "openalex", "openlibrary", "legislation-gov-uk", "find-case-law", "eur-lex", "hudoc", "lovdata", "un-digital-library", "untc", "icj", "nb"]) {
 			expect(en.has("oc-source-" + s)).toBe(true);
 		}
 	});

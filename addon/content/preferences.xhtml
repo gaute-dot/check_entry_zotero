@@ -16,6 +16,7 @@
     <checkbox preference="extensions.oscola-check.source.un-digital-library" data-l10n-id="oc-prefs-source-un-digital-library"/>
     <checkbox preference="extensions.oscola-check.source.untc" data-l10n-id="oc-prefs-source-untc"/>
     <checkbox preference="extensions.oscola-check.source.icj" data-l10n-id="oc-prefs-source-icj"/>
+    <checkbox preference="extensions.oscola-check.source.nb" data-l10n-id="oc-prefs-source-nb"/>
   </groupbox>
   <groupbox>
     <html:h2 data-l10n-id="oc-prefs-style"/>
@@ -23,6 +24,23 @@
     <hbox>
       <button id="oscola-check-install-style" data-l10n-id="oc-prefs-style-install"/>
     </hbox>
+  </groupbox>
+  <groupbox>
+    <html:h2 data-l10n-id="oc-prefs-ocr"/>
+    <html:p data-l10n-id="oc-prefs-ocr-help"/>
+    <checkbox preference="extensions.oscola-check.ocr.enabled" data-l10n-id="oc-prefs-ocr-enabled"/>
+    <label data-l10n-id="oc-prefs-ocr-pages" control="oscola-check-ocr-pages"/>
+    <html:input id="oscola-check-ocr-pages" type="number" min="1" max="20" preference="extensions.oscola-check.ocr.pages"/>
+    <label data-l10n-id="oc-prefs-ocr-lang" control="oscola-check-ocr-lang"/>
+    <html:input id="oscola-check-ocr-lang" type="text" preference="extensions.oscola-check.ocr.lang"/>
+    <label data-l10n-id="oc-prefs-ocr-tesseract" control="oscola-check-ocr-tesseract"/>
+    <html:input id="oscola-check-ocr-tesseract" type="text" preference="extensions.oscola-check.ocr.tesseractPath"/>
+    <label data-l10n-id="oc-prefs-ocr-pdftoppm" control="oscola-check-ocr-pdftoppm"/>
+    <html:input id="oscola-check-ocr-pdftoppm" type="text" preference="extensions.oscola-check.ocr.pdftoppmPath"/>
+  </groupbox>
+  <groupbox>
+    <label data-l10n-id="oc-prefs-openalex-key" control="oscola-check-openalex-key"/>
+    <html:input id="oscola-check-openalex-key" type="text" preference="extensions.oscola-check.openalexKey"/>
   </groupbox>
   <groupbox>
     <label data-l10n-id="oc-prefs-email" control="oscola-check-email"/>
