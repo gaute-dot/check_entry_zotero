@@ -39,7 +39,7 @@ A scan is only a picture of each page, so there is no text to read the author fr
 - **Windows:** install Tesseract from [UB Mannheim](https://github.com/UB-Mannheim/tesseract/wiki) and poppler; set their paths in the settings if they are not found.
 - **Linux:** `sudo apt install tesseract-ocr poppler-utils`.
 
-Settings → OCR Check: switch recognition on/off, the number of pages to read (default 4), the languages (default `eng`; e.g. `eng+nor` after `brew install tesseract-lang`), and the program paths if they are not found automatically. If the programs are missing, the review window says so and how to install them.
+Settings → OSCOLA Check: switch recognition on/off, the number of pages to read (default 4), the languages (default `eng`; e.g. `eng+nor` after `brew install tesseract-lang`), and the program paths if they are not found automatically. If the programs are missing, the review window says so and how to install them.
 
 Recognised values are confirmed in the book catalogues where possible (see below) and are otherwise marked as guessed.
 
