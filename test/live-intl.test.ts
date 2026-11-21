@@ -103,3 +103,27 @@ live("live: files without an item (text of real PDFs)", () => {
 		expect(ticked).toMatchObject(expected);
 	}, T);
 });
+
+live("live: cover pages and widened search", () => {
+	it("the uploaded HeinOnline book", async () => {
+		const { identifyFile } = await import("../src/core/identify");
+		const { newItemRows } = await import("../src/core/newitem");
+		const { fixture } = await import("./helpers");
+		const id = identifyFile({ text: fixture("files/hein-cover-book.txt"), filename: "85071237-httpsheinonline.org_holsupportwshein.com.pdf" });
+		const rows = newItemRows(id.item, await checkItem(id.item, liveEnv), "file", id.identified, id.via);
+		const ticked = Object.fromEntries(rows.filter((r) => r.preselect).map((r) => [r.field, r.suggested]));
+		expect(ticked).toMatchObject({ itemType: "book", creators: "Lemkin, Raphael", date: "1944" });
+		expect(ticked.title).toMatch(/^Axis Rule in Occupied Europe/);
+	}, T);
+
+	it("a bare title page is confirmed by Open Library and becomes a book", async () => {
+		const { identifyFile } = await import("../src/core/identify");
+		const { expandSearch } = await import("../src/core/expand");
+		const text = "AXIS RULE IN\nOCCUPIED EUROPE\nBy\nRAPHAEL LEMKIN\n";
+		const id = identifyFile({ text, filename: "scan.pdf" });
+		const exp = await expandSearch(id.item, text, liveEnv);
+		expect(exp.foundOnline).toBe(true);
+		expect(exp.item).toMatchObject({ itemType: "book", fields: { date: "1944" } });
+		expect(exp.item.fields.publisher).toMatch(/Carnegie/);
+	}, T);
+});

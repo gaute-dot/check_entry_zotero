@@ -34,11 +34,13 @@ The interface is available in English and Norwegian (Bokmål). It follows Zotero
 Select one or more files that have no Zotero item yet (PDFs, EPUBs or snapshots shown at the top level of the library) and choose **Check for OSCOLA…**. The plugin then:
 
 1. tries **Zotero's own recognition** first (the same service as "Retrieve Metadata for PDF"), which identifies most academic articles and books by DOI, ISBN or arXiv ID;
-2. otherwise reads the **first pages and the file name** and looks for a legal or UN identifier: a UN document symbol (printed at the top of UN documents and in UN file names such as `A_HRC_43_52-EN.pdf`), a neutral citation (`[2015] UKSC 11`), the ICJ's "Official citation", an ECHR application number, a CJEU case number or ECLI, a Norwegian `HR-…` or `LOV-…` ID, "… Act 2010 / CHAPTER 15", an SI number, an EU regulation or directive, a treaty title, a DOI or an ISBN;
-3. looks the document up in the online sources and runs the OSCOLA check on the result;
-4. shows the **proposed new item** in the review window. When you apply it, the item is created in the file's collections and the file is moved under it (and renamed, if Zotero's "Automatically rename attachment files" setting is on).
+2. otherwise reads **database cover pages**: HeinOnline (built from its Bluebook, APA and Chicago citations, which each have gaps or OCR errors; Hein's own "OSCOLA" line is not used, as it is not in OSCOLA form), JSTOR and SSRN;
+3. otherwise reads the **first pages and the file name** and looks for a legal or UN identifier: a UN document symbol (printed at the top of UN documents and in UN file names such as `A_HRC_43_52-EN.pdf`), a neutral citation (`[2015] UKSC 11`), the ICJ's "Official citation", an ECHR application number, a CJEU case number or ECLI, a Norwegian `HR-…` or `LOV-…` ID, "… Act 2010 / CHAPTER 15", an SI number, an EU regulation or directive, a treaty title, a DOI or an ISBN;
+4. looks the document up in the online sources and runs the OSCOLA check on the result;
+5. makes sure **title, author and year** are filled in. If any is missing, the search is widened: more pages of the file are read and title, authors and year are guessed from the title page (a line after "By", "© 1991" …), and Open Library (books, by title and author) and Crossref (articles) are searched. An online record is only used when the title and the author match. Values that were only guessed are marked as such; anything still missing is named in the review window;
+6. shows the **proposed new item** in the review window. When you apply it, the item is created in the file's collections and the file is moved under it (and renamed, if Zotero's "Automatically rename attachment files" setting is on).
 
-If nothing can be identified, the window proposes a draft item (title and date from the first lines of the text) with nothing ticked. Scanned files without text recognition (OCR) cannot be read.
+If nothing can be identified, the window proposes a draft item from the text. A wrong title is worse than none, so running text (such as a preface) is never used as a title, and neither are meaningless file names ("download.pdf", "85071237-https…"). Scanned files without text recognition (OCR) cannot be read.
 
 Settings (**Zotero Settings → OSCOLA Check**):
 - Turn individual online sources on or off.

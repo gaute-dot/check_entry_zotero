@@ -151,6 +151,8 @@ oc-reason-new-item = Identified from the file: { $via }.
 oc-reason-new-item-draft = The file could not be identified online. Not ticked: check the fields first.
 oc-reason-from-file = Read from the file.
 oc-reason-from-zotero = Found by Zotero's own recognition (as in “Retrieve Metadata for PDF”).
+oc-issue-basics-guessed = Some values were guessed from the text of the file (not found online). Check title, author and year before applying.
+oc-issue-basics-missing = Still missing after reading more of the file and searching online: { $fields }. Fill these in by hand.
 oc-issue-file-no-text = No text could be read from the file. It may be a scan without text recognition (OCR).
 oc-issue-file-not-identified = The file could not be identified. The proposed item is built from the first lines of the text and nothing is ticked: check and tick what is correct, or add the item by hand.
 

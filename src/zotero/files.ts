@@ -6,6 +6,7 @@
 import { checkItem } from "../core/check";
 import { identifyFile } from "../core/identify";
 import { newItemRows } from "../core/newitem";
+import { expandSearch, itemFromRows, missingBasics } from "../core/expand";
 import type { Creator, Env, ItemData, Suggestion } from "../core/types";
 import type { Issue } from "../core/types";
 
@@ -17,10 +18,10 @@ export function isStandaloneFile(item: any): boolean {
 	return !!item.isAttachment?.() && item.isTopLevelItem() && !item.isNote?.() && item.attachmentLinkMode !== Zotero.Attachments.LINK_MODE_LINKED_URL;
 }
 
-async function fileText(att: any): Promise<string> {
+async function fileText(att: any, pages = 3): Promise<string> {
 	try {
 		if (att.isPDFAttachment()) {
-			const res = await Zotero.PDFWorker.getFullText(att.id, 3, true);
+			const res = await Zotero.PDFWorker.getFullText(att.id, pages, true);
 			return res?.text ?? "";
 		}
 		return (await att.attachmentText) ?? "";
@@ -105,14 +106,29 @@ export async function proposeForFile(att: any, env: Env): Promise<FileProposal> 
 		return { rows: newItemRows(fromZotero, result, "zotero", true, "Zotero"), issues: result.issues, itemType: fromZotero.itemType };
 	}
 
-	// 2. The plugin's identification from text and file name (legal and UN material)
+	// 2. The plugin's identification from text and file name (cover pages, legal and UN material)
 	const text = await fileText(att);
 	if (!text.trim()) issues.push({ severity: "warning", message: { id: "oc-issue-file-no-text" } });
 	const id = identifyFile({ text, filename, title: att.getField("title") });
-	const result = await checkItem(id.item, env);
-	const rows = newItemRows(id.item, result, "file", id.identified, id.via);
-	if (!id.identified) issues.push({ severity: "warning", message: { id: "oc-issue-file-not-identified" } });
-	return { rows, issues: [...issues, ...result.issues.filter((i) => i.message.id !== "oc-issue-item-type")], itemType: id.item.itemType };
+	let result = await checkItem(id.item, env);
+	let rows = newItemRows(id.item, result, "file", id.identified, id.via);
+
+	// 3. Title, author and year are the minimum. If any is missing, widen the search.
+	let proposed = itemFromRows(rows);
+	if (missingBasics(proposed).length || !id.identified) {
+		const more = await fileText(att, 12);
+		const exp = await expandSearch(proposed, more || text, env);
+		const complete = missingBasics(exp.item).length === 0;
+		result = await checkItem(exp.item, env);
+		const via = exp.foundOnline ? exp.item.itemType : id.via;
+		rows = newItemRows(exp.item, result, "file", id.identified || exp.foundOnline || complete, via || "text");
+		if (exp.guessed) issues.push({ severity: "warning", message: { id: "oc-issue-basics-guessed" } });
+		proposed = itemFromRows(rows);
+	}
+	const missing = missingBasics(proposed);
+	if (missing.length) issues.push({ severity: "warning", message: { id: "oc-issue-basics-missing", args: { fields: missing.join(", ") } } });
+	if (!id.identified && !missing.length) issues.push({ severity: "info", message: { id: "oc-issue-file-not-identified" } });
+	return { rows, issues: [...issues, ...result.issues.filter((i) => i.message.id !== "oc-issue-item-type")], itemType: proposed.itemType };
 }
 
 /** Create the parent item from the ticked rows and put the file under it. */

@@ -151,6 +151,8 @@ oc-reason-new-item = Identifisert fra filen: { $via }.
 oc-reason-new-item-draft = Filen kunne ikke identifiseres på nett. Ikke avkrysset: kontroller feltene først.
 oc-reason-from-file = Lest fra filen.
 oc-reason-from-zotero = Funnet av Zoteros egen gjenkjenning (som i «Hent metadata for PDF»).
+oc-issue-basics-guessed = Noen verdier er gjettet ut fra teksten i filen (ikke funnet på nett). Kontroller tittel, forfatter og år før du tar dem i bruk.
+oc-issue-basics-missing = Mangler fortsatt etter at mer av filen er lest og det er søkt på nett: { $fields }. Fyll inn dette manuelt.
 oc-issue-file-no-text = Ingen tekst kunne leses fra filen. Den kan være en skanning uten tekstgjenkjenning (OCR).
 oc-issue-file-not-identified = Filen kunne ikke identifiseres. Det foreslåtte elementet er bygd fra de første linjene i teksten, og ingenting er avkrysset: kontroller og kryss av det som stemmer, eller legg inn elementet manuelt.
 

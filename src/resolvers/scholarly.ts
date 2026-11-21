@@ -1,6 +1,6 @@
 /** Resolvers for secondary sources: Crossref, OpenAlex and Open Library. */
 import type { Detected } from "../core/detect";
-import { isoDate, similarity, stripTags } from "../core/text";
+import { isoDate, normalizeForCompare, similarity, stripTags } from "../core/text";
 import type { Candidate, Creator, Env, ItemData } from "../core/types";
 import type { Resolver } from "./index";
 import { getJSON, splitName } from "./util";
@@ -184,10 +184,52 @@ interface OpenLibraryBook {
 	number_of_pages?: number;
 }
 
+interface OpenLibraryDoc {
+	title?: string;
+	subtitle?: string;
+	author_name?: string[];
+	first_publish_year?: number;
+	publisher?: string[];
+	publish_place?: string[];
+}
+
+/** Books without an ISBN: search by title (and first author); accept only a clear match. */
+async function searchOpenLibrary(item: ItemData, env: Env): Promise<Candidate | null> {
+	const title = item.fields.title ?? "";
+	const short = title.split(/[:;]/)[0].trim();
+	const last = firstAuthorLast(item);
+	const url =
+		`https://openlibrary.org/search.json?title=${encodeURIComponent(short)}` +
+		(last ? `&author=${encodeURIComponent(last)}` : "") +
+		"&limit=10&fields=title,subtitle,author_name,first_publish_year,publisher,publish_place";
+	const res = await getJSON<{ docs?: OpenLibraryDoc[] }>(env, url);
+	let best: { doc: OpenLibraryDoc; score: number } | null = null;
+	for (const doc of res.docs ?? []) {
+		const full = [doc.title, doc.subtitle].filter(Boolean).join(": ");
+		const score = Math.max(similarity(title, full), similarity(short, doc.title ?? ""));
+		if (!best || score > best.score) best = { doc, score };
+	}
+	if (!best || best.score < 0.85) return null;
+	const doc = best.doc;
+	const authors = doc.author_name ?? [];
+	// without an author to compare with, a title match alone is not enough
+	const authorOK = last ? authors.some((a) => a.toLowerCase().includes(last.toLowerCase())) : false;
+	const theirs = [doc.title, doc.subtitle].filter(Boolean).join(": ");
+	const fields: Record<string, string> = {
+		// don't offer a shorter form of the title the item already has
+		title: normalizeForCompare(title).startsWith(normalizeForCompare(theirs)) ? "" : theirs,
+		date: doc.first_publish_year ? String(doc.first_publish_year) : "",
+		publisher: doc.publisher?.[0] ?? "",
+		place: doc.publish_place?.[0] ?? "",
+	};
+	return { source: "openlibrary", fields, creators: authors.map((a) => splitName(a)), confidence: authorOK ? best.score : 0.6 };
+}
+
 export const openlibrary: Resolver = {
 	id: "openlibrary",
-	applies: (item, d) => (item.itemType === "book" || item.itemType === "bookSection") && !!d.isbn,
+	applies: (item, d) => ((item.itemType === "book" || item.itemType === "bookSection") && !!d.isbn) || (item.itemType === "book" && !!item.fields.title),
 	async resolve(item, d, env) {
+		if (!d.isbn) return searchOpenLibrary(item, env);
 		const key = `ISBN:${d.isbn}`;
 		const res = await getJSON<Record<string, OpenLibraryBook>>(
 			env,

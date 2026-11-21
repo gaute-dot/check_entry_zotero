@@ -17,7 +17,9 @@ import {
 	looksLikeTreatyTitle,
 	parseTreatySeries,
 } from "./citations";
+import { parseCoverPage, ssrnDOI } from "./cover";
 import { collapse, englishDateToISO } from "./text";
+import { guessMeta } from "./textmeta";
 import type { ItemData } from "./types";
 
 export interface FileInfo {
@@ -57,6 +59,13 @@ function lines(text: string, max: number): string[] {
 }
 
 export function identifyFile(f: FileInfo): Identified {
+	// Database cover pages (HeinOnline, JSTOR) carry the citation itself
+	const cover = parseCoverPage(f.text);
+	if (cover && cover.item.fields.title) return { item: cover.item, identified: true, via: cover.via };
+	const ssrn = ssrnDOI(f.text);
+	if (ssrn) return { item: item("journalArticle", { title: "", DOI: ssrn }), identified: true, via: `SSRN ${ssrn}` };
+	if (cover) f = { ...f, text: cover.body };
+
 	const head = f.text.slice(0, 4000);
 	const top = lines(f.text, 12);
 	const topText = top.join("\n");
@@ -157,10 +166,14 @@ export function identifyFile(f: FileInfo): Identified {
 	const isbn = /ISBN[\s:-]*([\d\s-]{10,17}[\dX])/i.exec(f.text.slice(0, 12000))?.[1];
 	if (isbn && normalizeISBN(isbn)) return { item: item("book", { title: "", ISBN: normalizeISBN(isbn)! }), identified: true, via: `ISBN ${normalizeISBN(isbn)}` };
 
-	// ---- Nothing recognised: a draft from the text
-	const titleLine =
-		top.find((l) => l.length >= 10 && l.length <= 200 && /[a-z]/.test(l) && !/^(page|side|distr|original)\b/i.test(l)) ??
-		(f.title || f.filename.replace(/\.[a-z0-9]{2,5}$/i, "").replace(/[_-]+/g, " "));
-	const date = englishDateToISO(head) || "";
-	return { item: item("document", { title: titleLine, date }), identified: false, via: "" };
+	// ---- Nothing recognised: a draft from what the text suggests
+	const g = guessMeta(f.text);
+	// fall back on the attachment title or file name, unless it is meaningless ("Full Text PDF", "download", "85071237-https…")
+	const name = (f.title && !/^(Full Text PDF|PDF|Snapshot|Attachment)$/i.test(f.title) ? f.title : f.filename.replace(/\.[a-z0-9]{2,5}$/i, "")).replace(/[_-]+/g, " ").trim();
+	const meaningful = name.split(" ").filter((w) => /^[A-Za-zÀ-ÿ]{3,}$/.test(w)).length >= 2 && !/https?|www|download|scan|untitled|document\b/i.test(name);
+	const title = g.title ?? (meaningful ? name : "");
+	const full = englishDateToISO(head);
+	const draft = item("document", { title, date: full && (!g.year || full.startsWith(g.year)) ? full : (g.year ?? "") });
+	if (g.creators) draft.creators = g.creators;
+	return { item: draft, identified: false, via: "" };
 }
