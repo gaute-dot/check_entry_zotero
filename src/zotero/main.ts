@@ -7,6 +7,7 @@
  */
 import { checkItem } from "../core/check";
 import type { Creator, Env, ItemData, Message, SourceId, Suggestion } from "../core/types";
+import { createParent, isStandaloneFile, proposeForFile } from "./files";
 import type { DialogIO, DialogItem, ShownMessage, ShownSuggestion } from "./shared";
 
 declare const Zotero: any;
@@ -46,7 +47,7 @@ export async function startup(data: { id: string; rootURI: string }): Promise<vo
 				l10nID: "oc-menu-check",
 				icon: rootURI + "content/icons/icon.svg",
 				onShowing: (_ev: Event, ctx: any) => {
-					ctx.setVisible(!!ctx.items?.some((i: any) => i.isRegularItem()));
+					ctx.setVisible(!!ctx.items?.some((i: any) => i.isRegularItem() || isStandaloneFile(i)));
 				},
 				onCommand: (_ev: Event, ctx: any) => {
 					run(ctx.items ?? []).catch((e) => Zotero.logError(e));
@@ -190,11 +191,23 @@ function show(m: Message, itemType: string): ShownMessage {
 	return { id: m.id, args };
 }
 
+function shownSuggestions(list: Suggestion[], itemType: string): ShownSuggestion[] {
+	return list.map((s) => ({
+		...s,
+		fieldLabel: fieldLabel(s.field, itemType),
+		current: s.field === "itemType" ? (s.current ? typeLabel(s.current) : "") : s.current,
+		suggestedLabel: s.field === "itemType" ? typeLabel(s.suggested) : s.suggested,
+		sourceLabel: t("oc-source-" + s.source),
+		shownReason: show(s.reason, itemType),
+	}));
+}
+
 async function run(selected: any[]): Promise<void> {
 	const items = selected.filter((i) => i.isRegularItem());
+	const files = selected.filter((i) => isStandaloneFile(i));
 	const progress = new Zotero.ProgressWindow({ closeOnClick: false });
 	progress.changeHeadline(t("oc-progress-headline"));
-	if (!items.length) {
+	if (!items.length && !files.length) {
 		progress.addDescription(t("oc-progress-none"));
 		progress.show();
 		progress.startCloseTimer(4000);
@@ -205,12 +218,13 @@ async function run(selected: any[]): Promise<void> {
 
 	const env = makeEnv();
 	const results: DialogItem[] = [];
+	const total = items.length + files.length;
 	for (let i = 0; i < items.length; i++) {
 		const item = items[i];
 		const data = toItemData(item);
 		const title = item.getDisplayTitle();
-		line.setText(t("oc-progress-item", { current: i + 1, total: items.length, title }));
-		line.setProgress(Math.round((i / items.length) * 100));
+		line.setText(t("oc-progress-item", { current: i + 1, total, title }));
+		line.setProgress(Math.round((i / total) * 100));
 		let res;
 		try {
 			res = await checkItem(data, env);
@@ -218,21 +232,32 @@ async function run(selected: any[]): Promise<void> {
 			Zotero.logError(e);
 			res = { issues: [{ severity: "error" as const, message: { id: "oc-issue-source-failed", args: { source: "rules", error: String(e) } } }], suggestions: [] };
 		}
-		const suggestions: ShownSuggestion[] = res.suggestions.map((s) => ({
-			...s,
-			fieldLabel: fieldLabel(s.field, data.itemType),
-			current: s.field === "itemType" ? typeLabel(s.current) : s.current,
-			suggestedLabel: s.field === "itemType" ? typeLabel(s.suggested) : s.suggested,
-			sourceLabel: t("oc-source-" + s.source),
-			shownReason: show(s.reason, data.itemType),
-		}));
 		results.push({
 			itemID: item.id,
 			title,
 			itemTypeLabel: typeLabel(data.itemType),
 			issues: res.issues.map((i) => ({ severity: i.severity, fieldLabel: i.field ? fieldLabel(i.field, data.itemType) : "", message: show(i.message, data.itemType) })),
-			suggestions,
+			suggestions: shownSuggestions(res.suggestions, data.itemType),
 		});
+	}
+	for (let i = 0; i < files.length; i++) {
+		const att = files[i];
+		const name = att.attachmentFilename || att.getDisplayTitle();
+		line.setText(t("oc-progress-file", { current: items.length + i + 1, total, file: name }));
+		line.setProgress(Math.round(((items.length + i) / total) * 100));
+		try {
+			const p = await proposeForFile(att, env);
+			results.push({
+				itemID: att.id,
+				title: name,
+				itemTypeLabel: "",
+				newForFile: name,
+				issues: p.issues.map((x) => ({ severity: x.severity, fieldLabel: x.field ? fieldLabel(x.field, p.itemType) : "", message: show(x.message, p.itemType) })),
+				suggestions: shownSuggestions(p.rows, p.itemType),
+			});
+		} catch (e) {
+			Zotero.logError(e);
+		}
 	}
 	line.setProgress(100);
 	progress.close();
@@ -241,8 +266,13 @@ async function run(selected: any[]): Promise<void> {
 		items: results,
 		apply: async (selection) => {
 			let count = 0;
+			const newFor = new Set(results.filter((r) => r.newForFile).map((r) => r.itemID));
 			for (const { itemID, suggestions } of selection) {
 				if (!suggestions.length) continue;
+				if (newFor.has(itemID)) {
+					if (await createParent(itemID, suggestions)) count++;
+					continue;
+				}
 				await applyChanges(itemID, suggestions);
 				count++;
 			}

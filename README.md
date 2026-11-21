@@ -29,6 +29,17 @@ The interface is available in English and Norwegian (Bokmål). It follows Zotero
      - A suggested item type change always starts unticked. After changing the item type, run the check again.
 4. Click **Apply selected**.
 
+### Files without an item
+
+Select one or more files that have no Zotero item yet (PDFs, EPUBs or snapshots shown at the top level of the library) and choose **Check for OSCOLA…**. The plugin then:
+
+1. tries **Zotero's own recognition** first (the same service as "Retrieve Metadata for PDF"), which identifies most academic articles and books by DOI, ISBN or arXiv ID;
+2. otherwise reads the **first pages and the file name** and looks for a legal or UN identifier: a UN document symbol (printed at the top of UN documents and in UN file names such as `A_HRC_43_52-EN.pdf`), a neutral citation (`[2015] UKSC 11`), the ICJ's "Official citation", an ECHR application number, a CJEU case number or ECLI, a Norwegian `HR-…` or `LOV-…` ID, "… Act 2010 / CHAPTER 15", an SI number, an EU regulation or directive, a treaty title, a DOI or an ISBN;
+3. looks the document up in the online sources and runs the OSCOLA check on the result;
+4. shows the **proposed new item** in the review window. When you apply it, the item is created in the file's collections and the file is moved under it (and renamed, if Zotero's "Automatically rename attachment files" setting is on).
+
+If nothing can be identified, the window proposes a draft item (title and date from the first lines of the text) with nothing ticked. Scanned files without text recognition (OCR) cannot be read.
+
 Settings (**Zotero Settings → OSCOLA Check**):
 - Turn individual online sources on or off.
 - Optionally give an e-mail address for Crossref's "polite pool" (faster responses). None is sent by default.
@@ -108,6 +119,7 @@ The adjusted style is built from the official OSCOLA style by `scripts/build-sty
 - **ICJ Reports page numbers are not available online** in a usable form. The plugin fills in the case name, phase and date; add Reporter `ICJ Rep` and the first page yourself. If a case has several decisions and the item has no year, the plugin lists the decisions and asks for the year.
 - **UN Treaty Collection:** only treaties deposited with the UN Secretary-General are covered. The title index (`src/resolvers/data/untc-index.json`) is bundled; refresh it with `node scripts/build-untc-index.mjs`.
 - **Lovdata's public pages are parsed as HTML.** Check Lovdata's terms of use before relying on this source, and switch it off in the settings if needed. Only one page is fetched per item, and only when you run a check.
+- **The ICJ's PDF files** are behind a browser check and cannot be downloaded automatically; ICJ files you already have are recognised from their "Official citation" line.
 - **Items nothing could be looked up for** get a note saying which identifier to add, instead of "No problems found".
 - **Sources can change their format.** If one does, the check shows *"Could not reach …"* or *"Nothing found in …"* for that source and carries on with the others. The live tests show which source broke.
 

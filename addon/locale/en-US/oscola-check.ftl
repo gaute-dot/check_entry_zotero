@@ -140,6 +140,20 @@ oc-issue-icj-no-report = No ICJ Reports citation found. Add Reporter “ICJ Rep�
 oc-issue-icj-phase = OSCOLA adds the phase after the case name, e.g. “(Merits)”, “(Preliminary Objections)” or “(Advisory Opinion)”.
 oc-issue-icj-several = The case has several decisions: { $dates }. Enter the year in Date Decided and run the check again.
 
+## Files without an item
+
+oc-progress-file = Reading file { $current } of { $total }: { $file }
+oc-dialog-new-item = New item for the file “{ $file }”
+oc-dialog-new-item-help = The file has no Zotero item yet. Tick the fields for the new item; “Item type” must be ticked for the item to be created. The file is then placed under the new item.
+oc-source-file = The file
+oc-source-zotero = Zotero's own recognition
+oc-reason-new-item = Identified from the file: { $via }.
+oc-reason-new-item-draft = The file could not be identified online. Not ticked: check the fields first.
+oc-reason-from-file = Read from the file.
+oc-reason-from-zotero = Found by Zotero's own recognition (as in “Retrieve Metadata for PDF”).
+oc-issue-file-no-text = No text could be read from the file. It may be a scan without text recognition (OCR).
+oc-issue-file-not-identified = The file could not be identified. The proposed item is built from the first lines of the text and nothing is ticked: check and tick what is correct, or add the item by hand.
+
 ## Preferences
 
 oc-prefs-sources = Online sources

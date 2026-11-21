@@ -34,8 +34,13 @@ const boxes: { box: HTMLInputElement; itemID: number; suggestion: Suggestion }[]
 function renderItem(item: DialogItem): HTMLElement {
 	const section = el("section", { class: "item" });
 	const h = section.appendChild(el("h2"));
-	h.appendChild(el("span", { class: "title" }, item.title));
-	h.appendChild(el("span", { class: "type" }, item.itemTypeLabel));
+	if (item.newForFile) {
+		l10n(h.appendChild(el("span", { class: "title" })), "oc-dialog-new-item", { file: item.newForFile });
+		l10n(section.appendChild(el("p", { class: "note" })), "oc-dialog-new-item-help");
+	} else {
+		h.appendChild(el("span", { class: "title" }, item.title));
+		h.appendChild(el("span", { class: "type" }, item.itemTypeLabel));
+	}
 
 	if (item.issues.length) {
 		const ul = section.appendChild(el("ul", { class: "issues" }));

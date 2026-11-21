@@ -140,6 +140,20 @@ oc-issue-icj-no-report = Fant ingen ICJ Reports-referanse. Legg til Reporter «I
 oc-issue-icj-phase = OSCOLA legger til fasen etter saksnavnet, f.eks. «(Merits)», «(Preliminary Objections)» eller «(Advisory Opinion)».
 oc-issue-icj-several = Saken har flere avgjørelser: { $dates }. Skriv året i avgjørelsesdatoen og kjør kontrollen på nytt.
 
+## Filer uten element
+
+oc-progress-file = Leser fil { $current } av { $total }: { $file }
+oc-dialog-new-item = Nytt element for filen «{ $file }»
+oc-dialog-new-item-help = Filen har ikke noe Zotero-element ennå. Kryss av feltene for det nye elementet; «Elementtype» må være avkrysset for at elementet skal opprettes. Filen legges deretter under det nye elementet.
+oc-source-file = Filen
+oc-source-zotero = Zoteros egen gjenkjenning
+oc-reason-new-item = Identifisert fra filen: { $via }.
+oc-reason-new-item-draft = Filen kunne ikke identifiseres på nett. Ikke avkrysset: kontroller feltene først.
+oc-reason-from-file = Lest fra filen.
+oc-reason-from-zotero = Funnet av Zoteros egen gjenkjenning (som i «Hent metadata for PDF»).
+oc-issue-file-no-text = Ingen tekst kunne leses fra filen. Den kan være en skanning uten tekstgjenkjenning (OCR).
+oc-issue-file-not-identified = Filen kunne ikke identifiseres. Det foreslåtte elementet er bygd fra de første linjene i teksten, og ingenting er avkrysset: kontroller og kryss av det som stemmer, eller legg inn elementet manuelt.
+
 ## Innstillinger
 
 oc-prefs-sources = Nettkilder

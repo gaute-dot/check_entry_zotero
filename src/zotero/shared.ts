@@ -19,6 +19,8 @@ export interface DialogItem {
 	itemTypeLabel: string;
 	issues: { severity: Severity; fieldLabel: string; message: ShownMessage }[];
 	suggestions: ShownSuggestion[];
+	/** Set for a file without an item: the rows describe a new parent item */
+	newForFile?: string;
 }
 
 export interface DialogIO {

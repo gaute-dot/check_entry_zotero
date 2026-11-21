@@ -32,5 +32,6 @@ td.why .source, td.why .note { color: var(--oc-muted); font-size: 0.9em; margin-
 tr { cursor: default; }
 tr.unticked td.value:nth-of-type(4) { font-style: italic; }
 .empty { color: var(--oc-muted); font-style: italic; }
+p.note { color: var(--oc-muted); margin: 0 0 8px; }
 p.none { color: var(--oc-muted); margin: 4px 0; }
 .oc-buttons { padding: 8px 16px; border-top: 1px solid var(--oc-border); gap: 6px; }

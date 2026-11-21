@@ -40,6 +40,8 @@ export interface Issue {
 /** Where a proposed value came from. "rules" = local OSCOLA normalisation. */
 export type SourceId =
 	| "rules"
+	| "file"
+	| "zotero"
 	| "crossref"
 	| "openalex"
 	| "openlibrary"

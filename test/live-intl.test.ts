@@ -83,3 +83,23 @@ live("live: UN documents without a symbol", () => {
 		expect(res.suggestions.find((s) => s.field === "reportNumber")?.suggested).toBe("A/HRC/43/52");
 	}, T);
 });
+
+live("live: files without an item (text of real PDFs)", () => {
+	const cases: [string, string, Record<string, string>][] = [
+		["A_HRC_43_52-EN.txt", "report", { reportNumber: "A/HRC/43/52", reportType: "UN Doc" }],
+		["CCPR_C_21_Rev.1_Add.4-EN.txt", "report", { reportNumber: "CCPR/C/21/Rev.1/Add.4" }],
+		["A_RES_70_1-EN.txt", "report", { reportNumber: "A/RES/70/1", seriesNumber: "70/1", date: "2015-09-25" }],
+		["uksc-2015-11.txt", "case", { court: "UKSC", docketNumber: "11", dateDecided: "2015-03-11" }],
+		["ukpga-2010-15.txt", "statute", { nameOfAct: "Equality Act", dateEnacted: "2010-04-08" }],
+	];
+	it.each(cases)("%s", async (name, type, expected) => {
+		const { identifyFile } = await import("../src/core/identify");
+		const { newItemRows } = await import("../src/core/newitem");
+		const { fixture } = await import("./helpers");
+		const id = identifyFile({ text: fixture(`files/${name}`), filename: "download.pdf" });
+		const rows = newItemRows(id.item, await checkItem(id.item, liveEnv), "file", id.identified, id.via);
+		const ticked = Object.fromEntries(rows.filter((r) => r.preselect).map((r) => [r.field, r.suggested]));
+		expect(ticked.itemType).toBe(type);
+		expect(ticked).toMatchObject(expected);
+	}, T);
+});
