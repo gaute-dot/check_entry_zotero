@@ -7,7 +7,8 @@
  */
 import { checkItem } from "../core/check";
 import type { Creator, Env, ItemData, Message, SourceId, Suggestion } from "../core/types";
-import { createParent, isStandaloneFile, proposeForFile } from "./files";
+import { ensureBasics } from "../core/basics";
+import { createParent, isStandaloneFile, itemText, proposeForFile } from "./files";
 import type { DialogIO, DialogItem, ShownMessage, ShownSuggestion } from "./shared";
 
 declare const Zotero: any;
@@ -228,6 +229,8 @@ async function run(selected: any[]): Promise<void> {
 		let res;
 		try {
 			res = await checkItem(data, env);
+			// title, author and year are the minimum: widen the search if any is still missing
+			res = await ensureBasics(data, res, env, () => itemText(item));
 		} catch (e) {
 			Zotero.logError(e);
 			res = { issues: [{ severity: "error" as const, message: { id: "oc-issue-source-failed", args: { source: "rules", error: String(e) } } }], suggestions: [] };

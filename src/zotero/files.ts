@@ -13,12 +13,22 @@ import type { Issue } from "../core/types";
 declare const Zotero: any;
 declare const ZOTERO_CONFIG: any;
 
+/** Text of an existing item's best attachment (its PDF), for the widened search. */
+export async function itemText(item: any, pages = 12): Promise<string> {
+	try {
+		const att = await item.getBestAttachment();
+		return att && (att.isPDFAttachment() || att.isEPUBAttachment?.() || att.isSnapshotAttachment?.()) ? await fileText(att, pages) : "";
+	} catch {
+		return "";
+	}
+}
+
 /** Attachments that are files and have no parent item */
 export function isStandaloneFile(item: any): boolean {
 	return !!item.isAttachment?.() && item.isTopLevelItem() && !item.isNote?.() && item.attachmentLinkMode !== Zotero.Attachments.LINK_MODE_LINKED_URL;
 }
 
-async function fileText(att: any, pages = 3): Promise<string> {
+export async function fileText(att: any, pages = 3): Promise<string> {
 	try {
 		if (att.isPDFAttachment()) {
 			const res = await Zotero.PDFWorker.getFullText(att.id, pages, true);

@@ -127,3 +127,14 @@ live("live: cover pages and widened search", () => {
 		expect(exp.item.fields.publisher).toMatch(/Carnegie/);
 	}, T);
 });
+
+live("live: existing items missing author or year", () => {
+	it("a Book with only a title", async () => {
+		const { ensureBasics } = await import("../src/core/basics");
+		const it0 = item("book", { title: "Axis Rule in Occupied Europe" });
+		const r = await ensureBasics(it0, await checkItem(it0, liveEnv), liveEnv);
+		const s = Object.fromEntries(r.suggestions.map((x) => [x.field, x]));
+		expect(s.date?.suggested).toBe("1944");
+		expect(s.creators?.suggested).toBe("Lemkin, Raphael");
+	}, T);
+});

@@ -7,7 +7,8 @@
 import { detect } from "./detect";
 import { fieldForBase } from "./schema";
 import { guessMeta } from "./textmeta";
-import type { Candidate, Env, ItemData, Suggestion } from "./types";
+import { convertItem } from "./convert";
+import type { Candidate, Env, ItemData, SourceId, Suggestion } from "./types";
 import { openlibrary, crossref } from "../resolvers/scholarly";
 
 export type Basic = "title" | "creators" | "date";
@@ -42,12 +43,15 @@ export interface Expanded {
 	foundOnline: boolean;
 	/** Some values were only guessed from the text */
 	guessed: boolean;
+	/** Where each filled-in field came from ("creators" for authors) */
+	sources: Record<string, SourceId>;
 }
 
 export async function expandSearch(base: ItemData, moreText: string, env: Env): Promise<Expanded> {
 	let item: ItemData = { itemType: base.itemType, fields: { ...base.fields }, creators: [...base.creators] };
 	let guessed = false;
 	let foundOnline = false;
+	const sources: Record<string, SourceId> = {};
 	const tf = () => titleField(item.itemType);
 	const df = () => dateField(item.itemType);
 
@@ -55,9 +59,21 @@ export async function expandSearch(base: ItemData, moreText: string, env: Env): 
 	let missing = missingBasics(item);
 	if (missing.length && moreText) {
 		const g = guessMeta(moreText);
-		if (missing.includes("title") && g.title) (item.fields[tf()] = g.title), (guessed = true);
-		if (missing.includes("creators") && g.creators?.length) (item.creators = g.creators), (guessed = true);
-		if (missing.includes("date") && g.year) (item.fields[df()] = g.year), (guessed = true);
+		if (missing.includes("title") && g.title) {
+			item.fields[tf()] = g.title;
+			sources[tf()] = "file";
+			guessed = true;
+		}
+		if (missing.includes("creators") && g.creators?.length) {
+			item.creators = g.creators;
+			sources.creators = "file";
+			guessed = true;
+		}
+		if (missing.includes("date") && g.year) {
+			item.fields[df()] = g.year;
+			sources[df()] = "file";
+			guessed = true;
+		}
 	}
 
 	// 2. Search online by title (and author)
@@ -83,14 +99,32 @@ export async function expandSearch(base: ItemData, moreText: string, env: Env): 
 		}
 		if (best) {
 			foundOnline = true;
-			if (generic) item = { itemType: best.type, fields: { title, ...(item.fields[df()] ? { date: item.fields[df()] } : {}) }, creators: item.creators };
-			for (const [k, v] of Object.entries(best.c.fields)) {
-				if (v && !item.fields[k]?.trim()) item.fields[k] = v;
+			// a generic item (Document, Web Page) becomes what the record says it is; its other fields move along
+			if (generic) {
+				const moved = convertItem(item, best.type);
+				for (const [k, src] of Object.entries(sources)) {
+					if (k === tf() || k === df()) {
+						delete sources[k];
+						if (k === tf()) sources[titleField(best.type)] = src;
+						else sources[dateField(best.type)] = src;
+					}
+				}
+				item = moved;
 			}
-			if (!item.creators.length && best.c.creators?.length) item.creators = best.c.creators;
-			// values guessed from the text give way to the record found online
-			if (guessed && best.c.fields.date && missing.length === 0) item.fields[df()] = item.fields[df()] || best.c.fields.date;
+			for (const [k, v] of Object.entries(best.c.fields)) {
+				if (!v) continue;
+				// values that were only guessed give way to the record found online
+				if (!item.fields[k]?.trim() || sources[k] === "file") {
+					item.fields[k] = v;
+					sources[k] = best.c.source;
+				}
+			}
+			if ((!item.creators.length || sources.creators === "file") && best.c.creators?.length) {
+				item.creators = best.c.creators;
+				sources.creators = best.c.source;
+			}
 		}
 	}
-	return { item, foundOnline, guessed };
+	guessed = Object.values(sources).includes("file");
+	return { item, foundOnline, guessed, sources };
 }

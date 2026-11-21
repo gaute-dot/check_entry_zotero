@@ -29,6 +29,8 @@ The interface is available in English and Norwegian (Bokmål). It follows Zotero
      - A suggested item type change always starts unticked. After changing the item type, run the check again.
 4. Click **Apply selected**.
 
+**Title, author and year** are the minimum for every item. When an existing item would still lack any of them after the check, the search is widened in the same way as for new files (below): the item's PDF is read, and Open Library and Crossref are searched by title and author. Only empty fields get suggestions; values guessed from the PDF are marked, and anything still missing is named. Cases, legislation and UN documents are left to their own sources. Without an author to compare with, a book is only accepted from Open Library if its title matches exactly and no other book has a similar title.
+
 ### Files without an item
 
 Select one or more files that have no Zotero item yet (PDFs, EPUBs or snapshots shown at the top level of the library) and choose **Check for OSCOLA…**. The plugin then:

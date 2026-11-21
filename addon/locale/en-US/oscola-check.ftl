@@ -153,6 +153,8 @@ oc-reason-from-file = Read from the file.
 oc-reason-from-zotero = Found by Zotero's own recognition (as in “Retrieve Metadata for PDF”).
 oc-issue-basics-guessed = Some values were guessed from the text of the file (not found online). Check title, author and year before applying.
 oc-issue-basics-missing = Still missing after reading more of the file and searching online: { $fields }. Fill these in by hand.
+oc-reason-basics-guessed = Guessed from the item's PDF (not found online). Check before applying.
+oc-issue-basics-guessed-item = Title, author or year was missing; some values were guessed from the item's PDF. Check them before applying.
 oc-issue-file-no-text = No text could be read from the file. It may be a scan without text recognition (OCR).
 oc-issue-file-not-identified = The file could not be identified. The proposed item is built from the first lines of the text and nothing is ticked: check and tick what is correct, or add the item by hand.
 

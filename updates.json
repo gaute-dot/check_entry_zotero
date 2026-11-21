@@ -37,6 +37,15 @@
               "strict_min_version": "8.0"
             }
           }
+        },
+        {
+          "version": "0.6.0",
+          "update_link": "https://github.com/gaute-dot/check_entry_zotero/releases/download/v0.6.0/oscola-check-0.6.0.xpi",
+          "applications": {
+            "zotero": {
+              "strict_min_version": "8.0"
+            }
+          }
         }
       ]
     }

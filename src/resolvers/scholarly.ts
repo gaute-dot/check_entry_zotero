@@ -204,16 +204,19 @@ async function searchOpenLibrary(item: ItemData, env: Env): Promise<Candidate | 
 		"&limit=10&fields=title,subtitle,author_name,first_publish_year,publisher,publish_place";
 	const res = await getJSON<{ docs?: OpenLibraryDoc[] }>(env, url);
 	let best: { doc: OpenLibraryDoc; score: number } | null = null;
+	let close = 0;
 	for (const doc of res.docs ?? []) {
 		const full = [doc.title, doc.subtitle].filter(Boolean).join(": ");
 		const score = Math.max(similarity(title, full), similarity(short, doc.title ?? ""));
+		if (score >= 0.85) close++;
 		if (!best || score > best.score) best = { doc, score };
 	}
 	if (!best || best.score < 0.85) return null;
 	const doc = best.doc;
 	const authors = doc.author_name ?? [];
 	// without an author to compare with, a title match alone is not enough
-	const authorOK = last ? authors.some((a) => a.toLowerCase().includes(last.toLowerCase())) : false;
+	// Without an author to compare with, only an exact title that no other book shares is accepted
+	const authorOK = last ? authors.some((a) => a.toLowerCase().includes(last.toLowerCase())) : best.score >= 0.97 && close === 1;
 	const theirs = [doc.title, doc.subtitle].filter(Boolean).join(": ");
 	const fields: Record<string, string> = {
 		// don't offer a shorter form of the title the item already has
